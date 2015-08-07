@@ -1,7 +1,5 @@
 <?php
 
-defined('YII_ENV') or define('YII_ENV', getenv('YII_ENV') ? getenv('YII_ENV') : 'dev');
-
 $config = [
     'id' => 'minetest-bower',
     'basePath' => dirname(__DIR__),
