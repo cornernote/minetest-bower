@@ -1,7 +1,5 @@
 <?php
 
-echo getenv('YII_ENV'); die;
-
 defined('YII_ENV') or define('YII_ENV', getenv('YII_ENV') ? getenv('YII_ENV') : 'dev');
 
 $config = [

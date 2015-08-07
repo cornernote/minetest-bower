@@ -2,6 +2,7 @@
 
 if (YII_ENV == 'prod') {
     $url = parse_url(getenv('DATABASE_URL'));
+    echo $url; die;
     return [
         'class' => 'yii\db\Connection',
         'dsn' => 'pgsql:host=' . $url['host'] . ';dbname=' . substr($url['path'], 1),
