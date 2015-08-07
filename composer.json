@@ -1,12 +1,27 @@
 {
-
-    "config": {
-        "vendor-dir": "app/vendor"
-    },
-
+    "name": "cornernote/minetest-bower",
+    "description": "Minetest Bower",
+    "homepage": "http://minetest-bower.herokuapp.com/",
+    "type": "project",
+    "license": "BSD-3-Clause",
+    "minimum-stability": "stable",
     "require": {
-        "slim/slim": "2.*",
-        "php-activerecord/php-activerecord": "dev-master"        
+        "php": ">=5.4.0",
+        "yiisoft/yii2": ">=2.0.5",
+        "yiisoft/yii2-bootstrap": "*"
+    },
+    "config": {
+        "process-timeout": 1800
+    },
+    "scripts": {
+        "post-create-project-cmd": [
+            "yii\\composer\\Installer::postCreateProject"
+        ]
+    },
+    "extra": {
+        "asset-installer-paths": {
+            "npm-asset-library": "vendor/npm",
+            "bower-asset-library": "vendor/bower"
+        }
     }
-
 }

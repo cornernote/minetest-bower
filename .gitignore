@@ -1,3 +1,6 @@
 .idea
-/app/vendor/
-app/data/bower.db.sqlite
+.DS_Store
+Thumbs.db
+composer.phar
+vendor/
+_bak/
