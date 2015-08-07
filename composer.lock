@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "75b875ef72f6bf53a20a2b11b05c7ac2",
+    "hash": "d68521a2d6134b936106f3348f7beadb",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -315,6 +315,62 @@
                 "html"
             ],
             "time": "2013-11-30 08:25:19"
+        },
+        {
+            "name": "fxp/composer-asset-plugin",
+            "version": "v1.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/francoispluchino/composer-asset-plugin.git",
+                "reference": "c2b0406ac19e9ea2d9556987e827d4e7f6924fde"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/francoispluchino/composer-asset-plugin/zipball/c2b0406ac19e9ea2d9556987e827d4e7f6924fde",
+                "reference": "c2b0406ac19e9ea2d9556987e827d4e7f6924fde",
+                "shasum": ""
+            },
+            "require": {
+                "composer-plugin-api": "^1.0",
+                "php": ">=5.3.3"
+            },
+            "require-dev": {
+                "composer/composer": "~1.0@dev"
+            },
+            "type": "composer-plugin",
+            "extra": {
+                "class": "Fxp\\Composer\\AssetPlugin\\FxpAssetPlugin",
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Fxp\\Composer\\AssetPlugin\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "François Pluchino",
+                    "email": "francois.pluchino@gmail.com"
+                }
+            ],
+            "description": "NPM/Bower Dependency Manager for Composer",
+            "homepage": "https://github.com/francoispluchino/composer-asset-plugin",
+            "keywords": [
+                "asset",
+                "bower",
+                "composer",
+                "dependency manager",
+                "nodejs",
+                "npm",
+                "package"
+            ],
+            "time": "2015-07-29 12:23:21"
         },
         {
             "name": "yiisoft/yii2",
