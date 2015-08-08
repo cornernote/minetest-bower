@@ -2,6 +2,7 @@
 
 $config = [
     'id' => 'minetest-bower',
+    'name' => 'Minetest Bower',
     'basePath' => dirname(__DIR__),
     'components' => [
         'db' => require(__DIR__ . '/db.php'),

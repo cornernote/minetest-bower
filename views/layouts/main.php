@@ -24,30 +24,32 @@ AppAsset::register($this);
 <body>
 <?php $this->beginBody() ?>
 
-<div class="wrap">
-    <?php
-    NavBar::begin([
-        'brandLabel' => 'Minetest Bower',
-        'brandUrl' => Yii::$app->homeUrl,
-        'options' => [
-            'class' => 'navbar-inverse navbar-fixed-top',
-        ],
-    ]);
-    echo Nav::widget([
-        'options' => ['class' => 'navbar-nav navbar-right'],
-        'items' => [
-            ['label' => 'Home', 'url' => ['/site/index']],
-        ],
-    ]);
-    NavBar::end();
-    ?>
+<?php
+NavBar::begin([
+    'brandLabel' => 'Minetest Bower',
+    'brandUrl' => Yii::$app->homeUrl,
+    'options' => [
+        'class' => 'navbar-default navbar-fixed-top',
+    ],
+]);
+//echo Nav::widget([
+//    'options' => ['class' => 'navbar-nav navbar-right'],
+//    'items' => [
+//        ['label' => 'Home', 'url' => ['/site/index']],
+//    ],
+//]);
+NavBar::end();
 
-    <div class="container">
-        <?= Breadcrumbs::widget([
-            'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-        ]) ?>
-        <?= $content ?>
-    </div>
+if (isset($this->params['jumbotron'])) {
+    echo $this->render($this->params['jumbotron']);
+}
+?>
+
+<div class="container">
+    <?= Breadcrumbs::widget([
+        'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+    ]) ?>
+    <?= $content ?>
 </div>
 
 <?php $this->endBody() ?>
