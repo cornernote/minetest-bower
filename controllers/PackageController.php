@@ -66,7 +66,7 @@ class PackageController extends Controller
         return Package::find()->orderBy(['hits' => SORT_DESC])->all();
     }
 
-    public function actionView($name = null)
+    public function actionView($name)
     {
         $package = Package::find()->where(['name' => $name])->one();
         if ($package) {
@@ -79,7 +79,7 @@ class PackageController extends Controller
 
     public function actionSearch($name)
     {
-        return Package::find()->where(['name' => $name])->orderBy(['hits' => SORT_DESC])->all();
+        return Package::find()->where(['like', 'name', $name])->orderBy(['hits' => SORT_DESC])->all();
     }
 
 }
