@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\components\Git;
 use app\models\Package;
 use Yii;
 use yii\filters\VerbFilter;
@@ -31,6 +32,36 @@ class PackageController extends Controller
         return parent::beforeAction($action);
     }
 
+    public function actionIndex()
+    {
+        return Package::find()
+            ->select(['name', 'url', 'hits'])
+            ->orderBy(['hits' => SORT_DESC])
+            ->all();
+    }
+
+    public function actionView($name)
+    {
+        $package = Package::find()
+            ->where(['name' => $name])
+            ->one();
+        if ($package) {
+            $package->hits++;
+            $package->save();
+            return $package;
+        }
+        throw new HttpException(404, 'Package not found.');
+    }
+
+    public function actionSearch($name)
+    {
+        return Package::find()
+            ->select(['name', 'url', 'hits'])
+            ->where(['like', 'name', $name])
+            ->orderBy(['hits' => SORT_DESC])
+            ->all();
+    }
+
     public function actionCreate()
     {
         $package = new Package();
@@ -47,7 +78,7 @@ class PackageController extends Controller
             }
         }
         if (isset($package->errors['name'])) {
-            throw new HttpException(400, 'Invalid Package Name: ' . implode(', ', $package->errors['name']));
+            throw new HttpException(400, 'Invalid Name: ' . implode(', ', $package->errors['name']));
         }
         if (isset($package->errors['url'])) {
             throw new HttpException(400, 'Invalid URL: ' . implode(', ', $package->errors['url']));
@@ -59,27 +90,6 @@ class PackageController extends Controller
             }
         }
         throw new HttpException(400, 'Error: ' . implode(', ', $errors));
-    }
-
-    public function actionIndex()
-    {
-        return Package::find()->orderBy(['hits' => SORT_DESC])->all();
-    }
-
-    public function actionView($name)
-    {
-        $package = Package::find()->where(['name' => $name])->one();
-        if ($package) {
-            $package->hits++;
-            $package->save();
-            return $package;
-        }
-        throw new HttpException(404);
-    }
-
-    public function actionSearch($name)
-    {
-        return Package::find()->where(['like', 'name', $name])->orderBy(['hits' => SORT_DESC])->all();
     }
 
 }

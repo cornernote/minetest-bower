@@ -2,8 +2,10 @@
 
 namespace app\models;
 
+use app\models\query\PackageQuery;
 use Yii;
 use yii\behaviors\TimestampBehavior;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "{{%package}}".
@@ -12,10 +14,11 @@ use yii\behaviors\TimestampBehavior;
  * @property string $name
  * @property string $url
  * @property integer $hits
+ * @property string $bower
  * @property string $created_at
  * @property string $updated_at
  */
-class Package extends \yii\db\ActiveRecord
+class Package extends ActiveRecord
 {
     /**
      * @inheritdoc
@@ -49,6 +52,7 @@ class Package extends \yii\db\ActiveRecord
             'name' => 'Name',
             'url' => 'URL',
             'hits' => 'Hits',
+            'bower' => 'Bower',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
         ];
@@ -67,5 +71,14 @@ class Package extends \yii\db\ActiveRecord
                 },
             ],
         ];
+    }
+
+    /**
+     * @inheritdoc
+     * @return PackageQuery the active query used by this AR class.
+     */
+    public static function find()
+    {
+        return new PackageQuery(get_called_class());
     }
 }

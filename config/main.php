@@ -1,4 +1,5 @@
 <?php
+use yii\helpers\ArrayHelper;
 
 $config = [
     'id' => 'minetest-bower',
@@ -6,6 +7,11 @@ $config = [
     'basePath' => dirname(__DIR__),
     'components' => [
         'db' => require(__DIR__ . '/db.php'),
+    ],
+];
+
+$web = [
+    'components' => [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
@@ -24,5 +30,17 @@ $config = [
         ],
     ],
 ];
+
+$console = [
+    'controllerNamespace' => 'app\commands',
+];
+
+if (php_sapi_name() != 'cli') {
+    // Web application
+    $config = ArrayHelper::merge($config, $web);
+} else {
+    // Console application
+    $config = ArrayHelper::merge($config, $console);
+}
 
 return $config;

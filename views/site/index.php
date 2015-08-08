@@ -33,9 +33,10 @@ $this->params['jumbotron'] = '/site/_index-jumbotron';
 
                 <h2>Create Packages</h2>
                 <p>Create packages with <code>bower register</code>.</p>
-                <pre>$ bower register &lt;name&gt; &lt;url&gt;
+                <pre>$ bower register &lt;my_mod_name&gt; &lt;git_endpoint&gt;
 
-$ bower register mymod git://github.com/username/mymod.git</pre>
+# for example
+$ bower register example git://github.com/user/example.git</pre>
 
                 <!--
                 <h2>Search Packages</h2>
