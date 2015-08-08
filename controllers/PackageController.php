@@ -39,7 +39,26 @@ class PackageController extends Controller
             Yii::$app->response->statusCode = 201;
             return '';
         }
-        throw new HttpException(400, json_encode($package->errors));
+        foreach ($package->errors as $attributeErrors) {
+            foreach ($attributeErrors as $error) {
+                if (strpos($error, 'has already been taken')) {
+                    throw new HttpException(403, 'Package already registered');
+                }
+            }
+        }
+        if (isset($package->errors['name'])) {
+            throw new HttpException(400, 'Invalid Package Name: ' . implode(', ', $package->errors['name']));
+        }
+        if (isset($package->errors['url'])) {
+            throw new HttpException(400, 'Invalid URL: ' . implode(', ', $package->errors['url']));
+        }
+        $errors = [];
+        foreach ($package->errors as $attribute => $attributeErrors) {
+            foreach ($attributeErrors as $error) {
+                $errors[] = $attribute . ': ' . $error;
+            }
+        }
+        throw new HttpException(400, 'Error: ' . implode(', ', $errors));
     }
 
     public function actionIndex()
