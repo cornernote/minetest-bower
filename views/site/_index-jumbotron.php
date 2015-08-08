@@ -1,14 +1,22 @@
 <?php
 /* @var $this \yii\web\View */
 
+use yii\helpers\Html;
 use yii\helpers\Url;
+
 ?>
 
 <div class="jumbotron">
     <div class="container">
-        <h1><?= Yii::$app->name; ?></h1>
+        <?= Html::img(Yii::getAlias('@web') . '/logo.png', [
+            'id' => 'logo',
+            'class' => 'pull-left',
+        ]) ?>
+        <div>
+            <h1><?= Yii::$app->name; ?></h1>
 
-        <p>A package manager for Minetest.</p>
+            <p>A package manager for Minetest.</p>
+        </div>
 
         <!--
         <p>

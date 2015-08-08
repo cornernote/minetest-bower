@@ -16,10 +16,10 @@ $this->params['jumbotron'] = '/site/_index-jumbotron';
 
                 <p>Bower is a command line utility. Install it with npm.</p>
                 <pre>$ npm install -g bower</pre>
-                <p>Bower requires <a href="http://nodejs.org/">Node</a> and npm and <a href="http://git-scm.com/">Git</a>.</p>
+                <p>Bower requires <a href="http://nodejs.org/">Node and npm</a> and <a href="http://git-scm.com/">Git</a>.</p>
 
                 <h2>Configure Bower</h2>
-                <p>Create <code>.bowerrc</code> in your home directory or minetest folder:</p>
+                <p>Create a <code>.bowerrc</code> file in your home directory or minetest folder with the following contents.</p>
                 <pre>{
     "registry": "https://minetest-bower.herokuapp.com/",
     "directory" : "mods"
