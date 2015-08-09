@@ -69,4 +69,30 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]) ?>
 
+
+    <p>If you are the mod owner then please add a
+        <code>bower.json</code> file to your repository with the following contents, then click
+        <?= Html::a('Update bower.json', ['update', 'name' => $model->name]) ?>.
+    </p>
+
+    <pre>{
+  "name": "<?= $model->name; ?>",
+  "description": "Description of your mod.",
+  "keywords": [
+    "example",
+    "rainbow"
+  ],
+  "homepage": "<?= Git::getUrl($model->url) ?>",
+  "screenshots": [
+    "https://example.com/screenshot1.png"
+  ],
+  "authors": [
+    "Your Name"
+  ],
+  "license": "WTFPL"
+  ]
+}</pre>
+
+    <p><?= Html::a('bower.json Format  &raquo;', ['/docs/bower-format'], ['class' => 'btn btn-sm btn-default']); ?></p>
+
 </div>

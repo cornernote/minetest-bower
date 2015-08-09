@@ -24,7 +24,7 @@ $this->params['breadcrumbs'][] = $this->title;
   "homepage": "http://example.com/",
   "screenshots": [
     "http://example.com/screenshot1.png",
-    "http://example.com/screenshot2.png",
+    "http://example.com/screenshot2.png"
   ],
   "authors": [
     "Example Author &lt;author@example.com&gt;"
