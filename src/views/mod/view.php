@@ -90,7 +90,6 @@ $this->params['breadcrumbs'][] = $this->title;
     "Your Name"
   ],
   "license": "WTFPL"
-  ]
 }</pre>
 
     <p><?= Html::a('bower.json Format  &raquo;', ['/docs/bower-format'], ['class' => 'btn btn-sm btn-default']); ?></p>
