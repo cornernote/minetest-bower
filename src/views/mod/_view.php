@@ -25,7 +25,7 @@ use yii\widgets\DetailView;
     ?>
 
     <div class="row">
-        <div class="col-md-10">
+        <div class="col-sm-10">
             <?= DetailView::widget([
                 'model' => $model,
                 'attributes' => [
@@ -45,7 +45,7 @@ use yii\widgets\DetailView;
                 ],
             ]) ?>
         </div>
-        <div class="col-md-2">
+        <div class="col-sm-2">
             <?= Html::a(Html::img($model->screenshot, [
                 'class' => 'thumbnail',
                 'style' => 'max-width:100%',

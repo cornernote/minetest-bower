@@ -1,6 +1,7 @@
 <?php
 
 use app\components\Git;
+use yii\bootstrap\Alert;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
@@ -15,8 +16,19 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1>
         <?= Html::encode($this->title) ?>
-        <?= Html::a('Update', ['update', 'name' => $model->name], ['class' => 'btn btn-primary pull-right']) ?>
+        <?= Html::a('Update bower.json', ['update', 'name' => $model->name], ['class' => 'btn btn-primary pull-right']) ?>
     </h1>
+
+    <?php
+    if (!$model->bower) {
+        echo Alert::widget([
+            'options' => [
+                'class' => 'alert-danger',
+            ],
+            'body' => 'This mod has no ' . Html::a('bower.json', ['/docs/bower-json-format']) . ' file.  Please consider adding one to the <a href="' . Git::getUrl($model->url) . '">repository</a>.',
+        ]);
+    }
+    ?>
 
     <?= DetailView::widget([
         'model' => $model,
