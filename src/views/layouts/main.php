@@ -41,6 +41,12 @@ echo Nav::widget([
         ['label' => 'Submit', 'url' => ['/mod/create']],
     ],
 ]);
+echo Nav::widget([
+    'options' => ['class' => 'navbar-nav navbar-right'],
+    'items' => [
+        ['label' => 'Minetest Home', 'url' => 'http://minetest.net'],
+    ],
+]);
 NavBar::end();
 
 if (isset($this->params['jumbotron'])) {
