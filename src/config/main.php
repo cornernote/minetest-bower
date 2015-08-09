@@ -30,6 +30,7 @@ $web = [
                 'packages/<name:\w+>' => 'package/view',
                 'packages' => 'package/index',
                 // mods
+                'submit' => 'mod/create',
                 'mods/update/<name:\w+>' => 'mod/update',
                 'mods/<name:\w+>' => 'mod/view',
                 'mods' => 'mod/index',

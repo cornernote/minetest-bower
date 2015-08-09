@@ -2,10 +2,15 @@
 
 /* @var $this yii\web\View */
 
-$this->title = 'Minetest bower.json specification';
-?>
-<div class="site-bower-json-format">
+use yii\helpers\Html;
 
+$this->title = 'bower.json Format';
+$this->params['breadcrumbs'][] = ['label' => 'Docs', 'url' => ['index']];
+$this->params['breadcrumbs'][] = $this->title;
+?>
+<div class="docs-bower-json-format">
+
+    <h1><?= Html::encode($this->title) ?></h1>
 
     <h2>Example <code>bower.json</code></h2>
 
@@ -138,9 +143,15 @@ $this->title = 'Minetest bower.json specification';
 
     <ul>
         <li>Key must be a valid <code>name</code>.</li>
-        <li>Value must be a valid <a href="https://github.com/npm/node-semver#ranges">semver range</a>, a Git URL, or a URL (inc. tarball and zipball).</li>
-        <li>Git URLs can be restricted to a reference (revision SHA, branch, or tag) by appending it after a hash, e.g. <code>https://github.com/owner/package.git#branch</code>.</li>
-        <li>Value can be an owner/package shorthand, i.e. owner/package. By default, the shorthand resolves to GitHub -> git://github.com/{{owner}}/{{package}}.git. This may be changed in <code>.bowerrc</code> <a href="http://bower.io/docs/config/#shorthand-resolver">shorthand_resolver</a>.</li>
+        <li>Value must be a valid
+            <a href="https://github.com/npm/node-semver#ranges">semver range</a>, a Git URL, or a URL (inc. tarball and zipball).
+        </li>
+        <li>Git URLs can be restricted to a reference (revision SHA, branch, or tag) by appending it after a hash, e.g.
+            <code>https://github.com/owner/package.git#branch</code>.
+        </li>
+        <li>Value can be an owner/package shorthand, i.e. owner/package. By default, the shorthand resolves to GitHub -> git://github.com/{{owner}}/{{package}}.git. This may be changed in
+            <code>.bowerrc</code> <a href="http://bower.io/docs/config/#shorthand-resolver">shorthand_resolver</a>.
+        </li>
         <li>Local paths may be used as values for local development, but they will be disallowed when registering.</li>
     </ul>
 

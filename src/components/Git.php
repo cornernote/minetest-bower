@@ -32,19 +32,14 @@ class Git
         if (strpos($endpoint, 'github.com')) {
             return self::getGitHubComUrl($endpoint, $file);
         }
-        if (strpos($endpoint, 'bitbucket.org')) {
-            return self::getBitBucketOrgUrl($endpoint, $file);
-        }
-        if (strpos($endpoint, 'notabug.org')) {
-            return self::getBitBucketOrgUrl($endpoint, $file);
-        }
-        if (strpos($endpoint, 'gitlab.com')) {
-            return self::getBitBucketOrgUrl($endpoint, $file);
-        }
         if (strpos($endpoint, 'repo.or.cz')) {
             return self::getRepoOrCzUrl($endpoint, $file);
         }
-        return false;
+        return strtr($endpoint, [
+            'http://' => 'https://',
+            'git://' => 'https://',
+            '.git' => $file ? '/raw/master/' . $file : '/',
+        ]);
     }
 
     /**
@@ -59,20 +54,6 @@ class Git
             'http://' => $file ? 'https://raw.' : 'https://',
             'git://' => $file ? 'https://raw.' : 'https://',
             '.git' => $file ? '/master/' . $file : '/',
-        ]);
-    }
-
-    /**
-     * @param $endpoint
-     * @param $file
-     * @return string
-     */
-    private static function getBitBucketOrgUrl($endpoint, $file)
-    {
-        return strtr($endpoint, [
-            'http://' => 'https://',
-            'git://' => 'https://',
-            '.git' => $file ? '/raw/master/' . $file : '/',
         ]);
     }
 

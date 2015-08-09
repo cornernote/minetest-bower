@@ -32,25 +32,25 @@ $this->params['jumbotron'] = '/site/_index-jumbotron';
 }</pre>
             </div>
             <div class="col-lg-6">
-                <h2>Install Packages</h2>
+                <h2>Install Mods</h2>
 
-                <p>Install packages with <code>bower install</code>.</p>
-                <pre>$ bower install &lt;package&gt;</pre>
+                <p>Install mods with <code>bower install</code>.</p>
+                <pre>$ bower install &lt;mod&gt;</pre>
 
-                <h2>Create Packages</h2>
+                <h2>Create Mods</h2>
 
-                <p>Create packages with
+                <p>Create mods with
                     <code>bower register</code> or <?= Html::a('submit a mod online', ['/mod/create']) ?>.</p>
                 <pre>$ bower register &lt;my_mod_name&gt; &lt;git_endpoint&gt;
 
 # for example
 $ bower register example https://github.com/user/example.git</pre>
 
-                <h2>Package Information</h2>
+                <h2>Mod Information</h2>
 
-                <p>Package information is collected from a <code>bower.json</code> file in the repository</p>
+                <p>Mod information is collected from a <code>bower.json</code> file in the repository</p>
 
-                <p><?= Html::a('bower.json format  &raquo;', ['/docs/bower-json-format'], ['class' => 'btn btn-sm btn-default']); ?></p>
+                <p><?= Html::a('bower.json format  &raquo;', ['/docs/bower-format'], ['class' => 'btn btn-sm btn-default']); ?></p>
 
             </div>
         </div>

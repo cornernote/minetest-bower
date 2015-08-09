@@ -39,6 +39,7 @@ echo Nav::widget([
         //['label' => 'Home', 'url' => ['/site/index']],
         ['label' => 'Browse', 'url' => ['/mod/index']],
         ['label' => 'Submit', 'url' => ['/mod/create']],
+        ['label' => 'Docs', 'url' => ['/docs/index']],
     ],
 ]);
 echo Nav::widget([

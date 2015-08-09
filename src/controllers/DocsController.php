@@ -13,9 +13,9 @@ class DocsController extends Controller
         return $this->render('index');
     }
 
-    public function actionBowerJsonFormat()
+    public function actionBowerFormat()
     {
-        return $this->render('bower-json-format');
+        return $this->render('bower-format');
     }
 
 }
