@@ -25,6 +25,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'options' => [
                 'class' => 'alert-danger',
             ],
+            'closeButton' => false,
             'body' => 'This mod has no ' . Html::a('bower.json', ['/docs/bower-json-format']) . ' file.  Please consider adding one to the <a href="' . Git::getUrl($model->url) . '">repository</a>.',
         ]);
     }

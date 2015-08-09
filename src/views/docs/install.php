@@ -50,4 +50,16 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
     </div>
 
+    <h2>Configure Bower</h2>
+
+    <p>In order to connect to the minetest-bower registry you need to configure bower.</p>
+
+    <p>Create a
+        <code>.bowerrc</code> file in your home directory or minetest folder with the following contents.
+    </p>
+                <pre>{
+    "registry": "https://minetest-bower.herokuapp.com/",
+    "directory" : "mods"
+}</pre>
+
 </div>

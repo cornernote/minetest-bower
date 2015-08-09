@@ -66,8 +66,8 @@ class Package extends ActiveRecord
             'url' => 'URL',
             'hits' => 'Hits',
             'bower' => 'Bower',
-            'created_at' => 'Created At',
-            'updated_at' => 'Updated At',
+            'created_at' => 'Created',
+            'updated_at' => 'Updated',
         ];
     }
 

@@ -33,13 +33,13 @@ NavBar::begin([
         'class' => 'navbar-default navbar-fixed-top',
     ],
 ]);
+echo '<a class="hidden-xs" href="https://github.com/cornernote/minetest-bower"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"></a>';
 echo Nav::widget([
     'options' => ['class' => 'navbar-nav'],
     'items' => [
-        //['label' => 'Home', 'url' => ['/site/index']],
-        ['label' => 'Browse', 'url' => ['/mod/index']],
+        ['label' => 'Browse', 'url' => ['/mod/index'], 'active' => (Yii::$app->controller->id == 'mod' && Yii::$app->controller->action->id != 'create')],
         ['label' => 'Submit', 'url' => ['/mod/create']],
-        ['label' => 'Docs', 'url' => ['/docs/index']],
+        ['label' => 'Docs', 'url' => ['/docs/index'], 'active' => Yii::$app->controller->id == 'docs'],
     ],
 ]);
 echo Nav::widget([

@@ -34,6 +34,8 @@ $web = [
                 'mods/update/<name:\w+>' => 'mod/update',
                 'mods/<name:\w+>' => 'mod/view',
                 'mods' => 'mod/index',
+                // docs
+                'docs' => 'docs/index',
             ],
         ],
     ],
