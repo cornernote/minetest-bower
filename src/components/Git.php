@@ -30,10 +30,19 @@ class Git
     public static function getUrl($endpoint, $file = null)
     {
         if (strpos($endpoint, 'github.com')) {
-            return self::getGitHubUrl($endpoint, $file);
+            return self::getGitHubComUrl($endpoint, $file);
         }
         if (strpos($endpoint, 'bitbucket.org')) {
-            return self::getBitBucketUrl($endpoint, $file);
+            return self::getBitBucketOrgUrl($endpoint, $file);
+        }
+        if (strpos($endpoint, 'notabug.org')) {
+            return self::getBitBucketOrgUrl($endpoint, $file);
+        }
+        if (strpos($endpoint, 'gitlab.com')) {
+            return self::getBitBucketOrgUrl($endpoint, $file);
+        }
+        if (strpos($endpoint, 'repo.or.cz')) {
+            return self::getRepoOrCzUrl($endpoint, $file);
         }
         return false;
     }
@@ -43,7 +52,7 @@ class Git
      * @param $file
      * @return string
      */
-    private static function getGitHubUrl($endpoint, $file)
+    private static function getGitHubComUrl($endpoint, $file)
     {
         return strtr($endpoint, [
             'https://' => $file ? 'https://raw.' : 'https://',
@@ -58,7 +67,7 @@ class Git
      * @param $file
      * @return string
      */
-    private static function getBitBucketUrl($endpoint, $file)
+    private static function getBitBucketOrgUrl($endpoint, $file)
     {
         return strtr($endpoint, [
             'http://' => 'https://',
@@ -66,4 +75,20 @@ class Git
             '.git' => $file ? '/raw/master/' . $file : '/',
         ]);
     }
+
+    /**
+     * @param $endpoint
+     * @param $file
+     * @return string
+     */
+    private static function getRepoOrCzUrl($endpoint, $file)
+    {
+        return strtr($endpoint, [
+            'https://' => 'http://',
+            'http://' => 'http://',
+            'git://' => 'http://',
+            '.git' => $file ? '.git/blob_plain/master:/' . $file : '.git',
+        ]);
+    }
+
 }
