@@ -71,12 +71,10 @@ class ModController extends Controller
     public function actionUpdate($name)
     {
         $model = $this->findModel($name);
-        $model->bower = Git::getFile($model->url, 'bower.json');
-        if (!$model->bower) {
+        if (!$model->harvestModInfo()) {
             Yii::$app->getSession()->setFlash('danger', Yii::t('app', 'bower.json could not be loaded from remote repository.'));
             return $this->redirect(['view', 'name' => $model->name]);
         }
-        $model->setBowerData();
         if ($model->getDirtyAttributes()) {
             $model->save();
         }

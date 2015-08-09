@@ -10,7 +10,8 @@
         "yiisoft/yii2": ">=2.0.5",
         "yiisoft/yii2-bootstrap": "*",
         "fxp/composer-asset-plugin": "*",
-        "kartik-v/yii2-widgets": "^3.4"
+        "kartik-v/yii2-widgets": "^3.4",
+        "cebe/markdown": "~1.0.1"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "*",

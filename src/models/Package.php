@@ -4,6 +4,7 @@ namespace app\models;
 
 use app\components\Git;
 use app\models\query\PackageQuery;
+use cebe\markdown\GithubMarkdown;
 use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
@@ -17,6 +18,7 @@ use yii\helpers\Html;
  * @property string $url
  * @property integer $hits
  * @property string $bower
+ * @property string $readme
  * @property string $description
  * @property string $homepage
  * @property string $keywords
@@ -72,6 +74,11 @@ class Package extends ActiveRecord
             'url' => 'URL',
             'hits' => 'Hits',
             'bower' => 'Bower',
+            'readme' => 'Readme',
+            'description' => 'Description',
+            'homepage' => 'Homepage',
+            'keywords' => 'Keywords',
+            'screenshot' => 'Screenshot',
             'created_at' => 'Created',
             'updated_at' => 'Updated',
         ];
@@ -116,21 +123,22 @@ class Package extends ActiveRecord
     public function beforeSave($insert)
     {
         if ($this->isNewRecord) {
-            $this->bower = Git::getFile($this->url, 'bower.json');
-            $this->bowerData = json_decode($this->bower, true);
-            $this->setBowerData();
+            $this->harvestModInfo();
         }
         return parent::beforeSave($insert);
     }
 
     /**
-     *
+     * @return bool
      */
-    public function setBowerData()
+    public function harvestModInfo()
     {
-        if (!$this->bowerData) {
-            return;
+        $this->readme = Git::getFile($this->url, 'README.md');
+        $this->bower = Git::getFile($this->url, 'bower.json');
+        if (!$this->bower) {
+            return false;
         }
+        $this->bowerData = json_decode($this->bower, true);
         if (isset($this->bowerData['description'])) {
             $this->description = $this->bowerData['description'];
         }
@@ -141,6 +149,7 @@ class Package extends ActiveRecord
         if (isset($this->bowerData['screenshots'])) {
             $this->screenshot = $this->bowerData['screenshots'][0];
         }
+        return true;
     }
 
     /**
@@ -225,4 +234,12 @@ class Package extends ActiveRecord
         return $licenses ? implode('<br>', $licenses) : null;
     }
 
+    /**
+     * @return string
+     */
+    public function getReadmeHtml()
+    {
+        $parser = new GithubMarkdown();
+        return $parser->parse($this->readme);
+    }
 }

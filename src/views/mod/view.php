@@ -43,9 +43,13 @@ $this->params['breadcrumbs'][] = $this->title;
             //    'format' => 'url',
             //],
             [
-                'attribute' => 'screenshot',
                 'label' => 'Screenshots',
                 'value' => $model->getScreenshotsHtml(),
+                'format' => 'raw',
+            ],
+            [
+                'attribute' => 'readme',
+                'value' => $model->getReadmeHtml(),
                 'format' => 'raw',
             ],
             [

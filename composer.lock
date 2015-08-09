@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "dfe19620a553483a909e62c6968b21df",
+    "hash": "2932f0af4cf2332e252af0e542d43751",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -214,16 +214,16 @@
         },
         {
             "name": "cebe/markdown",
-            "version": "1.1.0",
+            "version": "1.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/cebe/markdown.git",
-                "reference": "54a2c49de31cc44e864ebf0500a35ef21d0010b2"
+                "reference": "f681fee8303310415b746f3758eeda0a7ad08bda"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cebe/markdown/zipball/54a2c49de31cc44e864ebf0500a35ef21d0010b2",
-                "reference": "54a2c49de31cc44e864ebf0500a35ef21d0010b2",
+                "url": "https://api.github.com/repos/cebe/markdown/zipball/f681fee8303310415b746f3758eeda0a7ad08bda",
+                "reference": "f681fee8303310415b746f3758eeda0a7ad08bda",
                 "shasum": ""
             },
             "require": {
@@ -233,7 +233,7 @@
             "require-dev": {
                 "cebe/indent": "*",
                 "facebook/xhprof": "*@dev",
-                "phpunit/phpunit": "4.1.*"
+                "phpunit/phpunit": "3.7.*"
             },
             "bin": [
                 "bin/markdown"
@@ -241,7 +241,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.1.x-dev"
+                    "dev-master": "1.0.x-dev"
                 }
             },
             "autoload": {
@@ -270,7 +270,7 @@
                 "markdown",
                 "markdown-extra"
             ],
-            "time": "2015-03-06 05:28:07"
+            "time": "2015-03-06 05:21:16"
         },
         {
             "name": "ezyang/htmlpurifier",
