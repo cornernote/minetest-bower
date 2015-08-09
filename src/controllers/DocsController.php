@@ -13,6 +13,11 @@ class DocsController extends Controller
         return $this->render('index');
     }
 
+    public function actionInstall()
+    {
+        return $this->render('install');
+    }
+
     public function actionBowerFormat()
     {
         return $this->render('bower-format');

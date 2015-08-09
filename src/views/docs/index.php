@@ -12,12 +12,11 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <?php
-    echo Nav::widget([
+    <?= Nav::widget([
         'items' => [
+            ['label' => 'Installation', 'url' => ['/docs/install']],
             ['label' => 'bower.json Format', 'url' => ['/docs/bower-format']],
         ],
-    ]);
-    ?>
+    ]) ?>
 
 </div>

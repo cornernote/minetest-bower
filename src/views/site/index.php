@@ -21,6 +21,8 @@ $this->params['jumbotron'] = '/site/_index-jumbotron';
                 <p>Bower requires <a href="http://nodejs.org/">Node and npm</a> and
                     <a href="http://git-scm.com/">Git</a>.</p>
 
+                <p><?= Html::a('detailed installation  &raquo;', ['/docs/install'], ['class' => 'btn btn-sm btn-default']); ?></p>
+
                 <h2>Configure Bower</h2>
 
                 <p>Create a
