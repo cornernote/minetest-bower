@@ -53,6 +53,7 @@ class ModController extends Controller
         $model = new Package();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            Yii::$app->getSession()->setFlash('success', Yii::t('app', 'Mod has been registered.'));
             return $this->redirect(['view', 'name' => $model->name]);
         } else {
             return $this->render('create', [
