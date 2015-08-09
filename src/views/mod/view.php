@@ -23,7 +23,7 @@ $this->params['breadcrumbs'][] = $this->title;
     if (!$model->bower) {
         echo Alert::widget([
             'options' => [
-                'class' => 'alert-danger',
+                'class' => 'alert-info',
             ],
             'closeButton' => false,
             'body' => 'This mod has no ' . Html::a('bower.json', ['/docs/bower-json-format']) . ' file.  Please consider adding one to the <a href="' . Git::getUrl($model->url) . '">repository</a>.',
@@ -45,15 +45,25 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => 'screenshot',
                 'label' => 'Screenshots',
-                'format' => 'raw',
                 'value' => $model->getScreenshotsHtml(),
-            ],
-            //'hits',
-            [
-                'attribute' => 'bower',
                 'format' => 'raw',
-                'value' => '<pre>' . $model->bower . '</pre>',
             ],
+            [
+                'label' => 'Authors',
+                'value' => $model->getAuthorsHtml(),
+                'format' => 'raw',
+            ],
+            [
+                'label' => 'License',
+                'value' => $model->getLicenseHtml(),
+                'format' => 'raw',
+            ],
+            //[
+            //    'attribute' => 'bower',
+            //    'format' => 'raw',
+            //    'value' => '<pre>' . $model->bower . '</pre>',
+            //],
+            'hits',
             'created_at',
             'updated_at',
         ],

@@ -26,6 +26,12 @@ use yii\helpers\Html;
  */
 class Package extends ActiveRecord
 {
+
+    /**
+     * @var array
+     */
+    public $bowerData;
+
     /**
      * @inheritdoc
      */
@@ -98,10 +104,20 @@ class Package extends ActiveRecord
     /**
      * @inheritdoc
      */
+    public function afterFind()
+    {
+        $this->bowerData = json_decode($this->bower, true);
+        parent::afterFind();
+    }
+
+    /**
+     * @inheritdoc
+     */
     public function beforeSave($insert)
     {
         if ($this->isNewRecord) {
             $this->bower = Git::getFile($this->url, 'bower.json');
+            $this->bowerData = json_decode($this->bower, true);
             $this->setBowerData();
         }
         return parent::beforeSave($insert);
@@ -112,16 +128,18 @@ class Package extends ActiveRecord
      */
     public function setBowerData()
     {
-        $bower = json_decode($this->bower, true);
-        if (isset($bower['description'])) {
-            $this->description = $bower['description'];
+        if (!$this->bowerData) {
+            return;
         }
-        $this->homepage = isset($bower['homepage']) ? $bower['homepage'] : Git::getUrl($this->url);
-        if (isset($bower['keywords'])) {
-            $this->keywords = implode(',', $bower['keywords']);
+        if (isset($this->bowerData['description'])) {
+            $this->description = $this->bowerData['description'];
         }
-        if (isset($bower['screenshots'])) {
-            $this->screenshot = $bower['screenshots'][0];
+        $this->homepage = isset($this->bowerData['homepage']) ? $this->bowerData['homepage'] : Git::getUrl($this->url);
+        if (isset($this->bowerData['keywords'])) {
+            $this->keywords = implode(',', $this->bowerData['keywords']);
+        }
+        if (isset($this->bowerData['screenshots'])) {
+            $this->screenshot = $this->bowerData['screenshots'][0];
         }
     }
 
@@ -131,15 +149,80 @@ class Package extends ActiveRecord
     public function getScreenshotsHtml()
     {
         $screenshots = [];
-        $bower = json_decode($this->bower, true);
-        if (isset($bower['screenshots'])) {
-            foreach ($bower['screenshots'] as $screenshot) {
+        if (isset($this->bowerData['screenshots'])) {
+            foreach ($this->bowerData['screenshots'] as $screenshot) {
                 $screenshots[] = Html::img($screenshot, [
                     'style' => 'max-width:100%',
                 ]);
             }
         }
-        return implode('', $screenshots);
+        return $screenshots ? implode('', $screenshots) : null;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAuthorsHtml()
+    {
+        $authors = [];
+        if (isset($this->bowerData['authors'])) {
+            foreach ($this->bowerData['authors'] as $author) {
+                $authors[] = '<li>' . $this->formatAuthor($author) . '</li>';
+            }
+        }
+        return $authors ? '<ul class="list-unstyled" style="margin-bottom:0">' . implode('', $authors) . '</ul>' : null;
+    }
+
+    /**
+     * @param $author
+     * @return string
+     */
+    public function formatAuthor($author)
+    {
+        $authorInfo = [];
+        if (is_array($author)) {
+            if (isset($author['name'])) {
+                $authorInfo['name'] = $author['name'];
+            }
+            if (isset($author['email'])) {
+                $authorInfo['email'] = Html::a($author['email'], 'mailto:' . $author['email']);
+            }
+            if (isset($author['homepage'])) {
+                $authorInfo['homepage'] = Html::a($author['homepage'], $author['homepage']);
+            }
+            return implode(' ', $authorInfo);
+        } else {
+            // https://github.com/jonschlinkert/author-regex/blob/master/index.js
+            preg_match_all('/^([^<(]+?)?[ \t]*(?:<([^>(]+?)>)?[ \t]*(?:\(([^)]+?)\)|$)/', $author, $result, PREG_SET_ORDER);
+            if (isset($result[0][1])) {
+                $authorInfo['name'] = $result[0][1];
+            }
+            if (isset($result[0][2])) {
+                $authorInfo['email'] = Html::a($result[0][2], 'mailto:' . $result[0][2]);
+            }
+            if (isset($result[0][3])) {
+                $authorInfo['homepage'] = Html::a($result[0][3], $result[0][3]);
+            }
+        }
+        return implode(' ', $authorInfo);
+    }
+
+    /**
+     * @return string
+     */
+    public function getLicenseHtml()
+    {
+        $licenses = [];
+        if (isset($this->bowerData['license'])) {
+            if (is_array($this->bowerData['license'])) {
+                foreach ($this->bowerData['license'] as $license) {
+                    $licenses[] = $license;
+                }
+            } else {
+                $licenses[] = $this->bowerData['license'];
+            }
+        }
+        return $licenses ? implode('<br>', $licenses) : null;
     }
 
 }
