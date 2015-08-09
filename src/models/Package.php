@@ -133,12 +133,20 @@ class Package extends ActiveRecord
      */
     public function harvestModInfo()
     {
+        // get README.md
         $this->readme = Git::getFile($this->url, 'README.md');
+        if (!$this->readme) {
+            $this->readme = Git::getFile($this->url, 'readme.md');
+        }
+
+        // get bower.json
         $this->bower = Git::getFile($this->url, 'bower.json');
         if (!$this->bower) {
             return false;
         }
         $this->bowerData = json_decode($this->bower, true);
+
+        // set other meta data
         if (isset($this->bowerData['description'])) {
             $this->description = $this->bowerData['description'];
         }
@@ -149,6 +157,7 @@ class Package extends ActiveRecord
         if (isset($this->bowerData['screenshots'])) {
             $this->screenshot = $this->bowerData['screenshots'][0];
         }
+        
         return true;
     }
 
