@@ -13,7 +13,7 @@ class m150808_000001_create_package extends Migration
             'id' => Schema::TYPE_PK,
             'name' => Schema::TYPE_STRING . '(50) NOT NULL',
             'url' => Schema::TYPE_STRING . '(255) NOT NULL',
-            'hits' => Schema::TYPE_INTEGER . ' NOT NULL',
+            'hits' => Schema::TYPE_INTEGER . ' NOT NULL DEFAULT 0',
             'bower' => Schema::TYPE_TEXT,
             'homepage' => Schema::TYPE_STRING . '(255)',
             'description' => Schema::TYPE_STRING . '(140)',
