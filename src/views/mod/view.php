@@ -69,13 +69,13 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]) ?>
 
+    <?php if (!$model->bower) { ?>
+        <p>If you are the mod owner then please add a
+            <code>bower.json</code> file to your repository with the following contents, then click
+            <?= Html::a('Update bower.json', ['update', 'name' => $model->name]) ?>.
+        </p>
 
-    <p>If you are the mod owner then please add a
-        <code>bower.json</code> file to your repository with the following contents, then click
-        <?= Html::a('Update bower.json', ['update', 'name' => $model->name]) ?>.
-    </p>
-
-    <pre>{
+        <pre>{
   "name": "<?= $model->name; ?>",
   "description": "Description of your mod.",
   "keywords": [
@@ -92,6 +92,7 @@ $this->params['breadcrumbs'][] = $this->title;
   "license": "WTFPL"
 }</pre>
 
-    <p><?= Html::a('bower.json Format  &raquo;', ['/docs/bower-format'], ['class' => 'btn btn-sm btn-default']); ?></p>
+        <p><?= Html::a('bower.json Format  &raquo;', ['/docs/bower-format'], ['class' => 'btn btn-sm btn-default']); ?></p>
+    <?php } ?>
 
 </div>
