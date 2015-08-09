@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\components\Git;
 use Yii;
 use app\models\Package;
 use app\models\search\PackageSearch;
@@ -14,17 +15,6 @@ use yii\filters\VerbFilter;
  */
 class ModController extends Controller
 {
-    public function behaviors()
-    {
-        return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['post'],
-                ],
-            ],
-        ];
-    }
 
     /**
      * Lists all Package models.
@@ -80,27 +70,10 @@ class ModController extends Controller
     public function actionUpdate($name)
     {
         $model = $this->findModel($name);
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'name' => $model->name]);
-        } else {
-            return $this->render('update', [
-                'model' => $model,
-            ]);
-        }
-    }
-
-    /**
-     * Deletes an existing Package model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param string $name
-     * @return mixed
-     */
-    public function actionDelete($name)
-    {
-        $this->findModel($name)->delete();
-
-        return $this->redirect(['index']);
+        $model->bower = Git::getFile($model->url, 'bower.json');
+        $model->setBowerData();
+        $model->save();
+        $this->redirect(['view', 'name' => $model->name]);
     }
 
     /**
