@@ -237,6 +237,15 @@ class Package extends ActiveRecord
     /**
      * @return string
      */
+    public function getRepositoryHtml()
+    {
+        $url = Git::getUrl($this->url);
+        return Html::a($url, $url);
+    }
+
+    /**
+     * @return string
+     */
     public function getReadmeHtml()
     {
         $parser = new GithubMarkdown();

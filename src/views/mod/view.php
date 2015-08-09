@@ -37,6 +37,11 @@ $this->params['breadcrumbs'][] = $this->title;
             'description',
             'keywords',
             'homepage:url',
+            [
+                'label' => 'Repository',
+                'value' => $model->getRepositoryHtml(),
+                'format' => 'raw',
+            ],
             //[
             //    'attribute' => 'url',
             //    'value' => Git::getUrl($model->url),
@@ -45,11 +50,6 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'label' => 'Screenshots',
                 'value' => $model->getScreenshotsHtml(),
-                'format' => 'raw',
-            ],
-            [
-                'attribute' => 'readme',
-                'value' => $model->getReadmeHtml(),
                 'format' => 'raw',
             ],
             [
@@ -69,9 +69,15 @@ $this->params['breadcrumbs'][] = $this->title;
             //],
             'hits',
             'created_at',
-            'updated_at',
+            //'updated_at',
         ],
     ]) ?>
+
+    <?php
+    if ($model->readme) {
+        echo $model->getReadmeHtml();
+    }
+    ?>
 
     <?php if (!$model->bower) { ?>
         <p>If you are the mod owner then please add a
