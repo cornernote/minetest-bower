@@ -9,7 +9,12 @@
         "php": ">=5.4.0",
         "yiisoft/yii2": ">=2.0.5",
         "yiisoft/yii2-bootstrap": "*",
-        "fxp/composer-asset-plugin": "*"
+        "fxp/composer-asset-plugin": "*",
+        "kartik-v/yii2-widgets": "^3.4"
+    },
+    "require-dev": {
+        "yiisoft/yii2-debug": "*",
+        "yiisoft/yii2-gii": "*"
     },
     "extra": {
         "asset-installer-paths": {

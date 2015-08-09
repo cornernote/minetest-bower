@@ -1,0 +1,30 @@
+<?php
+
+use yii\helpers\Html;
+use yii\widgets\ListView;
+
+/* @var $this yii\web\View */
+/* @var $searchModel app\models\search\PackageSearch */
+/* @var $dataProvider yii\data\ActiveDataProvider */
+
+$this->title = 'Mods';
+$this->params['breadcrumbs'][] = $this->title;
+?>
+<div class="package-index">
+
+    <h1><?= Html::encode($this->title) ?></h1>
+    <?php echo $this->render('_search', ['model' => $searchModel]); ?>
+
+    <p>
+        <?php //echo Html::a('Create Package', ['create'], ['class' => 'btn btn-success']) ?>
+    </p>
+
+    <?= ListView::widget([
+        'dataProvider' => $dataProvider,
+        'itemOptions' => ['class' => 'item'],
+        'itemView' => function ($model, $key, $index, $widget) {
+            return $this->render('_view', ['model' => $model]);
+        },
+    ]) ?>
+
+</div>

@@ -5,6 +5,8 @@ $config = [
     'id' => 'minetest-bower',
     'name' => 'Minetest Bower',
     'basePath' => dirname(__DIR__),
+    'vendorPath' => '@app/../vendor',
+    'runtimePath' => '@app/../runtime',
     'components' => [
         'db' => require(__DIR__ . '/db.php'),
     ],
@@ -23,9 +25,12 @@ $web = [
             'showScriptName' => false,
             'rules' => [
                 'POST packages' => 'package/create',
-                'packages' => 'package/index',
                 'packages/search/<name:\w+>' => 'package/search',
                 'packages/<name:\w+>' => 'package/view',
+                'packages' => 'package/index',
+
+                'mods/<name:\w+>' => 'mod/view',
+                'mods' => 'mod/index',
             ],
         ],
     ],
@@ -41,6 +46,15 @@ if (php_sapi_name() != 'cli') {
 } else {
     // Console application
     $config = ArrayHelper::merge($config, $console);
+}
+
+if (YII_ENV_DEV) {
+    // configuration adjustments for 'dev' environment
+    $config['bootstrap'][] = 'gii';
+    $config['modules']['gii'] = [
+        'class' => 'yii\gii\Module',
+        'allowedIPs' => ['*'],
+    ];
 }
 
 return $config;

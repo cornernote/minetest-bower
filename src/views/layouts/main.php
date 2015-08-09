@@ -32,12 +32,14 @@ NavBar::begin([
         'class' => 'navbar-default navbar-fixed-top',
     ],
 ]);
-//echo Nav::widget([
-//    'options' => ['class' => 'navbar-nav navbar-right'],
-//    'items' => [
-//        ['label' => 'Home', 'url' => ['/site/index']],
-//    ],
-//]);
+echo Nav::widget([
+    'options' => ['class' => 'navbar-nav'],
+    'items' => [
+        //['label' => 'Home', 'url' => ['/site/index']],
+        ['label' => 'Browse', 'url' => ['/mod/index']],
+        ['label' => 'Submit', 'url' => ['/mod/create']],
+    ],
+]);
 NavBar::end();
 
 if (isset($this->params['jumbotron'])) {

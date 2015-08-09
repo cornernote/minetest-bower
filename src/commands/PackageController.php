@@ -14,7 +14,7 @@ class PackageController extends Controller
     {
         $packages = Package::find()->all();
         foreach ($packages as $package) {
-            $package->bower = Git::get($package->url, 'bower.json');
+            $package->bower = Git::getFile($package->url, 'bower.json');
             $package->save();
         }
     }

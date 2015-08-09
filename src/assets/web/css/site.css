@@ -4,7 +4,7 @@ body {
 }
 
 body {
-    padding-top: 50px;
+    padding-top: 60px;
 }
 
 #logo {
@@ -49,6 +49,14 @@ a.desc:after {
 
 .grid-view th {
     white-space: nowrap;
+}
+
+.detail-view th {
+    width: 20%;
+}
+
+.detail-view td {
+    width: 80%;
 }
 
 .hint-block {
