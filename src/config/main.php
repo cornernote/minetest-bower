@@ -24,11 +24,13 @@ $web = [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+                // packages
                 'POST packages' => 'package/create',
                 'packages/search/<name:\w+>' => 'package/search',
                 'packages/<name:\w+>' => 'package/view',
                 'packages' => 'package/index',
-
+                // mods
+                'mods/update/<name:\w+>' => 'mod/update',
                 'mods/<name:\w+>' => 'mod/view',
                 'mods' => 'mod/index',
             ],

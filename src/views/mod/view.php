@@ -13,18 +13,10 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="package-view">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-
-    <?php //echo Html::a('Update', ['update', 'name' => $model->name], ['class' => 'btn btn-primary']) ?>
-    <?php
-    //echo Html::a('Delete', ['delete', 'name' => $model->name], [
-    //    'class' => 'btn btn-danger',
-    //    'data' => [
-    //        'confirm' => 'Are you sure you want to delete this item?',
-    //        'method' => 'post',
-    //    ],
-    //])
-    ?>
+    <h1>
+        <?= Html::encode($this->title) ?>
+        <?= Html::a('Update', ['update', 'name' => $model->name], ['class' => 'btn btn-primary pull-right']) ?>
+    </h1>
 
     <?= DetailView::widget([
         'model' => $model,
