@@ -72,10 +72,16 @@ class ModController extends Controller
     {
         $model = $this->findModel($name);
         $model->bower = Git::getFile($model->url, 'bower.json');
+        if (!$model->bower) {
+            Yii::$app->getSession()->setFlash('danger', Yii::t('app', 'bower.json could not be loaded from remote repository.'));
+            return $this->redirect(['view', 'name' => $model->name]);
+        }
         $model->setBowerData();
-        $model->save();
+        if ($model->getDirtyAttributes()) {
+            $model->save();
+        }
         Yii::$app->getSession()->setFlash('success', Yii::t('app', 'bower.json has been updated from remote repository.'));
-        $this->redirect(['view', 'name' => $model->name]);
+        return $this->redirect(['view', 'name' => $model->name]);
     }
 
     /**
