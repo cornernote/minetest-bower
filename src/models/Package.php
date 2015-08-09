@@ -46,7 +46,7 @@ class Package extends ActiveRecord
             [['name', 'url'], 'unique'],
             [['name', 'url'], 'trim'],
             [['name'], 'match', 'pattern' => '/^[-a-z0-9_]+$/', 'message' => '{attribute} can only contain lowercase letters, numbers, "_" and "-"'],
-            [['url'], 'match', 'pattern' => '%(git|http(s)?)(:(//)?)([\w./\-~]+)(\.git)%', 'message' => '{attribute} must be a valid git endpoint on github or bitbucket.'],
+            [['url'], 'match', 'pattern' => '%(git|http(s)?)(:(//)?)([\w./\-~]+)(\.git)%', 'message' => '{attribute} must be a valid git endpoint.'],
             [['url'], function ($attribute, $params) {
                 if (Git::getFile($this->$attribute, '') === false) {
                     $this->addError($attribute, 'Could not fetch remote repository.');
