@@ -138,6 +138,9 @@ class Package extends ActiveRecord
         if (!$this->readme) {
             $this->readme = Git::getFile($this->url, 'readme.md');
         }
+        if (!$this->readme) {
+            $this->readme = Git::getFile($this->url, 'Readme.md');
+        }
 
         // get bower.json
         $this->bower = Git::getFile($this->url, 'bower.json');
@@ -157,7 +160,7 @@ class Package extends ActiveRecord
         if (isset($this->bowerData['screenshots'])) {
             $this->screenshot = $this->bowerData['screenshots'][0];
         }
-        
+
         return true;
     }
 
