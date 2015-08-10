@@ -46,6 +46,9 @@ class PackageController extends Controller
             }
             $url = trim(trim($row['2'], '/')) . '.git';
             $url = strtr($url, $urlTranslate);
+            if (!strpos($url, 'github.com') && !strpos($url, 'bitbucket.org') && !strpos($url, 'repo.or.cz')) {
+                continue;
+            }
             $package = Package::find()->where(['name' => $name])->one();
             if (!$package) {
                 $package = new Package();
