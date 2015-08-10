@@ -18,6 +18,15 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="col-lg-8">
             <?= $model->getReadmeHtml() ?>
             <?php
+            if (!$model->readme) {
+                echo Alert::widget([
+                    'options' => [
+                        'class' => 'alert-danger',
+                    ],
+                    'closeButton' => false,
+                    'body' => 'This mod has no readme.  If you are the owner please consider adding one.',
+                ]);
+            }
             if ($model->readme_format == 'text') {
                 echo Alert::widget([
                     'options' => [

@@ -384,7 +384,7 @@ class Package extends ActiveRecord
      */
     public function getReadmeHtml()
     {
-        if ($this->readme_format && $this->readme) {
+        if ($this->readme) {
             if ($this->readme_format == 'markdown') {
                 $parser = new GithubMarkdown();
                 return $parser->parse($this->readme);
