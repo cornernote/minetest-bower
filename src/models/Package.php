@@ -35,6 +35,10 @@ use yii\widgets\Menu;
  */
 class Package extends ActiveRecord
 {
+    /**
+     * @var array
+     */
+    public $serializeAttributes = ['bower', 'authors', 'license', 'screenshots'];
 
     /**
      * @inheritdoc
@@ -117,10 +121,9 @@ class Package extends ActiveRecord
      */
     public function afterFind()
     {
-        $this->bower = json_decode($this->bower, true);
-        $this->authors = json_decode($this->authors, true);
-        $this->license = json_decode($this->license, true);
-        $this->screenshots = json_decode($this->screenshots, true);
+        foreach ($this->serializeAttributes as $attribute) {
+            $this->$attribute = json_decode($this->$attribute, true);
+        }
         parent::afterFind();
     }
 
@@ -132,10 +135,9 @@ class Package extends ActiveRecord
         if ($this->isNewRecord) {
             $this->harvestModInfo();
         }
-        $this->bower = json_encode($this->bower);
-        $this->authors = json_encode($this->authors);
-        $this->license = json_encode($this->license);
-        $this->screenshots = json_encode($this->screenshots);
+        foreach ($this->serializeAttributes as $attribute) {
+            $this->$attribute = json_encode($this->$attribute);
+        }
         return parent::beforeSave($insert);
     }
 
@@ -144,11 +146,25 @@ class Package extends ActiveRecord
      */
     public function afterSave($insert, $changedAttributes)
     {
-        $this->bower = json_decode($this->bower, true);
-        $this->authors = json_decode($this->authors, true);
-        $this->license = json_decode($this->license, true);
-        $this->screenshots = json_decode($this->screenshots, true);
+        foreach ($this->serializeAttributes as $attribute) {
+            $this->$attribute = json_decode($this->$attribute, true);
+        }
         parent::afterSave($insert, $changedAttributes);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getDirtyAttributes($names = null)
+    {
+        foreach ($this->serializeAttributes as $attribute) {
+            $this->$attribute = json_encode($this->$attribute);
+        }
+        $attributes = parent::getDirtyAttributes($names);
+        foreach ($this->serializeAttributes as $attribute) {
+            $this->$attribute = json_decode($this->$attribute, true);
+        }
+        return $attributes;
     }
 
     /**

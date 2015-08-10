@@ -19,7 +19,6 @@ $this->params['breadcrumbs'][] = $this->title;
             <?= $model->getReadmeHtml() ?>
         </div>
         <div class="col-lg-4 small">
-            <p class="text-right"><?= Html::a('Update', ['update', 'name' => $model->name], ['class' => 'btn btn-primary text-right']) ?></p>
             <?= DetailView::widget([
                 'model' => $model,
                 'attributes' => [
@@ -43,7 +42,11 @@ $this->params['breadcrumbs'][] = $this->title;
                     ],
                     'hits',
                     'created_at',
-                    //'updated_at',
+                    [
+                        'attribute' => 'updated_at',
+                        'value' => $model->updated_at . '&nbsp;&nbsp;[' . Html::a('update', ['update', 'name' => $model->name]) . ']',
+                        'format' => 'raw',
+                    ],
                 ],
             ]) ?>
             <?= $model->getScreenshotsHtml(); ?>
@@ -53,10 +56,10 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php if (!$model->bower) { ?>
         <?= Alert::widget([
             'options' => [
-                'class' => 'alert-info',
+                'class' => 'alert-danger',
             ],
             'closeButton' => false,
-            'body' => 'This mod has no ' . Html::a('bower.json', ['/docs/bower-json-format']) . ' file.  Please consider adding one to the <a href="' . Git::getUrl($model->url) . '">repository</a>.',
+            'body' => 'This mod has no valid ' . Html::a('bower.json', ['/docs/bower-json-format']) . ' file.  Please consider adding one to the <a href="' . Git::getUrl($model->url) . '">repository</a>.',
         ]); ?>
 
         <p>If you are the mod owner then please add a
