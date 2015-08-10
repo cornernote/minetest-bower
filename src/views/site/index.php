@@ -18,7 +18,7 @@ $this->params['jumbotron'] = '/site/_index-jumbotron';
 
         <p>The repository is unmoderated. Anybody may submit mods using one of several different approaches. Different versions by different people of similar mods are permitted but each version must have different names.</p>
 
-        <p>If you'd like to run a Minetest Bower mirror, this is encouraged and simple to set up. Nothing is required except for placing <?= Html::a('this JSON file',['/package/index']) ?> on your website.</p>
+        <p>If you'd like to run a Minetest Bower mirror, this is encouraged and simple to set up. Simply copy the the JSON file at <?= Html::a('this URL',['/package/index']) ?> to your website and update it periodically.</p>
 
         <div class="row">
             <div class="col-lg-6">
