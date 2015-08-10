@@ -65,7 +65,7 @@ class Git
     private static function getRepoOrCzUrl($endpoint, $file)
     {
         return strtr($endpoint, [
-            'http://' => 'http://',
+            'https://' => 'http://',
             'git://' => 'http://',
             '.git' => $file ? '.git/blob_plain/master:/' . $file : '.git',
         ]);

@@ -136,6 +136,7 @@ class PackageController extends Controller
             '/issues.git' => '.git',
             '/zipball/master.git' => '.git',
             '/archive-tarball/master.git' => '.git',
+            'https://repo.or.cz/' => 'http://repo.or.cz/',
         ];
         $csv = array_map('str_getcsv', explode("\n", file_get_contents('https://raw.githubusercontent.com/rubenwardy/mtpm_lists/gh-pages/lists/mods.csv')));
         array_shift($csv);
