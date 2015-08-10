@@ -74,9 +74,7 @@ $this->params['breadcrumbs'][] = $this->title;
     ]) ?>
 
     <?php
-    if ($model->readme) {
-        echo $model->getReadmeHtml();
-    }
+    echo $model->getReadmeHtml();
     ?>
 
     <?php if (!$model->bower) { ?>

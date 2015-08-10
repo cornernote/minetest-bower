@@ -19,6 +19,7 @@ use yii\helpers\Html;
  * @property integer $hits
  * @property string $bower
  * @property string $readme
+ * @property string $readme_format
  * @property string $description
  * @property string $homepage
  * @property string $keywords
@@ -134,12 +135,21 @@ class Package extends ActiveRecord
     public function harvestModInfo()
     {
         // get README.md
-        $this->readme = Git::getFile($this->url, 'README.md');
-        if (!$this->readme) {
-            $this->readme = Git::getFile($this->url, 'readme.md');
+        foreach (['README.md', 'readme.md', 'Readme.md'] as $file) {
+            $this->readme = Git::getFile($this->url, $file);
+            if ($this->readme) {
+                $this->readme_format = 'markdown';
+                break;
+            }
         }
         if (!$this->readme) {
-            $this->readme = Git::getFile($this->url, 'Readme.md');
+            foreach (['README.txt', 'readme.txt', 'Readme.txt', 'README', 'readme'] as $file) {
+                $this->readme = Git::getFile($this->url, $file);
+                if ($this->readme) {
+                    $this->readme_format = 'text';
+                    break;
+                }
+            }
         }
 
         // get bower.json
@@ -260,7 +270,15 @@ class Package extends ActiveRecord
      */
     public function getReadmeHtml()
     {
-        $parser = new GithubMarkdown();
-        return $parser->parse($this->readme);
+        if ($this->readme_format && $this->readme) {
+            if ($this->readme_format == 'markdown') {
+                $parser = new GithubMarkdown();
+                return $parser->parse($this->readme);
+            }
+            if ($this->readme_format == 'text') {
+                return '<pre>' . $this->readme . '</pre>';
+            }
+        }
+        return '';
     }
 }
