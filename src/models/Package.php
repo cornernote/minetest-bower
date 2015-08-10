@@ -3,6 +3,7 @@
 namespace app\models;
 
 use app\components\Git;
+use app\components\Serialize;
 use app\models\query\PackageQuery;
 use bigpaulie\fancybox\FancyBox;
 use cebe\markdown\GithubMarkdown;
@@ -70,8 +71,8 @@ class Package extends ActiveRecord
             [['name', 'url'], 'trim'],
             [['name'], 'match', 'pattern' => '/^[-a-z0-9_]+$/', 'message' => '{attribute} can only contain lowercase letters, numbers, "_" and "-"'],
             [['url'], 'match', 'pattern' => '%(git|http(s)?)(:(//)?)([\w./\-~]+)(\.git)%', 'message' => '{attribute} must be a valid git endpoint.'],
-            [['url'], function ($attribute, $params) {
-                if ($this->checkUrl && Git::getFile($this->$attribute, '') === false) {
+            [['url'], function ($attribute) {
+                if ($this->checkUrl && Git::getFile($this->$attribute) === false) {
                     $this->addError($attribute, 'Could not fetch remote repository.');
                 }
             }],
@@ -172,7 +173,7 @@ class Package extends ActiveRecord
         if (!$this->serialized) {
             foreach ($this->serializeAttributes as $attribute) {
                 if ($this->$attribute) {
-                    $this->$attribute = json_encode($this->$attribute);
+                    $this->$attribute = [Serialize::serialize($this->$attribute), \PDO::PARAM_LOB];
                 }
             }
             $this->serialized = true;
@@ -187,7 +188,7 @@ class Package extends ActiveRecord
         if ($this->serialized) {
             foreach ($this->serializeAttributes as $attribute) {
                 if ($this->$attribute) {
-                    $this->$attribute = json_decode($this->$attribute, true);
+                    $this->$attribute = Serialize::unserialize($this->$attribute);
                 }
             }
             $this->serialized = false;
