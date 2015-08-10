@@ -8,8 +8,11 @@ use bigpaulie\fancybox\FancyBox;
 use cebe\markdown\GithubMarkdown;
 use Yii;
 use yii\behaviors\TimestampBehavior;
+use yii\bootstrap\Nav;
+use yii\bootstrap\Tabs;
 use yii\db\ActiveRecord;
 use yii\helpers\Html;
+use yii\widgets\Menu;
 
 /**
  * This is the model class for table "{{%package}}".
@@ -319,10 +322,17 @@ class Package extends ActiveRecord
     /**
      * @return string
      */
-    public function getRepositoryHtml()
+    public function getLinksHtml()
     {
-        $url = Git::getUrl($this->url);
-        return Html::a($url, $url);
+        $items = [];
+        if ($this->homepage && $this->homepage != Git::getUrl($this->url)) {
+            $items[] = ['label' => 'Home', 'url' => $this->homepage, 'active' => true];
+        }
+        $items[] = ['label' => 'Repository', 'url' => Git::getUrl($this->url), 'active' => true];
+        return Menu::widget([
+            'options' => ['class' => 'list-unstyled', 'style' => 'margin-bottom:0;'],
+            'items' => $items,
+        ]);
     }
 
     /**

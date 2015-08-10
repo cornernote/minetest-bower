@@ -26,10 +26,9 @@ $this->params['breadcrumbs'][] = $this->title;
                     'name',
                     'description',
                     'keywords',
-                    'homepage:url',
                     [
-                        'label' => 'Repository',
-                        'value' => $model->getRepositoryHtml(),
+                        'label' => 'Links',
+                        'value' => $model->getLinksHtml(),
                         'format' => 'raw',
                     ],
                     [
