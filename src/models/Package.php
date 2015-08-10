@@ -395,7 +395,7 @@ class Package extends ActiveRecord
                 return $parser->parse($this->readme);
             }
             if ($this->readme_format == 'text') {
-                return '<pre>' . $this->readme . '</pre>';
+                return '<pre class="readme">' . $this->readme . '</pre>';
             }
         }
         return '';

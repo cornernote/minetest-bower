@@ -89,3 +89,10 @@ a.desc:after {
 pre.prettyprint {
     padding: 10px !important;
 }
+
+pre.readme {
+    color: #333;
+    background-color: transparent;
+    border-width: 0;
+    padding: 0;
+}

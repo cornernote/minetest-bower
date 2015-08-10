@@ -27,15 +27,6 @@ $this->params['breadcrumbs'][] = $this->title;
                     'body' => 'This mod has no readme.  If you are the owner please consider adding one to the <a href="' . Git::getUrl($model->url) . '">repository</a>.',
                 ]);
             }
-            if ($model->readme_format == 'text') {
-                echo Alert::widget([
-                    'options' => [
-                        'class' => 'alert-danger',
-                    ],
-                    'closeButton' => false,
-                    'body' => 'This readme is in text format.  If you are the owner please consider converting it to markdown.',
-                ]);
-            }
             ?>
         </div>
         <div class="col-lg-4 small">
