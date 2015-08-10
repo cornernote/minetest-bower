@@ -6,6 +6,7 @@ use app\components\Git;
 use app\models\query\PackageQuery;
 use bigpaulie\fancybox\FancyBox;
 use cebe\markdown\GithubMarkdown;
+use Github\Client;
 use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
@@ -226,7 +227,8 @@ class Package extends ActiveRecord
             if (strpos($this->url, 'github.com')) {
                 $url = parse_url(Git::getUrl($this->url));
                 $path = explode('/', trim($url['path'], '/'));
-                $github = new \Github\Client();
+                $github = new Client();
+                $github->authenticate(getenv('GITHUB_USER'), getenv('GITHUB_TOKEN'), Client::AUTH_URL_CLIENT_ID);
                 $repo = $github->api('repo')->show($path[0], $path[1]);
                 if (isset($repo['description'])) {
                     $this->description = substr($repo['description'], 0, 140);
