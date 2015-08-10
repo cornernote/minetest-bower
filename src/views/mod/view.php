@@ -17,6 +17,17 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="row">
         <div class="col-lg-8">
             <?= $model->getReadmeHtml() ?>
+            <?php
+            if ($model->readme_format == 'text') {
+                echo Alert::widget([
+                    'options' => [
+                        'class' => 'alert-danger',
+                    ],
+                    'closeButton' => false,
+                    'body' => 'This readme is in text format.  If you are the owner please consider converting it to markdown.',
+                ]);
+            }
+            ?>
         </div>
         <div class="col-lg-4 small">
             <?= DetailView::widget([
@@ -59,7 +70,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'class' => 'alert-danger',
             ],
             'closeButton' => false,
-            'body' => 'This mod has no valid ' . Html::a('bower.json', ['/docs/bower-json-format']) . ' file.  Please consider adding one to the <a href="' . Git::getUrl($model->url) . '">repository</a>.',
+            'body' => 'This mod has no valid ' . Html::a('bower.json', ['/docs/bower-json-format']) . ' file.  If you are the owner please consider adding one to the <a href="' . Git::getUrl($model->url) . '">repository</a>.',
         ]); ?>
 
         <p>If you are the mod owner then please add a

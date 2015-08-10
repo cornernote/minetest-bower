@@ -38,7 +38,17 @@ class Package extends ActiveRecord
     /**
      * @var array
      */
-    public $serializeAttributes = ['bower', 'authors', 'license', 'screenshots'];
+    public $serializeAttributes = ['bower', 'screenshots', 'authors', 'license'];
+
+    /**
+     * @var bool
+     */
+    public $serialized = false;
+
+    /**
+     * @var bool
+     */
+    public $checkUrl = true;
 
     /**
      * @inheritdoc
@@ -62,7 +72,7 @@ class Package extends ActiveRecord
             [['name'], 'match', 'pattern' => '/^[-a-z0-9_]+$/', 'message' => '{attribute} can only contain lowercase letters, numbers, "_" and "-"'],
             [['url'], 'match', 'pattern' => '%(git|http(s)?)(:(//)?)([\w./\-~]+)(\.git)%', 'message' => '{attribute} must be a valid git endpoint.'],
             [['url'], function ($attribute, $params) {
-                if (Git::getFile($this->$attribute, '') === false) {
+                if ($this->checkUrl && Git::getFile($this->$attribute, '') === false) {
                     $this->addError($attribute, 'Could not fetch remote repository.');
                 }
             }],
@@ -121,9 +131,7 @@ class Package extends ActiveRecord
      */
     public function afterFind()
     {
-        foreach ($this->serializeAttributes as $attribute) {
-            $this->$attribute = json_decode($this->$attribute, true);
-        }
+        $this->unserializeAttributes();
         parent::afterFind();
     }
 
@@ -132,12 +140,7 @@ class Package extends ActiveRecord
      */
     public function beforeSave($insert)
     {
-        if ($this->isNewRecord) {
-            $this->harvestModInfo();
-        }
-        foreach ($this->serializeAttributes as $attribute) {
-            $this->$attribute = json_encode($this->$attribute);
-        }
+        $this->serializeAttributes();
         return parent::beforeSave($insert);
     }
 
@@ -146,9 +149,7 @@ class Package extends ActiveRecord
      */
     public function afterSave($insert, $changedAttributes)
     {
-        foreach ($this->serializeAttributes as $attribute) {
-            $this->$attribute = json_decode($this->$attribute, true);
-        }
+        $this->unserializeAttributes();
         parent::afterSave($insert, $changedAttributes);
     }
 
@@ -157,14 +158,40 @@ class Package extends ActiveRecord
      */
     public function getDirtyAttributes($names = null)
     {
-        foreach ($this->serializeAttributes as $attribute) {
-            $this->$attribute = json_encode($this->$attribute);
-        }
+        $this->serializeAttributes();
         $attributes = parent::getDirtyAttributes($names);
-        foreach ($this->serializeAttributes as $attribute) {
-            $this->$attribute = json_decode($this->$attribute, true);
-        }
+        $this->unserializeAttributes();
         return $attributes;
+    }
+
+    /**
+     *
+     */
+    public function serializeAttributes()
+    {
+        if (!$this->serialized) {
+            foreach ($this->serializeAttributes as $attribute) {
+                if ($this->$attribute) {
+                    $this->$attribute = json_encode($this->$attribute);
+                }
+            }
+            $this->serialized = true;
+        }
+    }
+
+    /**
+     *
+     */
+    public function unserializeAttributes()
+    {
+        if ($this->serialized) {
+            foreach ($this->serializeAttributes as $attribute) {
+                if ($this->$attribute) {
+                    $this->$attribute = json_decode($this->$attribute, true);
+                }
+            }
+            $this->serialized = false;
+        }
     }
 
     /**
@@ -241,6 +268,7 @@ class Package extends ActiveRecord
             }
         }
 
+        return true;
     }
 
     /**

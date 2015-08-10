@@ -70,6 +70,7 @@ class PackageController extends Controller
     {
         $package = new Package();
         $package->setAttributes(Yii::$app->request->post());
+        $package->harvestModInfo();
         if ($package->save()) {
             Yii::$app->response->statusCode = 201;
             return '';
