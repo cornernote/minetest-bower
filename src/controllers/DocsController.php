@@ -23,4 +23,9 @@ class DocsController extends Controller
         return $this->render('bower-format');
     }
 
+    public function actionRegistryCurl()
+    {
+        return $this->render('registry-curl');
+    }
+
 }
