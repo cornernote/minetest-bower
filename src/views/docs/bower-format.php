@@ -15,19 +15,17 @@ $this->params['breadcrumbs'][] = $this->title;
     <h2>Example <code>bower.json</code></h2>
 
     <pre>{
-  "name": "my_example",
+  "name": "rainbows",
   "description": "Description of my minetest mod.",
   "keywords": [
-    "example",
-    "rainbow"
+    "rainbows"
   ],
   "homepage": "http://example.com/",
   "screenshots": [
-    "http://example.com/screenshot1.png",
-    "http://example.com/screenshot2.png"
+    "http://example.com/screenshot.png"
   ],
   "authors": [
-    "Example Author &lt;author@example.com&gt;"
+    "Author &lt;author@example.com&gt;"
   ],
   "license": "WTFPL",
   "dependencies": {
