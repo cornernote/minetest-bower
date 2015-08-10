@@ -85,3 +85,7 @@ a.desc:after {
     padding: 10px 20px;
     margin: 0 0 15px 0;
 }
+
+pre.prettyprint {
+    padding: 10px !important;
+}

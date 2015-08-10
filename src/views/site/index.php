@@ -27,12 +27,12 @@ $this->params['jumbotron'] = '/site/_index-jumbotron';
 
                 <p>Bower is a command line utility. It requires <a href="http://nodejs.org/">NodeJS and npm</a> and
                     <a href="http://git-scm.com/">Git</a>.</p>
-                <pre>$ npm install -g bower</pre>
+                <pre class="prettyprint lang-bash">$ npm install -g bower</pre>
 
                 <p>Create a
                     <code>.bowerrc</code> file in your home directory or minetest folder with the following contents.
                 </p>
-                <pre>{
+                <pre class="prettyprint lang-js">{
     "registry": "https://minetest-bower.herokuapp.com/",
     "directory" : "mods"
 }</pre>
@@ -44,12 +44,12 @@ $this->params['jumbotron'] = '/site/_index-jumbotron';
                 <h2>Install Mods</h2>
 
                 <p>Install mods and their dependencies with <code>bower install</code>.</p>
-                <pre>$ bower install &lt;mod&gt;</pre>
+                <pre class="prettyprint lang-bash">$ bower install &lt;mod&gt;</pre>
 
                 <h2>Search Mods</h2>
 
                 <p>Find mods that you can install with <code>bower search</code> or <?= Html::a('browse the repository', ['/mod/index']) ?>.</p>
-                <pre>$ bower search &lt;keyword&gt;
+                <pre class="prettyprint lang-bash">$ bower search &lt;keyword&gt;
 
 # for example
 $ bower search rainbow</pre>
@@ -58,7 +58,7 @@ $ bower search rainbow</pre>
 
                 <p>Register mods with
                     <code>bower register</code> or <?= Html::a('submit a mod online', ['/mod/create']) ?>.</p>
-                <pre>$ bower register &lt;my_mod_name&gt; &lt;git_endpoint&gt;
+                <pre class="prettyprint lang-bash">$ bower register &lt;my_mod_name&gt; &lt;git_endpoint&gt;
 
 # for example
 $ bower register rainbows https://github.com/user/rainbows.git</pre>

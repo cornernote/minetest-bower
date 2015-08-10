@@ -14,22 +14,22 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h2>Create Mod</h2>
 
-    <pre>curl https://minetest-bower.herokuapp.com/packages -v -F 'name=rainbows' -F 'url=https://github.com/user/rainbows.git'</pre>
+    <pre class="prettyprint lang-bash">curl https://minetest-bower.herokuapp.com/packages -v -F 'name=rainbows' -F 'url=https://github.com/user/rainbows.git'</pre>
 
     <h2>Find Mod</h2>
 
-    <pre>curl https://minetest-bower.herokuapp.com/packages/rainbows</pre>
+    <pre class="prettyprint lang-bash">curl https://minetest-bower.herokuapp.com/packages/rainbows</pre>
 
     <p>returns:</p>
 
-    <pre>{"name":"rainbows","url":"https://github.com/user/rainbows.git"}</pre>
+    <pre class="prettyprint lang-js">{"name":"rainbows","url":"https://github.com/user/rainbows.git"}</pre>
 
     <h2>Search Mod</h2>
 
-    <pre>curl https://minetest-bower.herokuapp.com/packages/search/rainbows</pre>
+    <pre class="prettyprint lang-bash">curl https://minetest-bower.herokuapp.com/packages/search/rainbows</pre>
 
     <p>returns:</p>
 
-    <pre>[{"name":"rainbows","url":"https://github.com/user/rainbows.git"}, {"name":"rainbows_lib","url":"git://github.com/user/rainbows_lib.git"}]</pre>
+    <pre class="prettyprint lang-js">[{"name":"rainbows","url":"https://github.com/user/rainbows.git"}, {"name":"rainbows_lib","url":"git://github.com/user/rainbows_lib.git"}]</pre>
 
 </div>

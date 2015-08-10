@@ -14,7 +14,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h2>Example <code>bower.json</code></h2>
 
-    <pre>{
+    <pre class="prettyprint lang-js">{
   "name": "rainbows",
   "description": "Description of my minetest mod.",
   "keywords": [
@@ -107,7 +107,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <p>Either:</p>
 
-    <pre>"authors": [
+    <pre class="prettyprint lang-js">"authors": [
     "John Doe",
     "John Doe &lt;john@doe.com&gt;",
     "John Doe &lt;john@doe.com&gt; (http://johndoe.com)"
@@ -115,7 +115,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <p>or:</p>
 
-    <pre>"authors": [
+    <pre class="prettyprint lang-js">"authors": [
     { "name": "John Doe" },
     { "name": "John Doe", "email": "john@doe.com" },
     { "name": "John Doe", "email": "john@doe.com", "homepage": "http://johndoe.com" }

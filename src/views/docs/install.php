@@ -23,7 +23,7 @@ $this->params['breadcrumbs'][] = $this->title;
             </ol>
 
             <p>Install bower</p>
-            <pre>C:\> npm install -g bower</pre>
+            <pre class="prettyprint lang-bash">C:\> npm install -g bower</pre>
 
         </div>
         <div class="col-lg-4">
@@ -35,17 +35,17 @@ $this->params['breadcrumbs'][] = $this->title;
             </ol>
 
             <p>Install bower</p>
-            <pre>$ npm install -g bower</pre>
+            <pre class="prettyprint lang-bash">$ npm install -g bower</pre>
 
         </div>
         <div class="col-lg-4">
             <h2>Ubuntu/Debian</h2>
 
             <p>Install nodejs, npm and git</p>
-            <pre>$ sudo apt-get install nodejs npm git-core</pre>
+            <pre class="prettyprint lang-bash">$ sudo apt-get install nodejs npm git-core</pre>
 
             <p>Install bower</p>
-            <pre>$ npm install -g bower</pre>
+            <pre class="prettyprint lang-bash">$ npm install -g bower</pre>
 
         </div>
     </div>
@@ -57,7 +57,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <p>Create a
         <code>.bowerrc</code> file in your home directory or minetest folder with the following contents.
     </p>
-                <pre>{
+                <pre class="prettyprint lang-js">{
     "registry": "https://minetest-bower.herokuapp.com/",
     "directory" : "mods"
 }</pre>
