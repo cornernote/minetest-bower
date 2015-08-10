@@ -10,12 +10,14 @@ use yii\console\Controller;
 class PackageController extends Controller
 {
 
-    public function actionUpdateBower()
+    public function actionUpdate()
     {
         $packages = Package::find()->all();
         foreach ($packages as $package) {
-            $package->bower = Git::getFile($package->url, 'bower.json');
-            $package->save();
+            $package->harvestModInfo();
+            if ($package->getDirtyAttributes()) {
+                $package->save();
+            }
         }
     }
 

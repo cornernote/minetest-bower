@@ -71,14 +71,11 @@ class ModController extends Controller
     public function actionUpdate($name)
     {
         $model = $this->findModel($name);
-        if (!$model->harvestModInfo()) {
-            Yii::$app->getSession()->setFlash('danger', Yii::t('app', 'bower.json could not be loaded from remote repository.'));
-            return $this->redirect(['view', 'name' => $model->name]);
-        }
+        $model->harvestModInfo();
         if ($model->getDirtyAttributes()) {
             $model->save();
         }
-        Yii::$app->getSession()->setFlash('success', Yii::t('app', 'bower.json has been updated from remote repository.'));
+        Yii::$app->getSession()->setFlash('success', Yii::t('app', 'Mod has been updated from remote repository.'));
         return $this->redirect(['view', 'name' => $model->name]);
     }
 

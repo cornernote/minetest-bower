@@ -38,7 +38,7 @@ class Git
         return strtr($endpoint, [
             'http://' => 'https://',
             'git://' => 'https://',
-            '.git' => $file ? '/raw/master/' . $file : '/',
+            '.git' => $file ? '/raw/master/' . $file : '',
         ]);
     }
 
@@ -53,7 +53,7 @@ class Git
             'https://' => $file ? 'https://raw.' : 'https://',
             'http://' => $file ? 'https://raw.' : 'https://',
             'git://' => $file ? 'https://raw.' : 'https://',
-            '.git' => $file ? '/master/' . $file : '/',
+            '.git' => $file ? '/master/' . $file : '',
         ]);
     }
 

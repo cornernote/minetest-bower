@@ -24,17 +24,14 @@ use yii\helpers\Html;
  * @property string $description
  * @property string $homepage
  * @property string $keywords
- * @property string $screenshot
+ * @property string|array $authors
+ * @property string|array $screenshots
+ * @property string|array $license
  * @property string $created_at
  * @property string $updated_at
  */
 class Package extends ActiveRecord
 {
-
-    /**
-     * @var array
-     */
-    public $bowerData;
 
     /**
      * @inheritdoc
@@ -80,7 +77,9 @@ class Package extends ActiveRecord
             'description' => 'Description',
             'homepage' => 'Homepage',
             'keywords' => 'Keywords',
-            'screenshot' => 'Screenshot',
+            'authors' => 'Authors',
+            'license' => 'License',
+            'screenshots' => 'Screenshots',
             'created_at' => 'Created',
             'updated_at' => 'Updated',
         ];
@@ -115,7 +114,10 @@ class Package extends ActiveRecord
      */
     public function afterFind()
     {
-        $this->bowerData = json_decode($this->bower, true);
+        $this->bower = json_decode($this->bower, true);
+        $this->authors = json_decode($this->authors, true);
+        $this->license = json_decode($this->license, true);
+        $this->screenshots = json_decode($this->screenshots, true);
         parent::afterFind();
     }
 
@@ -127,7 +129,23 @@ class Package extends ActiveRecord
         if ($this->isNewRecord) {
             $this->harvestModInfo();
         }
+        $this->bower = json_encode($this->bower);
+        $this->authors = json_encode($this->authors);
+        $this->license = json_encode($this->license);
+        $this->screenshots = json_encode($this->screenshots);
         return parent::beforeSave($insert);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function afterSave($insert, $changedAttributes)
+    {
+        $this->bower = json_decode($this->bower, true);
+        $this->authors = json_decode($this->authors, true);
+        $this->license = json_decode($this->license, true);
+        $this->screenshots = json_decode($this->screenshots, true);
+        parent::afterSave($insert, $changedAttributes);
     }
 
     /**
@@ -135,7 +153,58 @@ class Package extends ActiveRecord
      */
     public function harvestModInfo()
     {
-        // get README.md
+        // fetch bower.json
+        $this->bower = Git::getFile($this->url, 'bower.json');
+        if ($this->bower) {
+            $this->bower = json_decode($this->bower, true);
+            // set fields from bower
+            if (isset($this->bower['description'])) {
+                $this->description = $this->bower['description'];
+            }
+            if (isset($this->bower['homepage'])) {
+                $this->homepage = $this->bower['homepage'];
+            }
+            if (isset($this->bower['keywords'])) {
+                $this->keywords = implode(',', $this->bower['keywords']);
+            }
+            if (isset($this->bower['authors'])) {
+                $this->authors = $this->bower['authors'];
+            }
+            if (isset($this->bower['screenshots'])) {
+                $this->screenshots = $this->bower['screenshots'];
+            }
+            if (isset($this->bower['license'])) {
+                $this->license = $this->bower['license'];
+            }
+        } else {
+            // no bower, get from github api
+            if (strpos($this->url, 'github.com')) {
+                $url = parse_url(Git::getUrl($this->url));
+                $path = explode('/', trim($url['path'], '/'));
+                $github = new \Github\Client();
+                $repo = $github->api('repo')->show($path[0], $path[1]);
+                if (isset($repo['description'])) {
+                    $this->description = $repo['description'];
+                }
+                if (isset($repo['homepage'])) {
+                    $this->homepage = $repo['homepage'];
+                } elseif (isset($repo['html_url'])) {
+                    $this->homepage = $repo['html_url'];
+                }
+                if (isset($repo['owner']['login'])) {
+                    $this->authors = [$repo['owner']['login']];
+                }
+            }
+        }
+
+        // update authors
+        if (!$this->authors) {
+            $url = parse_url(Git::getUrl($this->url));
+            $path = explode('/', trim($url['path'], '/'));
+            $this->authors = [$path[0]];
+        }
+
+        // fetch readme
         foreach (['README.md', 'readme.md', 'Readme.md'] as $file) {
             $this->readme = Git::getFile($this->url, $file);
             if ($this->readme) {
@@ -153,26 +222,6 @@ class Package extends ActiveRecord
             }
         }
 
-        // get bower.json
-        $this->bower = Git::getFile($this->url, 'bower.json');
-        if (!$this->bower) {
-            return false;
-        }
-        $this->bowerData = json_decode($this->bower, true);
-
-        // set other meta data
-        if (isset($this->bowerData['description'])) {
-            $this->description = $this->bowerData['description'];
-        }
-        $this->homepage = isset($this->bowerData['homepage']) ? $this->bowerData['homepage'] : Git::getUrl($this->url);
-        if (isset($this->bowerData['keywords'])) {
-            $this->keywords = implode(',', $this->bowerData['keywords']);
-        }
-        if (isset($this->bowerData['screenshots'])) {
-            $this->screenshot = $this->bowerData['screenshots'][0];
-        }
-
-        return true;
     }
 
     /**
@@ -181,8 +230,8 @@ class Package extends ActiveRecord
     public function getScreenshotsHtml()
     {
         $screenshots = [];
-        if (isset($this->bowerData['screenshots'])) {
-            foreach ($this->bowerData['screenshots'] as $screenshot) {
+        if ($this->screenshots) {
+            foreach ($this->screenshots as $screenshot) {
                 $screenshots[] = FancyBox::widget([
                     'type' => 'image',
                     'item' => [
@@ -207,8 +256,8 @@ class Package extends ActiveRecord
     public function getAuthorsHtml()
     {
         $authors = [];
-        if (isset($this->bowerData['authors'])) {
-            foreach ($this->bowerData['authors'] as $author) {
+        if ($this->authors) {
+            foreach ($this->authors as $author) {
                 $authors[] = '<li>' . $this->formatAuthor($author) . '</li>';
             }
         }
@@ -255,13 +304,13 @@ class Package extends ActiveRecord
     public function getLicenseHtml()
     {
         $licenses = [];
-        if (isset($this->bowerData['license'])) {
-            if (is_array($this->bowerData['license'])) {
-                foreach ($this->bowerData['license'] as $license) {
+        if ($this->license) {
+            if (is_array($this->license)) {
+                foreach ($this->license as $license) {
                     $licenses[] = $license;
                 }
             } else {
-                $licenses[] = $this->bowerData['license'];
+                $licenses[] = $this->license;
             }
         }
         return $licenses ? implode('<br>', $licenses) : null;
@@ -291,5 +340,27 @@ class Package extends ActiveRecord
             }
         }
         return '';
+    }
+
+    /**
+     * @return string
+     */
+    public function getBowerJson()
+    {
+        if ($this->bower) {
+            $bower = json_encode($this->bower, JSON_PRETTY_PRINT);
+        } else {
+            $bower = json_encode([
+                'name' => $this->name,
+                'description' => $this->description ? $this->description : 'Description of your mod.',
+                'keywords' => [$this->name],
+                'homepage' => $this->homepage ? $this->homepage : Git::getUrl($this->url),
+                'screenshots' => ['https://example.com/screenshot1.png'],
+                'authors' => $this->authors ? $this->authors : ['Your Name'],
+                'license' => 'UNKNOWN',
+            ], JSON_PRETTY_PRINT);
+        }
+        $bower = str_replace('\/', '/', $bower);
+        return '<pre>' . $bower . '</pre>';
     }
 }

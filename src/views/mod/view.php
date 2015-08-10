@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1>
         <?= Html::encode($this->title) ?>
-        <?= Html::a('Update bower.json', ['update', 'name' => $model->name], ['class' => 'btn btn-primary pull-right']) ?>
+        <?= Html::a('Update', ['update', 'name' => $model->name], ['class' => 'btn btn-primary pull-right']) ?>
     </h1>
 
     <?php
@@ -42,11 +42,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 'value' => $model->getRepositoryHtml(),
                 'format' => 'raw',
             ],
-            //[
-            //    'attribute' => 'url',
-            //    'value' => Git::getUrl($model->url),
-            //    'format' => 'url',
-            //],
             [
                 'label' => 'Authors',
                 'value' => $model->getAuthorsHtml(),
@@ -57,11 +52,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 'value' => $model->getLicenseHtml(),
                 'format' => 'raw',
             ],
-            //[
-            //    'attribute' => 'bower',
-            //    'format' => 'raw',
-            //    'value' => '<pre>' . $model->bower . '</pre>',
-            //],
             'hits',
             'created_at',
             //'updated_at',
@@ -74,27 +64,13 @@ $this->params['breadcrumbs'][] = $this->title;
     ?>
 
     <?php if (!$model->bower) { ?>
+
         <p>If you are the mod owner then please add a
             <code>bower.json</code> file to your repository with the following contents, then click
-            <?= Html::a('Update bower.json', ['update', 'name' => $model->name]) ?>.
+            <?= Html::a('Update', ['update', 'name' => $model->name]) ?>.
         </p>
 
-        <pre>{
-  "name": "<?= $model->name; ?>",
-  "description": "Description of your mod.",
-  "keywords": [
-    "example",
-    "rainbow"
-  ],
-  "homepage": "<?= Git::getUrl($model->url) ?>",
-  "screenshots": [
-    "https://example.com/screenshot1.png"
-  ],
-  "authors": [
-    "Your Name"
-  ],
-  "license": "WTFPL"
-}</pre>
+        <?= $model->getBowerJson(); ?>
 
         <p><?= Html::a('bower.json Format  &raquo;', ['/docs/bower-format'], ['class' => 'btn btn-sm btn-default']); ?></p>
     <?php } ?>
