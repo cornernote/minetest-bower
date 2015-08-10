@@ -16,6 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'items' => [
             ['label' => 'Installation', 'url' => ['/docs/install']],
             ['label' => 'bower.json Format', 'url' => ['/docs/bower-format']],
+            ['label' => 'Semantic Versioning', 'url' => ['/docs/semver']],
             ['label' => 'Registry Requests using cURL', 'url' => ['/docs/registry-curl']],
         ],
     ]) ?>

@@ -147,7 +147,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <li>Git URLs can be restricted to a reference (revision SHA, branch, or tag) by appending it after a hash, e.g.
             <code>https://github.com/owner/package.git#branch</code>.
         </li>
-        <li>Value can be an owner/package shorthand, i.e. owner/package. By default, the shorthand resolves to GitHub -> git://github.com/{{owner}}/{{package}}.git. This may be changed in
+        <li>Value can be an owner/package shorthand, i.e. owner/package. By default, the shorthand resolves to GitHub -> git://github.com/owner/package.git. This may be changed in
             <code>.bowerrc</code> <a href="http://bower.io/docs/config/#shorthand-resolver">shorthand_resolver</a>.
         </li>
         <li>Local paths may be used as values for local development, but they will be disallowed when registering.</li>

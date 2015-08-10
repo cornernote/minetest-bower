@@ -28,4 +28,9 @@ class DocsController extends Controller
         return $this->render('registry-curl');
     }
 
+    public function actionSemver()
+    {
+        return $this->render('semver');
+    }
+
 }
