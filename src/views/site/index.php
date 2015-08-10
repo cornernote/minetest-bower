@@ -18,7 +18,11 @@ $this->params['jumbotron'] = '/site/_index-jumbotron';
 
         <p>The repository is unmoderated. Anybody may submit mods using one of several different approaches. Different versions by different people of similar mods are permitted but each version must have different names.</p>
 
-        <p>If you'd like to run a Minetest Bower mirror, this is encouraged and simple to set up. Simply copy the <?= Html::a('this JSON file',['/package/index']) ?> to your website and update it periodically.</p>
+        <p>If you'd like to run a Minetest Bower mirror, this is encouraged and simple to set up. Simply copy the <?= Html::a('this JSON file', ['/package/index']) ?> to your website and update it periodically.</p>
+
+        <h2>Mod Information</h2>
+
+        <p>Optionally, to add more information about your mod such as description, screenshots, and your own remarks, you can submit a JSON file along with your mod. To do so add a <?= Html::a('bower.json', ['/docs/bower-format'], ['class' => 'btn btn-sm btn-default']); ?> file to your mod's repository.</p>
 
         <div class="row">
             <div class="col-lg-6">
@@ -52,12 +56,6 @@ $this->params['jumbotron'] = '/site/_index-jumbotron';
 
 # for example
 $ bower register rainbows https://github.com/user/rainbows.git</pre>
-
-                <h2>Mod Information</h2>
-
-                <p>Mod information is collected from a <code>bower.json</code> file in the repository</p>
-
-                <p><?= Html::a('bower.json Format  &raquo;', ['/docs/bower-format'], ['class' => 'btn btn-sm btn-default']); ?></p>
 
             </div>
         </div>
