@@ -20,10 +20,6 @@ $this->params['jumbotron'] = '/site/_index-jumbotron';
 
         <p>If you'd like to run a Minetest Bower mirror, this is encouraged and simple to set up. Simply copy the <?= Html::a('this JSON file', ['/package/index']) ?> to your website and update it periodically.</p>
 
-        <h2>Mod Information</h2>
-
-        <p>Optionally, to add more information about your mod such as description, screenshots, and your own remarks, you can submit a JSON file along with your mod. To do so add a <?= Html::a('bower.json', ['/docs/bower-format']); ?> file to your mod's repository.</p>
-
         <div class="row">
             <div class="col-lg-6">
                 <h2>Install Bower</h2>
@@ -41,12 +37,13 @@ $this->params['jumbotron'] = '/site/_index-jumbotron';
 }</pre>
                 <p><?= Html::a('Installation Guide &raquo;', ['/docs/install'], ['class' => 'btn btn-sm btn-default']); ?></p>
 
-            </div>
-            <div class="col-lg-6">
                 <h2>Install Mods</h2>
 
                 <p>Install mods with <code>bower install</code>.</p>
                 <pre>$ bower install &lt;mod&gt;</pre>
+
+            </div>
+            <div class="col-lg-6">
 
                 <h2>Register Mods</h2>
 
@@ -57,6 +54,10 @@ $this->params['jumbotron'] = '/site/_index-jumbotron';
 # for example
 $ bower register rainbows https://github.com/user/rainbows.git</pre>
 
+                <h2>Mod Information</h2>
+
+                <p>Optionally, to add more information about your mod such as description, screenshots, and your own remarks, you can submit a JSON file along with your mod. To do so add a <?= Html::a('bower.json', ['/docs/bower-format']); ?> file to your mod's repository.</p>
+                
             </div>
         </div>
 
