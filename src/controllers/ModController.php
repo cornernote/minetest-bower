@@ -38,8 +38,11 @@ class ModController extends Controller
      */
     public function actionView($name)
     {
+        $model = $this->findModel($name);
+        $model->hits++;
+        $model->save(false, ['hits']);
         return $this->render('view', [
-            'model' => $this->findModel($name),
+            'model' => $model,
         ]);
     }
 

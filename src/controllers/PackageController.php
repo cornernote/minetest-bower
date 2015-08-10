@@ -47,7 +47,7 @@ class PackageController extends Controller
             ->one();
         if ($package) {
             $package->hits++;
-            $package->save();
+            $package->save(false, ['hits']);
             return $package;
         }
         throw new HttpException(404, 'Package not found.');
