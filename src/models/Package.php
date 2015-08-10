@@ -38,7 +38,7 @@ class Package extends ActiveRecord
     /**
      * @var array
      */
-    public $serializeAttributes = ['bower', 'screenshots', 'authors', 'license'];
+    public $serializeAttributes = ['bower', 'screenshots', 'authors', 'license', 'readme'];
 
     /**
      * @var bool
