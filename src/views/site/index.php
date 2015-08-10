@@ -14,7 +14,7 @@ $this->params['jumbotron'] = '/site/_index-jumbotron';
 
         <h2>About Minetest Bower</h2>
 
-        <p>Minetest Bower is a Minetest mod repository. If you are familiar with CLI, you can use Minetest Bower to install specified Minetest mods and dependency mods quickly and easily under Linux, Windows, and Mac OS X. Minetest Bower needs primarily two software packages named NodeJS and Git, which are easy to install.</p>
+        <p>Minetest Bower is a Minetest mod repository. If you are familiar with CLI, you can use Minetest Bower to install Minetest mods and dependency mods quickly and easily under Linux, Windows, and Mac OS X. Minetest Bower needs primarily two software packages named NodeJS and Git, which are easy to install.</p>
 
         <p>The repository is unmoderated. Anybody may submit mods using one of several different approaches. Different versions by different people of similar mods are permitted but each version must have different names.</p>
 
