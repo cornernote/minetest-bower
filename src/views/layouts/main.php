@@ -63,6 +63,25 @@ if (isset($this->params['jumbotron'])) {
     <?= $content ?>
 </div>
 
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <p class="text-muted">
+                    Have issues or questions?
+                    <a href="https://github.com/cornernote/minetest-bower/issues/new">Contact us</a>
+                </p>
+            </div>
+            <div class="col-md-6 text-right">
+                <p class="text-muted">
+                    Hosting sponsored by
+                    <a href="https://heroku.com/">Heroku</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
 <?php $this->endBody() ?>
 </body>
 </html>
