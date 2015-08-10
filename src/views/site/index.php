@@ -43,8 +43,16 @@ $this->params['jumbotron'] = '/site/_index-jumbotron';
 
                 <h2>Install Mods</h2>
 
-                <p>Install mods with <code>bower install</code>.</p>
+                <p>Install mods and their dependencies with <code>bower install</code>.</p>
                 <pre>$ bower install &lt;mod&gt;</pre>
+
+                <h2>Search Mods</h2>
+
+                <p>Find mods that you can install with <code>bower search</code> or <?= Html::a('browse the repository', ['/mod/index']) ?>.</p>
+                <pre>$ bower search &lt;keyword&gt;
+
+# for example
+$ bower search rainbow</pre>
 
                 <h2>Register Mods</h2>
 
