@@ -8,8 +8,6 @@ use bigpaulie\fancybox\FancyBox;
 use cebe\markdown\GithubMarkdown;
 use Yii;
 use yii\behaviors\TimestampBehavior;
-use yii\bootstrap\Nav;
-use yii\bootstrap\Tabs;
 use yii\db\ActiveRecord;
 use yii\helpers\Html;
 use yii\widgets\Menu;
@@ -131,6 +129,7 @@ class Package extends ActiveRecord
      */
     public function afterFind()
     {
+        $this->serialized = true;
         $this->unserializeAttributes();
         parent::afterFind();
     }
