@@ -12,9 +12,9 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'name')->textInput(['maxlength' => true])->hint('The name of the mod package. For example: <code>my_mod</code>') ?>
+    <?= $form->field($model, 'name')->textInput(['maxlength' => true])->hint('The name of the mod. For example: <code>rainbows</code>') ?>
 
-    <?= $form->field($model, 'url')->textInput(['maxlength' => true])->hint('The git endpoint URL. For example: <code>https://github.com/my_username/minetest-my_mod.git</code>') ?>
+    <?= $form->field($model, 'url')->textInput(['maxlength' => true])->hint('The associated git URL. For example: <code>https://github.com/user/rainbows.git</code>') ?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

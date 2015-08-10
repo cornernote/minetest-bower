@@ -63,7 +63,7 @@ $ bower search rainbow</pre>
 # for example
 $ bower register rainbows https://github.com/user/rainbows.git</pre>
 
-                <p>Optionally, to add more information about your mod such as description, screenshots, and your own remarks, you can submit a JSON file along with your mod. To do so add a <code>bower.json</code> file to to your mod's git repository. For the format to be used, <?= Html::a('click here', ['/docs/bower-format']); ?>.</p>
+                <p>Optionally, to add more information about your mod such as description, screenshots, authors and licence, you can submit a JSON file along with your mod. To do so add a <code>bower.json</code> file to to your mod's git repository. For the format to be used, <?= Html::a('click here', ['/docs/bower-format']); ?>.</p>
 
             </div>
         </div>
