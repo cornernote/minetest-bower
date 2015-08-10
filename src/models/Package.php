@@ -228,7 +228,7 @@ class Package extends ActiveRecord
                 $url = parse_url(Git::getUrl($this->url));
                 $path = explode('/', trim($url['path'], '/'));
                 $github = new Client();
-                $github->authenticate(getenv('GITHUB_USER'), getenv('GITHUB_TOKEN'), Client::AUTH_URL_CLIENT_ID);
+                $github->authenticate(getenv('GITHUB_TOKEN'), Client::AUTH_URL_TOKEN);
                 $repo = $github->api('repo')->show($path[0], $path[1]);
                 if (isset($repo['description'])) {
                     $this->description = substr($repo['description'], 0, 140);
