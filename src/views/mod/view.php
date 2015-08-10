@@ -14,56 +14,51 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="package-view">
 
-    <h1>
-        <?= Html::encode($this->title) ?>
-        <?= Html::a('Update', ['update', 'name' => $model->name], ['class' => 'btn btn-primary pull-right']) ?>
-    </h1>
+    <div class="row">
+        <div class="col-lg-8">
+            <?= $model->getReadmeHtml() ?>
+        </div>
+        <div class="col-lg-4 small">
+            <p class="text-right"><?= Html::a('Update', ['update', 'name' => $model->name], ['class' => 'btn btn-primary text-right']) ?></p>
+            <?= DetailView::widget([
+                'model' => $model,
+                'attributes' => [
+                    'name',
+                    'description',
+                    'keywords',
+                    'homepage:url',
+                    [
+                        'label' => 'Repository',
+                        'value' => $model->getRepositoryHtml(),
+                        'format' => 'raw',
+                    ],
+                    [
+                        'label' => 'Authors',
+                        'value' => $model->getAuthorsHtml(),
+                        'format' => 'raw',
+                    ],
+                    [
+                        'label' => 'License',
+                        'value' => $model->getLicenseHtml(),
+                        'format' => 'raw',
+                    ],
+                    'hits',
+                    'created_at',
+                    //'updated_at',
+                ],
+            ]) ?>
+            <?= $model->getScreenshotsHtml(); ?>
+        </div>
+    </div>
 
-    <?php
-    if (!$model->bower) {
-        echo Alert::widget([
+    <?php if (!$model->bower) { ?>
+        <?= Alert::widget([
             'options' => [
                 'class' => 'alert-info',
             ],
             'closeButton' => false,
             'body' => 'This mod has no ' . Html::a('bower.json', ['/docs/bower-json-format']) . ' file.  Please consider adding one to the <a href="' . Git::getUrl($model->url) . '">repository</a>.',
-        ]);
-    }
-    ?>
-
-    <?= DetailView::widget([
-        'model' => $model,
-        'attributes' => [
-            'description',
-            'keywords',
-            'homepage:url',
-            [
-                'label' => 'Repository',
-                'value' => $model->getRepositoryHtml(),
-                'format' => 'raw',
-            ],
-            [
-                'label' => 'Authors',
-                'value' => $model->getAuthorsHtml(),
-                'format' => 'raw',
-            ],
-            [
-                'label' => 'License',
-                'value' => $model->getLicenseHtml(),
-                'format' => 'raw',
-            ],
-            'hits',
-            'created_at',
-            //'updated_at',
-        ],
-    ]) ?>
-
-    <?php
-    echo $model->getScreenshotsHtml();
-    echo $model->getReadmeHtml();
-    ?>
-
-    <?php if (!$model->bower) { ?>
+        ]); ?>
 
         <p>If you are the mod owner then please add a
             <code>bower.json</code> file to your repository with the following contents, then click
