@@ -159,21 +159,24 @@ class Package extends ActiveRecord
      */
     public function getDirtyAttributes($names = null)
     {
-        $this->serializeAttributes();
+        $this->serializeAttributes(false);
         $attributes = parent::getDirtyAttributes($names);
         $this->unserializeAttributes();
         return $attributes;
     }
 
     /**
-     *
+     * @param bool $lob
      */
-    public function serializeAttributes()
+    public function serializeAttributes($lob = true)
     {
         if (!$this->serialized) {
             foreach ($this->serializeAttributes as $attribute) {
                 if ($this->$attribute) {
-                    $this->$attribute = [Serialize::serialize($this->$attribute), \PDO::PARAM_LOB];
+                    if ($lob)
+                        $this->$attribute = [Serialize::serialize($this->$attribute), \PDO::PARAM_LOB];
+                    else
+                        $this->$attribute = Serialize::serialize($this->$attribute);
                 }
             }
             $this->serialized = true;
