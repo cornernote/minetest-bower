@@ -159,7 +159,7 @@ class Package extends ActiveRecord
             $this->bower = json_decode($this->bower, true);
             // set fields from bower
             if (isset($this->bower['description'])) {
-                $this->description = $this->bower['description'];
+                $this->description = substr($this->bower['description'], 0, 140);
             }
             if (isset($this->bower['homepage'])) {
                 $this->homepage = $this->bower['homepage'];
@@ -184,7 +184,7 @@ class Package extends ActiveRecord
                 $github = new \Github\Client();
                 $repo = $github->api('repo')->show($path[0], $path[1]);
                 if (isset($repo['description'])) {
-                    $this->description = $repo['description'];
+                    $this->description = substr($repo['description'], 0, 140);
                 }
                 if (isset($repo['homepage'])) {
                     $this->homepage = $repo['homepage'];
