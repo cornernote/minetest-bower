@@ -5,10 +5,16 @@ This application uses [Yii2 Framework](http://www.yiiframework.com/) and is host
 
 ## Installing
 
+Install minetest-bower:
+
+```
+git clone git@github.com:cornernote/minetest-bower.git
+```
+
 Install composer:
 
 ```
-curl -sS https://getcomposer.org/installer | php
+curl -s http://getcomposer.org/installer | php
 mv composer.phar /usr/local/bin/composer
 ```
 

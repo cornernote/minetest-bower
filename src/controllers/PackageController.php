@@ -53,11 +53,15 @@ class PackageController extends Controller
         throw new HttpException(404, 'Package not found.');
     }
 
-    public function actionSearch($name)
+    public function actionSearch($search)
     {
         return Package::find()
             ->select(['name', 'url', 'hits'])
-            ->where(['like', 'name', $name])
+            ->where([
+                'or',
+                ['like', 'name', $search],
+                ['like', 'keywords', $search],
+            ])
             ->orderBy(['hits' => SORT_DESC])
             ->all();
     }

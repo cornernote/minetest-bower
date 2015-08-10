@@ -12,14 +12,19 @@ use app\models\Package;
  */
 class PackageSearch extends Package
 {
+
+    /**
+     * @var string
+     */
+    public $search;
+
     /**
      * @inheritdoc
      */
     public function rules()
     {
         return [
-            [['id', 'hits'], 'integer'],
-            [['name', 'url', 'bower', 'created_at', 'updated_at'], 'safe'],
+            [['search', 'keywords', 'name', 'description'], 'safe'],
         ];
     }
 
@@ -55,16 +60,25 @@ class PackageSearch extends Package
             return $dataProvider;
         }
 
-        $query->andFilterWhere([
-            'id' => $this->id,
-            'hits' => $this->hits,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
-        ]);
+        if ($this->search) {
+            $query->andFilterWhere([
+                'or',
+                ['like', 'name', $this->search],
+                ['like', 'keywords', $this->search],
+            ]);
+        }
 
-        $query->andFilterWhere(['like', 'name', $this->name])
-            ->andFilterWhere(['like', 'url', $this->url])
-            ->andFilterWhere(['like', 'bower', $this->bower]);
+        //$query->andFilterWhere([
+        //    'id' => $this->id,
+        //    'hits' => $this->hits,
+        //    'created_at' => $this->created_at,
+        //    'updated_at' => $this->updated_at,
+        //]);
+
+        $query
+            ->andFilterWhere(['like', 'name', $this->name])
+            ->andFilterWhere(['like', 'description', $this->description])
+            ->andFilterWhere(['like', 'keywords', $this->keywords]);
 
         return $dataProvider;
     }

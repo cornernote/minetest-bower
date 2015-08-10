@@ -16,7 +16,7 @@ use yii\helpers\Html;
     ]); ?>
 
     <?php
-    echo $form->field($model, 'name', [
+    echo $form->field($model, 'search', [
         'addon' => [
             'append' => [
                 'content' => Html::submitButton('<i class="glyphicon glyphicon-search"></i>', ['class' => 'btn btn-primary']),
