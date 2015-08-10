@@ -24,7 +24,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         'class' => 'alert-danger',
                     ],
                     'closeButton' => false,
-                    'body' => 'This mod has no readme.  If you are the owner please consider adding one.',
+                    'body' => 'This mod has no readme.  If you are the owner please consider adding one to the <a href="' . Git::getUrl($model->url) . '">repository</a>.',
                 ]);
             }
             if ($model->readme_format == 'text') {
