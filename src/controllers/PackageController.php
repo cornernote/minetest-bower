@@ -46,8 +46,8 @@ class PackageController extends Controller
             ->where(['name' => $name])
             ->one();
         if ($package) {
-            $package->hits++;
-            $package->save(false, ['hits']);
+            //$package->hits++;
+            //$package->save(false, ['hits']);  // todo, this breaks serialize
             return $package;
         }
         throw new HttpException(404, 'Package not found.');

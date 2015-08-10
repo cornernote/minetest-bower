@@ -60,7 +60,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         'value' => $model->getLicenseHtml(),
                         'format' => 'raw',
                     ],
-                    'hits',
+                    //'hits',
                     'created_at',
                     [
                         'attribute' => 'updated_at',
