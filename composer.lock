@@ -4,8 +4,52 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "2932f0af4cf2332e252af0e542d43751",
+    "hash": "3a3de782ca636438cd027ce7814594b5",
     "packages": [
+        {
+            "name": "bigpaulie/yii2-fancybox",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/bigpaulie/yii2-fancybox.git",
+                "reference": "1b02ef28822697e7f73e627f0a8fc3bff0ee6398"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/bigpaulie/yii2-fancybox/zipball/1b02ef28822697e7f73e627f0a8fc3bff0ee6398",
+                "reference": "1b02ef28822697e7f73e627f0a8fc3bff0ee6398",
+                "shasum": ""
+            },
+            "require": {
+                "bower-asset/fancybox": "~2.1",
+                "php": ">=5.4.0",
+                "yiisoft/yii2": "2.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "bigpaulie\\fancybox\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Paul P",
+                    "email": "bigpaulie25ro@yahoo.com"
+                }
+            ],
+            "description": "Yii2 FancyBox extension",
+            "keywords": [
+                "extension",
+                "fancybox",
+                "widget",
+                "yii2"
+            ],
+            "time": "2015-05-01 15:50:39"
+        },
         {
             "name": "bower-asset/bootstrap",
             "version": "v3.3.5",
@@ -54,6 +98,22 @@
                 "responsive",
                 "web"
             ]
+        },
+        {
+            "name": "bower-asset/fancybox",
+            "version": "v2.1.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/fancyapps/fancyBox.git",
+                "reference": "e2248f468dc4b45f5b1ef1776bde958b2b52775d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/fancyapps/fancyBox/zipball/e2248f468dc4b45f5b1ef1776bde958b2b52775d",
+                "reference": "e2248f468dc4b45f5b1ef1776bde958b2b52775d",
+                "shasum": ""
+            },
+            "type": "bower-asset-library"
         },
         {
             "name": "bower-asset/jquery",

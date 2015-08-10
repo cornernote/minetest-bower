@@ -11,7 +11,8 @@
         "yiisoft/yii2-bootstrap": "*",
         "fxp/composer-asset-plugin": "*",
         "kartik-v/yii2-widgets": "^3.4",
-        "cebe/markdown": "~1.0.1"
+        "cebe/markdown": "~1.0.1",
+        "bigpaulie/yii2-fancybox": "^1.0"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "*",

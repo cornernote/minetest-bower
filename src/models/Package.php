@@ -4,6 +4,7 @@ namespace app\models;
 
 use app\components\Git;
 use app\models\query\PackageQuery;
+use bigpaulie\fancybox\FancyBox;
 use cebe\markdown\GithubMarkdown;
 use Yii;
 use yii\behaviors\TimestampBehavior;
@@ -182,8 +183,18 @@ class Package extends ActiveRecord
         $screenshots = [];
         if (isset($this->bowerData['screenshots'])) {
             foreach ($this->bowerData['screenshots'] as $screenshot) {
-                $screenshots[] = Html::img($screenshot, [
-                    'style' => 'max-width:100%',
+                $screenshots[] = FancyBox::widget([
+                    'type' => 'image',
+                    'item' => [
+                        'href' => $screenshot,
+                        'src' => $screenshot,
+                    ],
+                    'htmlOptions' => [
+                        'imageOptions' => [
+                            'class' => 'thumbnail',
+                            'style' => 'max-width:200px',
+                        ],
+                    ],
                 ]);
             }
         }

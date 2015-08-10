@@ -48,11 +48,6 @@ $this->params['breadcrumbs'][] = $this->title;
             //    'format' => 'url',
             //],
             [
-                'label' => 'Screenshots',
-                'value' => $model->getScreenshotsHtml(),
-                'format' => 'raw',
-            ],
-            [
                 'label' => 'Authors',
                 'value' => $model->getAuthorsHtml(),
                 'format' => 'raw',
@@ -74,6 +69,7 @@ $this->params['breadcrumbs'][] = $this->title;
     ]) ?>
 
     <?php
+    echo $model->getScreenshotsHtml();
     echo $model->getReadmeHtml();
     ?>
 

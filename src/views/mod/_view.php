@@ -12,36 +12,14 @@ use yii\widgets\DetailView;
 
     <h2><?= Html::a(Html::encode($model->name), ['view', 'name' => $model->name]) ?></h2>
 
-
-    <?php //echo Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']); ?>
-    <?php
-    //echo Html::a('Delete', ['delete', 'id' => $model->id], [
-    //    'class' => 'btn btn-danger',
-    //    'data' => [
-    //        'confirm' => 'Are you sure you want to delete this item?',
-    //        'method' => 'post',
-    //    ],
-    //]);
-    ?>
-
     <div class="row">
         <div class="col-sm-10">
             <?= DetailView::widget([
                 'model' => $model,
                 'attributes' => [
-                    //'name',
                     'description',
                     'keywords',
                     'homepage:url',
-                    //[
-                    //    'attribute' => 'url',
-                    //    'value' => Git::getUrl($model->url),
-                    //    'format' => 'url',
-                    //],
-                    //'hits',
-                    //'bower:ntext',
-                    //'created_at',
-                    //'updated_at',
                 ],
             ]) ?>
         </div>
@@ -49,7 +27,7 @@ use yii\widgets\DetailView;
             <?= Html::a(Html::img($model->screenshot, [
                 'class' => 'thumbnail',
                 'style' => 'max-width:100%',
-            ]), $model->screenshot) ?>
+            ]), ['view', 'name' => $model->name]) ?>
         </div>
     </div>
 
