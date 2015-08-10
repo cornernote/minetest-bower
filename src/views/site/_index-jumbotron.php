@@ -15,7 +15,7 @@ use yii\helpers\Url;
         <div>
             <h1><?= Yii::$app->name; ?></h1>
 
-            <p>A package manager for Minetest.</p>
+            <p>A mod repository and package manager for Minetest.</p>
         </div>
 
         <!--
