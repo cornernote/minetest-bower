@@ -22,7 +22,7 @@ $this->params['jumbotron'] = '/site/_index-jumbotron';
 
         <h2>Mod Information</h2>
 
-        <p>Optionally, to add more information about your mod such as description, screenshots, and your own remarks, you can submit a JSON file along with your mod. To do so add a <?= Html::a('bower.json', ['/docs/bower-format'], ['class' => 'btn btn-sm btn-default']); ?> file to your mod's repository.</p>
+        <p>Optionally, to add more information about your mod such as description, screenshots, and your own remarks, you can submit a JSON file along with your mod. To do so add a <?= Html::a('bower.json', ['/docs/bower-format']); ?> file to your mod's repository.</p>
 
         <div class="row">
             <div class="col-lg-6">
