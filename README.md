@@ -24,7 +24,6 @@ Install dependencies with composer:
 composer install
 ```
 
-
 ## Using Heroku
 
 Deploy:
@@ -54,6 +53,22 @@ heroku logs --tail
 More info:
 
 https://devcenter.heroku.com/articles/getting-started-with-php
+
+
+## Application Commands
+
+Update all packages from git repositories:
+
+```
+heroku run php /app/yii package/update
+```
+
+Import mods from MTPM:
+
+```
+heroku run php /app/yii package/import-mtpm
+```
+
 
 
 ## Resources
