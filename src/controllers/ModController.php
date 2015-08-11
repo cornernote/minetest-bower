@@ -100,19 +100,23 @@ class ModController extends Controller
      */
     public function actionCloud()
     {
-        $keywords = [];
-        $packages = Package::find()->where(['not', 'keywords'])->all();
-        foreach ($packages as $package) {
-            foreach (explode(',', $package->keywords) as $keyword) {
-                if (!isset($keywords[$keyword])) {
-                    $keywords[$keyword] = [
-                        'text' => $keyword,
-                        'weight' => 0,
-                        'link' => Url::to(['/mod/index', 'search' => $keyword]),
-                    ];
+        $keywords = Yii::$app->cache->get('mod.cloud.keywords');
+        if (!$keywords) {
+            $keywords = [];
+            $packages = Package::find()->where(['not', 'keywords'])->all();
+            foreach ($packages as $package) {
+                foreach (explode(',', $package->keywords) as $keyword) {
+                    if (!isset($keywords[$keyword])) {
+                        $keywords[$keyword] = [
+                            'text' => $keyword,
+                            'weight' => 0,
+                            'link' => Url::to(['/mod/index', 'search' => $keyword]),
+                        ];
+                    }
+                    $keywords[$keyword]['weight']++;
                 }
-                $keywords[$keyword]['weight']++;
             }
+            Yii::$app->cache->set('mod.cloud.keywords', $keywords, 60 * 60);
         }
         return $this->render('cloud', ['keywords' => $keywords]);
     }
