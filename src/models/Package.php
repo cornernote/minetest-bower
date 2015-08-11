@@ -238,17 +238,24 @@ class Package extends ActiveRecord
                 $path = explode('/', trim($url['path'], '/'));
                 $github = new Client();
                 $github->authenticate(getenv('GITHUB_TOKEN'), Client::AUTH_URL_TOKEN);
-                $repo = $github->api('repo')->show($path[0], $path[1]);
-                if (isset($repo['description'])) {
-                    $this->description = substr($repo['description'], 0, 140);
+                $repo = false;
+                try {
+                    $repo = $github->api('repo')->show($path[0], $path[1]);
+                } catch (\Exception $e) {
+                    // error fetching repo, just proceed
                 }
-                if (isset($repo['homepage'])) {
-                    $this->homepage = $repo['homepage'];
-                } elseif (isset($repo['html_url'])) {
-                    $this->homepage = $repo['html_url'];
-                }
-                if (isset($repo['owner']['login'])) {
-                    $this->authors = [$repo['owner']['login']];
+                if ($repo) {
+                    if (isset($repo['description'])) {
+                        $this->description = substr($repo['description'], 0, 140);
+                    }
+                    if (isset($repo['homepage'])) {
+                        $this->homepage = $repo['homepage'];
+                    } elseif (isset($repo['html_url'])) {
+                        $this->homepage = $repo['html_url'];
+                    }
+                    if (isset($repo['owner']['login'])) {
+                        $this->authors = [$repo['owner']['login']];
+                    }
                 }
             }
         }
