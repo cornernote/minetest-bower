@@ -152,6 +152,7 @@ class Package extends ActiveRecord
      */
     public function afterSave($insert, $changedAttributes)
     {
+        $this->serialized = true;
         $this->unserializeAttributes();
         parent::afterSave($insert, $changedAttributes);
     }
@@ -206,7 +207,7 @@ class Package extends ActiveRecord
     public function harvestModInfo()
     {
         // fetch bower.json
-        $this->bower = Git::getFile($this->url, 'bower.json');
+        $this->bower = json_decode(Git::getFile($this->url, 'bower.json'), true);
         if ($this->bower) {
             $this->bower = json_decode($this->bower, true);
             // set fields from bower
@@ -232,6 +233,7 @@ class Package extends ActiveRecord
                 $this->license = $this->bower['license'];
             }
         } else {
+            $this->bower = '';
             // no bower, get from github api
             if (strpos($this->url, 'github.com')) {
                 $url = parse_url(Git::getUrl($this->url));
