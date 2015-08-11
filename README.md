@@ -38,6 +38,18 @@ Run migrations:
 heroku run php /app/yii migrate/up --interactive=0
 ```
 
+Bash:
+
+```
+heroku run bash
+```
+
+Bash with vim
+
+```
+heroku vim
+```
+
 View database:
 
 ```
