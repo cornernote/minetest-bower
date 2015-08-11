@@ -1,9 +1,9 @@
 <?php
 
 use app\components\Git;
+use kartik\detail\DetailView;
 use yii\bootstrap\Alert;
 use yii\helpers\Html;
-use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Package */
@@ -32,9 +32,10 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="col-lg-4 small">
             <?= DetailView::widget([
                 'model' => $model,
+                'hideIfEmpty' => true,
                 'attributes' => [
                     'name',
-                    'description',
+                    //'description',
                     'keywords',
                     [
                         'label' => 'Links',
@@ -51,36 +52,33 @@ $this->params['breadcrumbs'][] = $this->title;
                         'value' => $model->getLicenseHtml(),
                         'format' => 'raw',
                     ],
-                    'hits',
+                    //'hits',
                     'created_at',
-                    [
-                        'attribute' => 'updated_at',
-                        'value' => $model->updated_at . '&nbsp;&nbsp;[' . Html::a('update', ['update', 'name' => $model->name]) . ']',
-                        'format' => 'raw',
-                    ],
+                    //[
+                    //    'attribute' => 'updated_at',
+                    //    'value' => $model->updated_at . '&nbsp;&nbsp;[' . Html::a('update', ['update', 'name' => $model->name]) . ']',
+                    //    'format' => 'raw',
+                    //],
                 ],
             ]) ?>
+
             <?= $model->getScreenshotsHtml(); ?>
+
+            <?php if (!$model->bower) { ?>
+                <?= Alert::widget([
+                    'options' => [
+                        'class' => 'alert-info',
+                    ],
+                    'closeButton' => false,
+                    'body' => 'This mod has no valid bower.json file.  If you are the owner please consider adding one to the repository, then click Update.',
+                ]); ?>
+            <?php } ?>
+
+            <p>
+                <?= Html::a('Update <i class="glyphicon glyphicon-chevron-right"></i>', ['update', 'name' => $model->name], ['class' => 'btn btn-sm btn-default']); ?>
+                <?= Html::a('View bower.json <i class="glyphicon glyphicon-chevron-right"></i>', ['bower', 'name' => $model->name], ['class' => 'btn btn-sm btn-default']); ?>
+            </p>
         </div>
     </div>
-
-    <?php if (!$model->bower) { ?>
-        <?= Alert::widget([
-            'options' => [
-                'class' => 'alert-danger',
-            ],
-            'closeButton' => false,
-            'body' => 'This mod has no valid ' . Html::a('bower.json', ['/docs/bower-json-format']) . ' file.  If you are the owner please consider adding one to the <a href="' . Git::getUrl($model->url) . '">repository</a>.',
-        ]); ?>
-
-        <p>If you are the mod owner then please add a
-            <code>bower.json</code> file to your repository with the following contents, then click
-            <?= Html::a('Update', ['update', 'name' => $model->name]) ?>.
-        </p>
-
-        <?= $model->getBowerJson(); ?>
-
-        <p><?= Html::a('bower.json Format  &raquo;', ['/docs/bower-format'], ['class' => 'btn btn-sm btn-default']); ?></p>
-    <?php } ?>
 
 </div>

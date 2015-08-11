@@ -36,6 +36,7 @@ $web = [
                 'submit' => 'mod/create',
                 'cloud' => 'mod/cloud',
                 'mods/update/<name:\w+>' => 'mod/update',
+                'mods/bower/<name:\w+>' => 'mod/bower',
                 'mods/<name:\w+>' => 'mod/view',
                 'mods' => 'mod/index',
                 // docs

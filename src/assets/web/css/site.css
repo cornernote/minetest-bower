@@ -105,6 +105,6 @@ pre.readme {
     display: none;
 }
 
-img {
+.thumbnail, img {
     max-width: 100%;
 }

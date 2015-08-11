@@ -56,6 +56,19 @@ class ModController extends Controller
     }
 
     /**
+     * Displays a single Package models bower info.
+     * @param string $name
+     * @return mixed
+     */
+    public function actionBower($name)
+    {
+        $model = $this->findModel($name);
+        return $this->render('bower', [
+            'model' => $model,
+        ]);
+    }
+
+    /**
      * Creates a new Package model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed

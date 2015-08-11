@@ -14,7 +14,8 @@
         "cebe/markdown": "~1.0.1",
         "bigpaulie/yii2-fancybox": "^1.0",
         "knplabs/github-api": "^1.4",
-        "vlucas/phpdotenv": "^2.0"
+        "vlucas/phpdotenv": "^2.0",
+        "kartik-v/yii2-detail-view": "^1.7"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "*",
