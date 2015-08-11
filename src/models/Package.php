@@ -374,20 +374,22 @@ class Package extends ActiveRecord
     }
 
     /**
+     * @param bool $inline
      * @return string
+     * @throws \Exception
      */
-    public function getLinksHtml()
+    public function getLinksHtml($inline = true)
     {
         $items = [];
-        if ($this->homepage && $this->homepage != Git::getUrl($this->url)) {
+        if ($this->homepage && $this->homepage != Git::getUrl($this->url) && $this->homepage != $this->forum) {
             $items[] = ['label' => 'Homepage', 'url' => $this->homepage];
         }
-        $items[] = ['label' => 'Project', 'url' => Git::getUrl($this->url)];
         if ($this->forum) {
             $items[] = ['label' => 'Forum', 'url' => $this->forum];
         }
+        $items[] = ['label' => 'Project', 'url' => Git::getUrl($this->url)];
         return Menu::widget([
-            'options' => ['class' => 'list-unstyled', 'style' => 'margin-bottom:0;'],
+            'options' => ['class' => 'list-unstyled' . ($inline ? ' list-inline' : ''), 'style' => 'margin-bottom:0;'],
             'items' => $items,
         ]);
     }

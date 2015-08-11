@@ -19,7 +19,7 @@ use yii\widgets\DetailView;
                 'attributes' => [
                     'description',
                     'keywords',
-                    'homepage:url',
+                    'linksHtml:raw',
                 ],
             ]) ?>
         </div>

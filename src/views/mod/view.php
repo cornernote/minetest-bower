@@ -38,7 +38,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'keywords',
                     [
                         'label' => 'Links',
-                        'value' => $model->getLinksHtml(),
+                        'value' => $model->getLinksHtml(false),
                         'format' => 'raw',
                     ],
                     [
