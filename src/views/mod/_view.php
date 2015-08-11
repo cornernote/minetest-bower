@@ -21,7 +21,7 @@ use yii\widgets\DetailView;
                     'keywords',
                     [
                         'label' => 'Links',
-                        'value' => $model->getLinksHtml(false),
+                        'value' => $model->getLinksHtml(true),
                         'format' => 'raw',
                     ],
                 ],
