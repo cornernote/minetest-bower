@@ -162,9 +162,28 @@ class Package extends ActiveRecord
      */
     public function getDirtyAttributes($names = null)
     {
-        $this->serializeAttributes(false);
-        $attributes = parent::getDirtyAttributes($names);
-        $this->unserializeAttributes();
+        if ($names === null) {
+            $names = $this->attributes();
+        }
+        $names = array_flip($names);
+        $attributes = [];
+        $oldAttributes = $this->oldAttributes;
+        if ($oldAttributes === null) {
+            foreach ($this->attributes as $name => $value) {
+                if (isset($names[$name])) {
+                    $attributes[$name] = $value;
+                }
+            }
+        } else {
+            foreach ($this->serializeAttributes as $attribute) {
+                $oldAttributes[$attribute] = Serialize::unserialize($oldAttributes[$attribute]);
+            }
+            foreach ($this->attributes as $name => $value) {
+                if (isset($names[$name]) && (!array_key_exists($name, $oldAttributes) || $value !== $oldAttributes[$name])) {
+                    $attributes[$name] = $value;
+                }
+            }
+        }
         return $attributes;
     }
 
@@ -175,12 +194,12 @@ class Package extends ActiveRecord
     {
         if (!$this->serialized) {
             foreach ($this->serializeAttributes as $attribute) {
-                if ($this->$attribute) {
-                    if ($lob)
-                        $this->$attribute = [Serialize::serialize($this->$attribute), \PDO::PARAM_LOB];
-                    else
-                        $this->$attribute = Serialize::serialize($this->$attribute);
-                }
+                //if ($this->$attribute) {
+                if ($lob)
+                    $this->$attribute = [Serialize::serialize($this->$attribute), \PDO::PARAM_LOB];
+                else
+                    $this->$attribute = Serialize::serialize($this->$attribute);
+                //}
             }
             $this->serialized = true;
         }
@@ -193,9 +212,9 @@ class Package extends ActiveRecord
     {
         if ($this->serialized) {
             foreach ($this->serializeAttributes as $attribute) {
-                if ($this->$attribute) {
-                    $this->$attribute = Serialize::unserialize($this->$attribute);
-                }
+                //if ($this->$attribute) {
+                $this->$attribute = Serialize::unserialize($this->$attribute);
+                //}
             }
             $this->serialized = false;
         }

@@ -99,14 +99,4 @@ class ModController extends Controller
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
-
-    public function actionTest()
-    {
-        $model = Package::find()->where(['name' => 'skyblock'])->one();
-        print_r($model->attributes);
-        $model->harvestModInfo();
-        print_r($model->getDirtyAttributes());
-        print_r($model->attributes);
-    }
-
 }
