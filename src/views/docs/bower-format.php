@@ -21,6 +21,7 @@ $this->params['breadcrumbs'][] = $this->title;
     "rainbows"
   ],
   "homepage": "http://example.com/",
+  "forum": "https://forum.minetest.net/viewtopic.php?id=1",
   "screenshots": [
     "http://example.com/screenshot.png"
   ],
@@ -86,6 +87,15 @@ $this->params['breadcrumbs'][] = $this->title;
     <p>Type: <code>String</code></p>
 
     <p>URL to learn more about the package. Falls back to GitHub/BitBucket project if not specified and it's a GitHub or BitBucket endpoint.</p>
+
+
+    <h3><code>forum</code></h3>
+
+    <p><strong>Recommended</strong></p>
+
+    <p>Type: <code>String</code></p>
+
+    <p>URL to discuss the package.</p>
 
 
     <h3><code>screenshots</code></h3>

@@ -58,8 +58,8 @@ class PackageController extends Controller
             }
             if (!$package->url)
                 $package->url = $url;
-            if (!$package->homepage)
-                $package->homepage = trim($row['4']);
+            if (!$package->forum)
+                $package->forum = trim($row['4']);
             if (!$package->authors)
                 $package->authors = [trim($row['0'])];
             $package->save();

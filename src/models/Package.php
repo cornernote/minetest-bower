@@ -26,6 +26,7 @@ use yii\widgets\Menu;
  * @property string $readme_format
  * @property string $description
  * @property string $homepage
+ * @property string $forum
  * @property string $keywords
  * @property string|array $authors
  * @property string|array $screenshots
@@ -93,6 +94,7 @@ class Package extends ActiveRecord
             'readme' => 'Readme',
             'description' => 'Description',
             'homepage' => 'Homepage',
+            'forum' => 'Forum',
             'keywords' => 'Keywords',
             'authors' => 'Authors',
             'license' => 'License',
@@ -213,6 +215,9 @@ class Package extends ActiveRecord
             }
             if (isset($this->bower['homepage'])) {
                 $this->homepage = $this->bower['homepage'];
+            }
+            if (isset($this->bower['forum'])) {
+                $this->forum = $this->bower['forum'];
             }
             if (isset($this->bower['keywords'])) {
                 $this->keywords = implode(',', $this->bower['keywords']);
@@ -375,9 +380,12 @@ class Package extends ActiveRecord
     {
         $items = [];
         if ($this->homepage && $this->homepage != Git::getUrl($this->url)) {
-            $items[] = ['label' => 'Home', 'url' => $this->homepage, 'active' => true];
+            $items[] = ['label' => 'Homepage', 'url' => $this->homepage];
         }
-        $items[] = ['label' => 'Repository', 'url' => Git::getUrl($this->url), 'active' => true];
+        if ($this->forum) {
+            $items[] = ['label' => 'Forum', 'url' => $this->forum];
+        }
+        $items[] = ['label' => 'Repository', 'url' => Git::getUrl($this->url)];
         return Menu::widget([
             'options' => ['class' => 'list-unstyled', 'style' => 'margin-bottom:0;'],
             'items' => $items,
