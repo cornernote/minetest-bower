@@ -30,10 +30,7 @@ use yii\widgets\DetailView;
         <div class="col-sm-2">
             <?php
             if ($model->screenshots) {
-                echo Html::a(Html::img($model->screenshots[0], [
-                    'class' => 'thumbnail',
-                    'style' => 'max-width:100%',
-                ]), ['view', 'name' => $model->name]);
+                echo Html::a(Html::img($model->screenshots[0], ['class' => 'thumbnail']), ['view', 'name' => $model->name]);
             }
             ?>
         </div>

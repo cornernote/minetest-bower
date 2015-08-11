@@ -340,7 +340,6 @@ class Package extends ActiveRecord
                     'htmlOptions' => [
                         'imageOptions' => [
                             'class' => 'thumbnail',
-                            'style' => 'max-width:100%',
                         ],
                     ],
                 ]);

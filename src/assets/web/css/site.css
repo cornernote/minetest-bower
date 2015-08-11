@@ -104,3 +104,7 @@ pre.readme {
 .pager .disabled {
     display: none;
 }
+
+img {
+    max-width: 100%;
+}
