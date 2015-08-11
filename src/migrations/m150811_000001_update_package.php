@@ -3,7 +3,7 @@
 use yii\db\Migration;
 use yii\db\Schema;
 
-class m150810_000003_update_package extends Migration
+class m150811_000001_update_package extends Migration
 {
     const TABLE = '{{%package}}';
 
