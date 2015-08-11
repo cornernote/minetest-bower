@@ -14,10 +14,22 @@ class PackageController extends Controller
     public function actionUpdate()
     {
         $packages = Package::find()->all();
+        $this->stdout('Updating mods from repositories' . "\n");
         foreach ($packages as $package) {
+            $this->stdout($package->name . ' ' . $package->url . ': ');
             $package->harvestModInfo();
             if ($package->getDirtyAttributes()) {
-                $package->save();
+                if ($package->save()) {
+                    $this->stdout('Updated!' . "\n", Console::FG_GREEN);
+                } else {
+                    $this->stdout('Errors', Console::FG_RED);
+                    foreach ($package->errors as $attribute => $errors) {
+                        $this->stdout(' -- ' . $attribute . ' ' . implode(', ', $errors), Console::FG_RED);
+                    }
+                    $this->stdout("\n");
+                }
+            } else {
+                $this->stdout('Unchanged.' . "\n", Console::FG_PURPLE);
             }
         }
     }
@@ -76,7 +88,6 @@ class PackageController extends Controller
                 }
                 $this->stdout("\n");
             }
-
         }
     }
 
