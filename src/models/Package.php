@@ -281,7 +281,7 @@ class Package extends ActiveRecord
         }
 
         // update authors
-        if (!$this->authors) {
+        if (!$this->authors && !strpos($this->url, 'repo.or.cz')) {
             $url = parse_url(Git::getUrl($this->url));
             $path = explode('/', trim($url['path'], '/'));
             $this->authors = [$path[0]];
