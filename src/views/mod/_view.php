@@ -20,8 +20,8 @@ use yii\widgets\DetailView;
                     'description',
                     'keywords',
                     [
-                        'attribute' => 'linksHtml',
                         'label' => 'Links',
+                        'value' => $model->getLinksHtml(false),
                         'format' => 'raw',
                     ],
                 ],

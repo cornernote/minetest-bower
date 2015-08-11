@@ -50,7 +50,7 @@ class PackageSearch extends Package
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
-            'sort' => ['defaultOrder' => ['hits' => SORT_DESC]],
+            'sort' => ['defaultOrder' => ['hits' => SORT_DESC, 'updated' => SORT_DESC]],
         ]);
 
         $this->load($params);
