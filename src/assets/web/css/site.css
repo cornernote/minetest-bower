@@ -96,3 +96,11 @@ pre.readme {
     border-width: 0;
     padding: 0;
 }
+
+.pager {
+    text-align: left;
+}
+
+.pager .disabled {
+    display: none;
+}

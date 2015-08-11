@@ -21,6 +21,12 @@ $this->params['breadcrumbs'][] = $this->title;
         'itemView' => function ($model, $key, $index, $widget) {
             return $this->render('_view', ['model' => $model]);
         },
+        'pager' => [
+            'maxButtonCount' => 0,
+            'options' => ['class' => 'pager'],
+            'nextPageLabel' => 'Next <i class="glyphicon glyphicon-chevron-right"></i>',
+            'prevPageLabel' => '<i class="glyphicon glyphicon-chevron-left"></i> Prev',
+        ],
     ]) ?>
 
 </div>
