@@ -209,7 +209,6 @@ class Package extends ActiveRecord
         // fetch bower.json
         $this->bower = json_decode(Git::getFile($this->url, 'bower.json'), true);
         if ($this->bower) {
-            $this->bower = json_decode($this->bower, true);
             // set fields from bower
             if (isset($this->bower['description'])) {
                 $this->description = substr($this->bower['description'], 0, 140);
