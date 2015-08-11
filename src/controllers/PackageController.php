@@ -69,8 +69,15 @@ class PackageController extends Controller
             ->where(['name' => $name])
             ->one();
         if ($package) {
-            //$package->hits++;
-            //$package->save(false, ['hits']);  // todo, this breaks serialize
+
+            // add a hit once per user per 24 hours
+            $cacheKey = $package->name . '_' . Yii::$app->request->userIP;
+            if (!Yii::$app->cache->get($cacheKey)) {
+                Yii::$app->cache->set($cacheKey, true, (60 * 60 * 24));
+                $package->hits++;
+                $package->save(false, ['hits']);
+            }
+
             return $package;
         }
         throw new HttpException(404, 'Package not found.');

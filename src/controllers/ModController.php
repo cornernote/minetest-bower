@@ -39,8 +39,15 @@ class ModController extends Controller
     public function actionView($name)
     {
         $model = $this->findModel($name);
-        //$model->hits++;
-        //$model->save(false, ['hits']); // todo, this breaks serialize
+
+        // add a hit once per user per 24 hours
+        $cacheKey = $model->name . '_' . Yii::$app->request->userIP;
+        if (!Yii::$app->cache->get($cacheKey)) {
+            Yii::$app->cache->set($cacheKey, true, (60 * 60 * 24));
+            $model->hits++;
+            $model->save(false, ['hits']);
+        }
+
         return $this->render('view', [
             'model' => $model,
         ]);
@@ -98,16 +105,5 @@ class ModController extends Controller
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
-    }
-
-    public function actionTest()
-    {
-        $test = Yii::$app->cache->get('test');
-        if (!$test) {
-            $test = 0;
-        }
-        $test++;
-        Yii::$app->cache->set('test', $test);
-        echo $test;
     }
 }
