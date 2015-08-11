@@ -10,7 +10,7 @@ $this->title = 'Submit a Mod';
 $this->params['breadcrumbs'][] = ['label' => 'Mods', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="package-create">
+<div class="mod-create">
 
     <h1><?= Html::encode($this->title) ?></h1>
 

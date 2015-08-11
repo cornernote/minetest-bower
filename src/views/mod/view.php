@@ -12,7 +12,7 @@ $this->title = $model->name;
 $this->params['breadcrumbs'][] = ['label' => 'Mods', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="package-view">
+<div class="mod-view">
 
     <div class="row">
         <div class="col-lg-8">

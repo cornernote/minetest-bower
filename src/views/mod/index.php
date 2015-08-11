@@ -10,7 +10,7 @@ use yii\widgets\ListView;
 $this->title = 'Mods';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="package-index">
+<div class="mod-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
     <?php echo $this->render('_search', ['model' => $searchModel]); ?>
