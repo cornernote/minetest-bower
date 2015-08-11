@@ -25,7 +25,7 @@ class ModController extends Controller
     public function actionIndex()
     {
         $searchModel = new PackageSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider = $searchModel->search(['PackageSearch' => Yii::$app->request->queryParams]);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
@@ -108,7 +108,7 @@ class ModController extends Controller
                     $keywords[$keyword] = [
                         'text' => $keyword,
                         'weight' => 0,
-                        'link' => Url::to(['/mods/search', 'keyword' => $keyword]),
+                        'link' => Url::to(['/mod/index', 'search' => $keyword]),
                     ];
                 }
                 $keywords[$keyword]['weight']++;

@@ -34,6 +34,7 @@ $web = [
                 'packages' => 'package/index',
                 // mods
                 'submit' => 'mod/create',
+                'cloud' => 'mod/cloud',
                 'mods/update/<name:\w+>' => 'mod/update',
                 'mods/<name:\w+>' => 'mod/view',
                 'mods' => 'mod/index',
