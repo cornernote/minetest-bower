@@ -51,9 +51,11 @@ class PackageController extends Controller
             '/archive-tarball/master.git' => '.git',
             'https://repo.or.cz/' => 'http://repo.or.cz/',
         ];
-        $csv = array_map('str_getcsv', explode("\n", file_get_contents($file)));
+        $csv = array_map('str_getcsv', explode("\n", trim(file_get_contents($file))));
         array_shift($csv);
-        foreach ($csv as $row) {
+        $count = count($csv);
+        foreach ($csv as $k => $row) {
+            $this->stdout('[' . ($k + 1) . '/' . $count . '] ', Console::FG_GREY);
             if (!isset($row['1'])) {
                 continue;
             }
