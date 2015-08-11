@@ -8,12 +8,23 @@ use Yii;
 use yii\console\Controller;
 use yii\helpers\Console;
 
+/**
+ * Class PackageController
+ * @package app\commands
+ */
 class PackageController extends Controller
 {
 
-    public function actionUpdate()
+    /**
+     * @param string|null $name
+     */
+    public function actionUpdate($name = null)
     {
-        $packages = Package::find()->all();
+        $query = Package::find();
+        if ($name) {
+            $query->where(['name' => $name]);
+        }
+        $packages = $query->all();
         $this->stdout('Updating mods from repositories' . "\n");
         $count = count($packages);
         foreach ($packages as $k => $package) {
@@ -36,6 +47,9 @@ class PackageController extends Controller
         }
     }
 
+    /**
+     *
+     */
     public function actionImportMtpm()
     {
         $file = 'https://raw.githubusercontent.com/rubenwardy/mtpm_lists/gh-pages/lists/mods.csv';

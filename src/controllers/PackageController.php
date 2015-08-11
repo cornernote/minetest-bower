@@ -10,10 +10,20 @@ use yii\web\Controller;
 use yii\web\HttpException;
 use yii\web\Response;
 
+/**
+ * Class PackageController
+ * @package app\controllers
+ */
 class PackageController extends Controller
 {
+    /**
+     * @var bool
+     */
     public $enableCsrfValidation = false;
 
+    /**
+     * @return array
+     */
     public function behaviors()
     {
         return [
@@ -26,12 +36,20 @@ class PackageController extends Controller
         ];
     }
 
+    /**
+     * @param \yii\base\Action $action
+     * @return bool
+     * @throws \yii\web\BadRequestHttpException
+     */
     public function beforeAction($action)
     {
         Yii::$app->response->format = Response::FORMAT_JSON;
         return parent::beforeAction($action);
     }
 
+    /**
+     * @return \app\models\Package[]|array
+     */
     public function actionIndex()
     {
         return Package::find()
@@ -40,6 +58,11 @@ class PackageController extends Controller
             ->all();
     }
 
+    /**
+     * @param $name
+     * @return Package|array|null
+     * @throws HttpException
+     */
     public function actionView($name)
     {
         $package = Package::find()
@@ -53,6 +76,10 @@ class PackageController extends Controller
         throw new HttpException(404, 'Package not found.');
     }
 
+    /**
+     * @param $search
+     * @return \app\models\Package[]|array
+     */
     public function actionSearch($search)
     {
         return Package::find()
@@ -66,6 +93,10 @@ class PackageController extends Controller
             ->all();
     }
 
+    /**
+     * @return string
+     * @throws HttpException
+     */
     public function actionCreate()
     {
         $package = new Package();
