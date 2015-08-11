@@ -7,7 +7,7 @@ use yii\helpers\Html;
 /* @var $keywords array */
 
 
-$this->title = 'Tag Cloud';
+$this->title = 'Keyword Cloud';
 $this->params['breadcrumbs'][] = ['label' => 'Mods', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>

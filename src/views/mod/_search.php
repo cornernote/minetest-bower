@@ -26,7 +26,9 @@ use yii\helpers\Html;
                 'asButton' => true
             ]
         ]
-    ])->label(false);
+    ])
+        ->label(false)
+        ->hint(Html::a('popular keywords', ['cloud']));
     ?>
 
     <?php ActiveForm::end(); ?>
