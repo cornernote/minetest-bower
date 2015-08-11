@@ -6,6 +6,8 @@ use app\components\Git;
 use Yii;
 use app\models\Package;
 use app\models\search\PackageSearch;
+use yii\helpers\Html;
+use yii\helpers\Url;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -89,6 +91,30 @@ class ModController extends Controller
             Yii::$app->getSession()->setFlash('info', Yii::t('app', 'Mod has been updated from remote repository, however no change was detected.'));
         }
         return $this->redirect(['view', 'name' => $model->name]);
+    }
+
+
+    /**
+     * Renders a tag cloud of popular keywords
+     * @return mixed
+     */
+    public function actionCloud()
+    {
+        $keywords = [];
+        $packages = Package::find()->where(['not', 'keywords'])->all();
+        foreach ($packages as $package) {
+            foreach (explode(',', $package->keywords) as $keyword) {
+                if (!isset($keywords[$keyword])) {
+                    $keywords[$keyword] = [
+                        'text' => $keyword,
+                        'weight' => 0,
+                        'link' => Url::to(['/mods/search', 'keyword' => $keyword]),
+                    ];
+                }
+                $keywords[$keyword]['weight']++;
+            }
+        }
+        return $this->render('cloud', ['keywords' => $keywords]);
     }
 
     /**
