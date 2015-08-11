@@ -103,7 +103,7 @@ class ModController extends Controller
         $keywords = Yii::$app->cache->get('mod.cloud.keywords');
         if (!$keywords) {
             $keywords = [];
-            $packages = Package::find()->where(['not', 'keywords'])->all();
+            $packages = Package::find()->where(['is not', 'keywords', null])->all();
             foreach ($packages as $package) {
                 foreach (explode(',', $package->keywords) as $keyword) {
                     if (!isset($keywords[$keyword])) {
