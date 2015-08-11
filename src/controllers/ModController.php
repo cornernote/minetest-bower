@@ -103,9 +103,10 @@ class ModController extends Controller
     public function actionTest()
     {
         $model = Package::find()->where(['name' => 'skyblock'])->one();
+        print_r($model->attributes);
         $model->harvestModInfo();
         print_r($model->getDirtyAttributes());
-        die;
+        print_r($model->attributes);
     }
 
 }
