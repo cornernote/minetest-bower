@@ -382,10 +382,10 @@ class Package extends ActiveRecord
         if ($this->homepage && $this->homepage != Git::getUrl($this->url)) {
             $items[] = ['label' => 'Homepage', 'url' => $this->homepage];
         }
+        $items[] = ['label' => 'Project', 'url' => Git::getUrl($this->url)];
         if ($this->forum) {
             $items[] = ['label' => 'Forum', 'url' => $this->forum];
         }
-        $items[] = ['label' => 'Repository', 'url' => Git::getUrl($this->url)];
         return Menu::widget([
             'options' => ['class' => 'list-unstyled', 'style' => 'margin-bottom:0;'],
             'items' => $items,

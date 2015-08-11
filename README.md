@@ -54,3 +54,11 @@ heroku logs --tail
 More info:
 
 https://devcenter.heroku.com/articles/getting-started-with-php
+
+
+## Resources
+
+* [Homepage](https://minetest-bower.herokuapp.com/)
+* [Project](https://github.com/cornernote/minetest-bower)
+* [Forum](https://forum.minetest.net/viewtopic.php?t=13012)
+* [Support](https://github.com/cornernote/minetest-bower/issues)
