@@ -466,7 +466,7 @@ class Package extends ActiveRecord
                 'description' => $this->description ? $this->description : 'Description of your mod.',
                 'keywords' => [$this->name],
                 'homepage' => $this->homepage ? $this->homepage : Git::getUrl($this->url),
-                'screenshots' => ['https://example.com/screenshot1.png'],
+                'screenshots' => $this->screenshots ? $this->screenshots : ['https://example.com/screenshot1.png'],
                 'authors' => $this->authors ? $this->authors : ['Your Name'],
                 'license' => 'UNKNOWN',
             ], JSON_PRETTY_PRINT);
