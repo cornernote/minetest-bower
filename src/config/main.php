@@ -8,6 +8,9 @@ $config = [
     'vendorPath' => '@app/../vendor',
     'runtimePath' => '@app/../runtime',
     'components' => [
+        'cache' => [
+            'class' => 'yii\caching\FileCache',
+        ],
         'db' => require(__DIR__ . '/db.php'),
     ],
 ];

@@ -99,4 +99,15 @@ class ModController extends Controller
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
+
+    public function actionTest()
+    {
+        $test = Yii::$app->cache->get('test');
+        if (!$test) {
+            $test = 0;
+        }
+        $test++;
+        Yii::$app->cache->set('test', $test);
+        echo $test;
+    }
 }
