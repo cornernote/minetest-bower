@@ -15,7 +15,9 @@ class PackageController extends Controller
     {
         $packages = Package::find()->all();
         $this->stdout('Updating mods from repositories' . "\n");
-        foreach ($packages as $package) {
+        $count = count($packages);
+        foreach ($packages as $k => $package) {
+            $this->stdout('[' . ($k + 1) . '/' . $count . '] ', Console::FG_GREY);
             $this->stdout($package->name . ' ' . $package->url . ': ');
             $package->harvestModInfo();
             if ($package->getDirtyAttributes()) {
