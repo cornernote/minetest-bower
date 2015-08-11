@@ -47,11 +47,6 @@ class Package extends ActiveRecord
     public $serialized = false;
 
     /**
-     * @var bool
-     */
-    public $checkUrl = true;
-
-    /**
      * @inheritdoc
      */
     public static function tableName()
@@ -73,7 +68,7 @@ class Package extends ActiveRecord
             [['name'], 'match', 'pattern' => '/^[-a-z0-9_]+$/', 'message' => '{attribute} can only contain lowercase letters, numbers, "_" and "-"'],
             [['url'], 'match', 'pattern' => '%(git|http(s)?)(:(//)?)([\w./\-~]+)(\.git)%', 'message' => '{attribute} must be a valid git endpoint.'],
             [['url'], function ($attribute) {
-                if ($this->checkUrl && Git::getFile($this->$attribute) === false) {
+                if ($this->isNewRecord && Git::getFile($this->$attribute) === false) {
                     $this->addError($attribute, 'Could not fetch remote repository.');
                 }
             }],
@@ -232,7 +227,7 @@ class Package extends ActiveRecord
         if ($this->bower) {
             // set fields from bower
             if (isset($this->bower['description'])) {
-                $this->description = substr($this->bower['description'], 0, 140);
+                $this->description = $this->bower['description'];
             }
             if (isset($this->bower['homepage'])) {
                 $this->homepage = $this->bower['homepage'];
@@ -268,7 +263,7 @@ class Package extends ActiveRecord
                 }
                 if ($repo) {
                     if (isset($repo['description'])) {
-                        $this->description = substr($repo['description'], 0, 140);
+                        $this->description = $repo['description'];
                     }
                     if (isset($repo['homepage'])) {
                         $this->homepage = $repo['homepage'];
@@ -282,7 +277,25 @@ class Package extends ActiveRecord
             }
         }
 
-        // update authors
+        // fetch screenshot
+        if (!$this->screenshots) {
+            $file = Git::getUrl($this->url, 'screenshot.png');
+            if (strpos(@get_headers($file)[0], '200')) {
+                $this->screenshots = [$file];
+            }
+        }
+
+        // fetch description
+        if (!$this->description) {
+            $this->description = Git::getFile($this->url, 'description.txt');
+        }
+
+        // trim description
+        if (strlen($this->description) > 140) {
+            $this->description = substr($this->description, 0, 137) . '...';
+        }
+
+        // fetch authors
         if (!$this->authors && !strpos($this->url, 'repo.or.cz')) {
             $url = parse_url(Git::getUrl($this->url));
             $path = explode('/', trim($url['path'], '/'));

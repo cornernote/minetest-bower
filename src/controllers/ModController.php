@@ -85,8 +85,11 @@ class ModController extends Controller
         $model = $this->findModel($name);
         $model->harvestModInfo();
         if ($model->getDirtyAttributes()) {
-            $model->save();
-            Yii::$app->getSession()->setFlash('success', Yii::t('app', 'Mod has been updated from remote repository.'));
+            if ($model->save()) {
+                Yii::$app->getSession()->setFlash('success', Yii::t('app', 'Mod has been updated from remote repository.'));
+            } else {
+                Yii::$app->getSession()->setFlash('error', Yii::t('app', 'Error while saving mod updates.'));
+            }
         } else {
             Yii::$app->getSession()->setFlash('info', Yii::t('app', 'Mod has been updated from remote repository, however no change was detected.'));
         }

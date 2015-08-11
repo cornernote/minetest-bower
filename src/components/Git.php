@@ -34,6 +34,7 @@ class Git
                 'https://' => $file ? 'https://raw.' : 'https://',
                 'http://' => $file ? 'https://raw.' : 'https://',
                 'git://' => $file ? 'https://raw.' : 'https://',
+                'github.com' => $file ? 'githubusercontent.com' : 'github.com',
                 '.git' => $file ? '/master/' . $file : '',
             ]);
         }

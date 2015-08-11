@@ -89,8 +89,6 @@ class PackageController extends Controller
             if (!$package) {
                 $package = new Package();
                 $package->name = $name;
-            } else {
-                $package->checkUrl = false;
             }
             if (!$package->url)
                 $package->url = $url;
