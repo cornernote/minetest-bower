@@ -110,7 +110,7 @@ class Package extends ActiveRecord
     public function behaviors()
     {
         return [
-            [
+            'timestamp' => [
                 'class' => TimestampBehavior::className(),
                 'value' => function () {
                     return date('Y-m-d H:i:s');
@@ -134,7 +134,7 @@ class Package extends ActiveRecord
     public function afterFind()
     {
         $this->serialized = true;
-        $this->unserializeAttributes();
+        $this->unserializeAttributes(false);
         parent::afterFind();
     }
 
@@ -194,27 +194,29 @@ class Package extends ActiveRecord
     {
         if (!$this->serialized) {
             foreach ($this->serializeAttributes as $attribute) {
-                //if ($this->$attribute) {
-                if ($lob)
+                if ($lob) {
                     $this->$attribute = [Serialize::serialize($this->$attribute), \PDO::PARAM_LOB];
-                else
+                } else {
                     $this->$attribute = Serialize::serialize($this->$attribute);
-                //}
+                }
             }
             $this->serialized = true;
         }
     }
 
     /**
-     *
+     * @param bool $lob
      */
-    public function unserializeAttributes()
+    public function unserializeAttributes($lob = true)
     {
         if ($this->serialized) {
             foreach ($this->serializeAttributes as $attribute) {
-                //if ($this->$attribute) {
-                $this->$attribute = Serialize::unserialize($this->$attribute);
-                //}
+                if ($lob) {
+                    $_attribute = $this->$attribute;
+                    $this->$attribute = Serialize::unserialize($_attribute[0]);
+                } else {
+                    $this->$attribute = Serialize::unserialize($this->$attribute);
+                }
             }
             $this->serialized = false;
         }
