@@ -388,6 +388,7 @@ class Package extends ActiveRecord
     public function getLinksHtml($inline = true)
     {
         $items = [];
+        $items[] = ['label' => 'Download', 'url' => Git::getDownload($this->url)];
         if ($this->homepage && $this->homepage != Git::getUrl($this->url) && $this->homepage != $this->forum) {
             $items[] = ['label' => 'Homepage', 'url' => $this->homepage];
         }

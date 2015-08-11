@@ -9,8 +9,8 @@ namespace app\components;
 class Git
 {
     /**
-     * @param $endpoint
-     * @param $file
+     * @param string $endpoint
+     * @param string $file
      * @return bool|string
      */
     public static function getFile($endpoint, $file = null)
@@ -23,17 +23,26 @@ class Git
     }
 
     /**
-     * @param $endpoint
-     * @param $file
+     * @param string $endpoint
+     * @param string $file
      * @return string
      */
     public static function getUrl($endpoint, $file = null)
     {
         if (strpos($endpoint, 'github.com')) {
-            return self::getGitHubComUrl($endpoint, $file);
+            return strtr($endpoint, [
+                'https://' => $file ? 'https://raw.' : 'https://',
+                'http://' => $file ? 'https://raw.' : 'https://',
+                'git://' => $file ? 'https://raw.' : 'https://',
+                '.git' => $file ? '/master/' . $file : '',
+            ]);
         }
         if (strpos($endpoint, 'repo.or.cz')) {
-            return self::getRepoOrCzUrl($endpoint, $file);
+            return strtr($endpoint, [
+                'https://' => 'http://',
+                'git://' => 'http://',
+                '.git' => $file ? '.git/blob_plain/master:/' . $file : '.git',
+            ]);
         }
         return strtr($endpoint, [
             'http://' => 'https://',
@@ -43,31 +52,31 @@ class Git
     }
 
     /**
-     * @param $endpoint
-     * @param $file
+     * @param string $endpoint
+     * @param string $format
+     * @param string $version
      * @return string
      */
-    private static function getGitHubComUrl($endpoint, $file)
+    public static function getDownload($endpoint, $format = 'zip', $version = 'master')
     {
+        if (strpos($endpoint, 'github.com')) {
+            return strtr($endpoint, [
+                'http://' => 'https://',
+                'git://' => 'https://',
+                '.git' => '/archive/' . $version . '.' . $format,
+            ]);
+        }
+        if (strpos($endpoint, 'repo.or.cz')) {
+            return strtr($endpoint, [
+                'https://' => 'http://',
+                'git://' => 'http://',
+                '.git' => '.git/snapshot/' . $version . '.' . $format,
+            ]);
+        }
         return strtr($endpoint, [
-            'https://' => $file ? 'https://raw.' : 'https://',
-            'http://' => $file ? 'https://raw.' : 'https://',
-            'git://' => $file ? 'https://raw.' : 'https://',
-            '.git' => $file ? '/master/' . $file : '',
-        ]);
-    }
-
-    /**
-     * @param $endpoint
-     * @param $file
-     * @return string
-     */
-    private static function getRepoOrCzUrl($endpoint, $file)
-    {
-        return strtr($endpoint, [
-            'https://' => 'http://',
-            'git://' => 'http://',
-            '.git' => $file ? '.git/blob_plain/master:/' . $file : '.git',
+            'http://' => 'https://',
+            'git://' => 'https://',
+            '.git' => '/get/' . $version . '.' . $format,
         ]);
     }
 
