@@ -108,3 +108,25 @@ pre.readme {
 .thumbnail, img {
     max-width: 100%;
 }
+
+hr.comments {
+    margin: 25px auto 30px;
+    padding: 0;
+    /*max-width: 250px;*/
+    border: 0;
+    border-top: solid 5px;
+    text-align: center;
+    border-color: #527394;
+}
+
+hr.comments:after {
+    content: "\e111";
+    display: inline-block;
+    position: relative;
+    top: -.8em;
+    padding: 0 .25em;
+    font-family: Glyphicons Halflings;
+    font-size: 2em;
+    color: #527394;
+    background-color: #fff;
+}

@@ -85,6 +85,7 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
     </div>
 
+    <hr class="comments">
     <div id="disqus_thread"></div>
     <script type="text/javascript">
         var disqus_shortname = 'minetest-bower';
