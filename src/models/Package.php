@@ -171,7 +171,7 @@ class Package extends ActiveRecord
         $names = array_flip($names);
         $attributes = [];
         $oldAttributes = $this->oldAttributes;
-        if ($oldAttributes === null) {
+        if (!$oldAttributes) {
             foreach ($this->attributes as $name => $value) {
                 if (isset($names[$name])) {
                     $attributes[$name] = $value;
