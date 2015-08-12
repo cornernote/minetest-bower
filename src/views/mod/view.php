@@ -62,8 +62,9 @@ $this->params['breadcrumbs'][] = $this->title;
                 ],
             ]) ?>
 
-            <p>
+            <p class="text-center">
                 <?= Html::a('Update <i class="glyphicon glyphicon-chevron-right"></i>', ['update', 'name' => $model->name], ['class' => 'btn btn-sm btn-default']); ?>
+                &nbsp;&nbsp;
                 <?= Html::a('View bower.json <i class="glyphicon glyphicon-chevron-right"></i>', ['bower', 'name' => $model->name], ['class' => 'btn btn-sm btn-default']); ?>
             </p>
 
