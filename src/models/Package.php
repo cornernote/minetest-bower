@@ -173,7 +173,7 @@ class Package extends ActiveRecord
         $oldAttributes = $this->oldAttributes;
         if (!$oldAttributes) {
             foreach ($this->attributes as $name => $value) {
-                if (isset($names[$name])) {
+                if (!empty($names[$name])) {
                     $attributes[$name] = $value;
                 }
             }
