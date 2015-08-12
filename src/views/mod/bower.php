@@ -52,23 +52,10 @@ $this->params['breadcrumbs'][] = 'bower.json';
                 <code><?= Url::to(['view', 'name' => $model->name], true); ?></code> into the
                 <em>Payload URL</em>, then click <em>Add webhook</em>.</p>
             <?= Html::img('https://cloud.githubusercontent.com/assets/51875/9213435/7cf27a68-40d1-11e5-888a-c4692ad9f4b9.png'); ?>
-        <?php } ?>
-
-        <?php if (strpos($model->url, 'bitbucket.org')) { ?>
-            <p>1) Go to the <?= Html::a('repository', Git::getUrl($model->url)) ?>, then click
-                <em>Settings</em> from the left-hand menu.</p>
-            <?= Html::img('https://cloud.githubusercontent.com/assets/51875/9213650/39776c5a-40d4-11e5-82bc-3ca6fd81d7b5.png'); ?>
-            <br><br>
-
-            <p>2) Click <em>Webhooks</em>.</p>
-            <?= Html::img('https://cloud.githubusercontent.com/assets/51875/9213652/3da76672-40d4-11e5-98d2-16c04f3c2fd2.png'); ?>
-            <br><br>
-
-            <p>3) Enter <code><?= Url::to(['view', 'name' => $model->name], true); ?></code> into the
-                <em>Payload URL</em>, then click <em>Add webhook</em>.</p>
-            <?php //echo Html::img('https://cloud.githubusercontent.com/assets/51875/9213435/7cf27a68-40d1-11e5-888a-c4692ad9f4b9.png'); ?>
-
-            <?= Html::a('waiting on bitbucket for screenshot', 'https://github.com/cornernote/minetest-bower/issues/21'); ?>
+        <?php } elseif (strpos($model->url, 'bitbucket.org')) { ?>
+            <p>Create a <?= Html::a('new webhook', Git::getUrl($model->url) . '/admin/addon/admin/bitbucket-webhooks/bb-webhooks-repo-admin') ?> and enter
+                <code><?= Url::to(['view', 'name' => $model->name], true); ?></code> into the URL. </p>
+            <?= Html::img('https://cloud.githubusercontent.com/assets/51875/9217084/5f2da65c-4102-11e5-81b5-61b313a39aa7.png'); ?>
         <?php } ?>
     <?php } ?>
 
