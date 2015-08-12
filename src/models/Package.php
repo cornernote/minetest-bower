@@ -138,6 +138,14 @@ class Package extends ActiveRecord
      */
     public function beforeSave($insert)
     {
+        // trim description
+        if (strlen($this->description) > 140) {
+            $this->description = substr($this->description, 0, 137) . '...';
+        }
+        // set hits
+        if ($this->hits === null) {
+            $this->hits = 0;
+        }
         $this->serializeAttributes();
         return parent::beforeSave($insert);
     }
@@ -171,7 +179,9 @@ class Package extends ActiveRecord
             }
         } else {
             foreach ($this->serializeAttributes as $attribute) {
-                $oldAttributes[$attribute] = Serialize::unserialize($oldAttributes[$attribute]);
+                if (isset($oldAttributes[$attribute])) {
+                    $oldAttributes[$attribute] = Serialize::unserialize($oldAttributes[$attribute]);
+                }
             }
             foreach ($this->attributes as $name => $value) {
                 if (isset($names[$name]) && (!array_key_exists($name, $oldAttributes) || $value !== $oldAttributes[$name])) {
@@ -288,11 +298,6 @@ class Package extends ActiveRecord
         // fetch description
         if (!$this->description) {
             $this->description = Git::getFile($this->url, 'description.txt');
-        }
-
-        // trim description
-        if (strlen($this->description) > 140) {
-            $this->description = substr($this->description, 0, 137) . '...';
         }
 
         // fetch authors
