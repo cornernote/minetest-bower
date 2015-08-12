@@ -19,7 +19,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <?= $model->getReadmeHtml() ?>
             <?php
             if (!$model->readme) {
-                echo '<h1>' . Html::encode($this->title) . '</h1>';
+                echo '<h1>' . Html::encode($model->name) . '</h1>';
                 echo Alert::widget([
                     'options' => [
                         'class' => 'alert-danger',
