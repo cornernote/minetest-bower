@@ -38,8 +38,8 @@ echo Nav::widget([
     'options' => ['class' => 'navbar-nav'],
     'items' => [
         ['label' => 'Browse', 'url' => ['/mod/index'], 'active' => (Yii::$app->controller->id == 'mod' && Yii::$app->controller->action->id != 'create')],
-        ['label' => 'Submit', 'url' => ['/mod/create']],
         ['label' => 'Random', 'url' => ['/mod/random']],
+        ['label' => 'Submit', 'url' => ['/mod/create']],
         ['label' => 'Docs', 'url' => ['/docs/index'], 'active' => Yii::$app->controller->id == 'docs'],
     ],
 ]);
