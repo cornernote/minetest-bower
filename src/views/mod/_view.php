@@ -1,6 +1,6 @@
 <?php
 
-use kartik\detail\DetailView;
+use app\widgets\DetailView;
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
@@ -11,7 +11,7 @@ use yii\helpers\Html;
 
     <h2><?= Html::a(Html::encode($model->name), ['view', 'name' => $model->name]) ?></h2>
 
-    <div class="row">
+    <div class="row small">
         <div class="col-sm-2">
             <?php
             if ($model->screenshots) {

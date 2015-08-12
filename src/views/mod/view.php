@@ -1,7 +1,7 @@
 <?php
 
 use app\components\Git;
-use kartik\detail\DetailView;
+use app\widgets\DetailView;
 use yii\bootstrap\Alert;
 use yii\helpers\Html;
 
