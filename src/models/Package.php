@@ -146,6 +146,10 @@ class Package extends ActiveRecord
         if ($this->hits === null) {
             $this->hits = 0;
         }
+        // set readme
+        if (!$this->readme) {
+            $this->readme = null;
+        }
         $this->serializeAttributes();
         return parent::beforeSave($insert);
     }
