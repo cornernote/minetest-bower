@@ -18,6 +18,10 @@ use yii\filters\VerbFilter;
  */
 class ModController extends Controller
 {
+    /**
+     * @var bool
+     */
+    public $enableCsrfValidation = false;
 
     /**
      * Lists all Package models.
