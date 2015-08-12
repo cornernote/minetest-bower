@@ -1,8 +1,7 @@
 <?php
 
-use app\components\Git;
+use kartik\detail\DetailView;
 use yii\helpers\Html;
-use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Package */
@@ -13,26 +12,39 @@ use yii\widgets\DetailView;
     <h2><?= Html::a(Html::encode($model->name), ['view', 'name' => $model->name]) ?></h2>
 
     <div class="row">
-        <div class="col-sm-10">
-            <?= DetailView::widget([
-                'model' => $model,
-                'attributes' => [
-                    'description',
-                    'keywords',
-                    [
-                        'label' => 'Links',
-                        'value' => $model->getLinksHtml(true),
-                        'format' => 'raw',
-                    ],
-                ],
-            ]) ?>
-        </div>
         <div class="col-sm-2">
             <?php
             if ($model->screenshots) {
                 echo Html::a(Html::img($model->screenshots[0], ['class' => 'thumbnail']), ['view', 'name' => $model->name]);
+            } else {
+                echo Html::a(Html::img('@web/img/no-image.png', ['class' => 'thumbnail']), ['view', 'name' => $model->name]);
             }
             ?>
+        </div>
+        <div class="col-sm-10">
+            <?= DetailView::widget([
+                'model' => $model,
+                'hideIfEmpty' => true,
+                'attributes' => [
+                    'description',
+                    'keywords',
+                    [
+                        'label' => 'Authors',
+                        'value' => $model->getAuthorsHtml(),
+                        'format' => 'raw',
+                    ],
+                    [
+                        'label' => 'License',
+                        'value' => $model->getLicenseHtml(),
+                        'format' => 'raw',
+                    ],
+                    [
+                        'label' => 'Links',
+                        'value' => $model->getLinksHtml(),
+                        'format' => 'raw',
+                    ],
+                ],
+            ]) ?>
         </div>
     </div>
 

@@ -38,11 +38,6 @@ $this->params['breadcrumbs'][] = $this->title;
                     //'description',
                     'keywords',
                     [
-                        'label' => 'Links',
-                        'value' => $model->getLinksHtml(false),
-                        'format' => 'raw',
-                    ],
-                    [
                         'label' => 'Authors',
                         'value' => $model->getAuthorsHtml(),
                         'format' => 'raw',
@@ -50,6 +45,11 @@ $this->params['breadcrumbs'][] = $this->title;
                     [
                         'label' => 'License',
                         'value' => $model->getLicenseHtml(),
+                        'format' => 'raw',
+                    ],
+                    [
+                        'label' => 'Links',
+                        'value' => $model->getLinksHtml(),
                         'format' => 'raw',
                     ],
                     //'hits',
