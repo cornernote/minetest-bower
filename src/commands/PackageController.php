@@ -50,6 +50,38 @@ class PackageController extends Controller
     /**
      *
      */
+    public function actionRestore()
+    {
+        $file = 'https://gist.githubusercontent.com/cornernote/d18f9048b230a8075be1/raw/bc76dc90013422053642865111ff8a5553fa6dd5/packages.json';
+        $this->stdout('Importing restore from ' . $file . "\n");
+        $data = json_decode(file_get_contents($file), true);
+        $count = count($data);
+        foreach ($data as $k => $row) {
+            $this->stdout('[' . ($k + 1) . '/' . $count . '] ', Console::FG_GREY);
+            $this->stdout($row['name'] . ' ' . $row['url'] . ': ');
+            $package = Package::find()->where(['name' => $row['name']])->one();
+            if (!$package) {
+                $package = new Package();
+                $package->name = $row['name'];
+            }
+            if (!$package->url) {
+                $package->url = $row['url'];
+            }
+            if ($package->save()) {
+                $this->stdout('Saved!' . "\n", Console::FG_GREEN);
+            } else {
+                $this->stdout('Errors', Console::FG_RED);
+                foreach ($package->errors as $attribute => $errors) {
+                    $this->stdout(' -- ' . $attribute . ' ' . implode(', ', $errors), Console::FG_RED);
+                }
+                $this->stdout("\n");
+            }
+        }
+    }
+
+    /**
+     *
+     */
     public function actionImportMtpm()
     {
         $file = 'https://raw.githubusercontent.com/rubenwardy/mtpm_lists/gh-pages/lists/mods.csv';
