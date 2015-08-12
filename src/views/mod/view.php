@@ -54,7 +54,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         'format' => 'raw',
                     ],
                     //'hits',
-                    'created_at',
+                    //'created_at',
                     //[
                     //    'attribute' => 'updated_at',
                     //    'value' => $model->updated_at . '&nbsp;&nbsp;[' . Html::a('update', ['update', 'name' => $model->name]) . ']',
