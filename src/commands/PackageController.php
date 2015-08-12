@@ -64,6 +64,7 @@ class PackageController extends Controller
             '/zipball/master.git' => '.git',
             '/archive-tarball/master.git' => '.git',
             'https://repo.or.cz/' => 'http://repo.or.cz/',
+            '/downloads' => '',
             '.zip' => '',
         ];
         $csv = array_map('str_getcsv', explode("\n", trim(file_get_contents($file))));
