@@ -62,6 +62,11 @@ $this->params['breadcrumbs'][] = $this->title;
                 ],
             ]) ?>
 
+            <p>
+                <?= Html::a('Update <i class="glyphicon glyphicon-chevron-right"></i>', ['update', 'name' => $model->name], ['class' => 'btn btn-sm btn-default']); ?>
+                <?= Html::a('View bower.json <i class="glyphicon glyphicon-chevron-right"></i>', ['bower', 'name' => $model->name], ['class' => 'btn btn-sm btn-default']); ?>
+            </p>
+
             <?= $model->getScreenshotsHtml(); ?>
 
             <?php if (!$model->bower) { ?>
@@ -74,10 +79,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 ]); ?>
             <?php } ?>
 
-            <p>
-                <?= Html::a('Update <i class="glyphicon glyphicon-chevron-right"></i>', ['update', 'name' => $model->name], ['class' => 'btn btn-sm btn-default']); ?>
-                <?= Html::a('View bower.json <i class="glyphicon glyphicon-chevron-right"></i>', ['bower', 'name' => $model->name], ['class' => 'btn btn-sm btn-default']); ?>
-            </p>
         </div>
     </div>
 
