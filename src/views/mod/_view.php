@@ -28,16 +28,16 @@ use yii\helpers\Html;
                 'attributes' => [
                     'description',
                     'keywords',
-                    [
-                        'label' => 'Authors',
-                        'value' => $model->getAuthorsHtml(),
-                        'format' => 'raw',
-                    ],
-                    [
-                        'label' => 'License',
-                        'value' => $model->getLicenseHtml(),
-                        'format' => 'raw',
-                    ],
+                    //[
+                    //    'label' => 'Authors',
+                    //    'value' => $model->getAuthorsHtml(),
+                    //    'format' => 'raw',
+                    //],
+                    //[
+                    //    'label' => 'License',
+                    //    'value' => $model->getLicenseHtml(),
+                    //    'format' => 'raw',
+                    //],
                     [
                         'label' => 'Links',
                         'value' => $model->getLinksHtml(),
