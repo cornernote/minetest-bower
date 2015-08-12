@@ -447,7 +447,8 @@ class Package extends ActiveRecord
                 return $parser->parse($this->readme);
             }
             if ($this->readme_format == 'text') {
-                return '<pre class="readme">' . $this->readme . '</pre>';
+                $readme = preg_replace('@(https?://([-\w\.]+[-\w])+(:\d+)?(/([\w/_\.#-]*(\?\S+)?[^\.\s])?)?)@', '<a href="$1">$1</a>', $this->readme);
+                return '<pre class="readme">' . $readme . '</pre>';
             }
         }
         return '';
