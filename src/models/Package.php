@@ -328,6 +328,7 @@ class Package extends ActiveRecord
                 if ($text) {
                     $this->readme = Git::getFile($this->url, $file);
                     if ($this->readme) {
+                        $this->readme_format = 'text';
                         break;
                     }
                 }
@@ -462,7 +463,7 @@ class Package extends ActiveRecord
             }
             if ($this->readme_format == 'text') {
                 $readme = preg_replace('@(https?://([-\w\.]+[-\w])+(:\d+)?(/([\w/_\.#-]*(\?\S+)?[^\.\s])?)?)@', '<a href="$1">$1</a>', $this->readme);
-                return '<pre class="readme">' . $readme . '</pre>';
+                return '<h1>' . $this->name . '</h1><pre class="readme">' . $readme . '</pre>';
             }
         }
         return '';

@@ -19,12 +19,13 @@ $this->params['breadcrumbs'][] = $this->title;
             <?= $model->getReadmeHtml() ?>
             <?php
             if (!$model->readme) {
+                echo '<h1>' . Html::encode($this->title) . '</h1>';
                 echo Alert::widget([
                     'options' => [
                         'class' => 'alert-danger',
                     ],
                     'closeButton' => false,
-                    'body' => 'This mod has no readme.  If you are the owner please consider adding one to the <a href="' . Git::getUrl($model->url) . '">repository</a>.',
+                    'body' => 'This mod has no <code>README.md</code> or <code>README.txt</code> file.  If you are the owner please consider adding one to the <a href="' . Git::getUrl($model->url) . '">repository</a>.',
                 ]);
             }
             ?>
@@ -78,7 +79,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         'class' => 'alert-info',
                     ],
                     'closeButton' => false,
-                    'body' => 'This mod has no valid bower.json file.  If you are the owner please consider adding one to the repository, then click Update.',
+                    'body' => 'This mod has no valid <code>bower.json</code> file.  If you are the owner please consider adding one to the repository, then click Update.',
                 ]); ?>
             <?php } ?>
 
