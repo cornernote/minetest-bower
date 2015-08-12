@@ -6,6 +6,7 @@ use app\components\Git;
 use Yii;
 use app\models\Package;
 use app\models\search\PackageSearch;
+use yii\db\Expression;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\web\Controller;
@@ -31,6 +32,24 @@ class ModController extends Controller
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
+    }
+
+    /**
+     * Redirects to a random mod.
+     * @return mixed
+     */
+    public function actionRandom()
+    {
+        $driver = Package::getDb()->driverName;
+        if ($driver == 'mysql') {
+            $rand = new Expression('RAND()');
+        } elseif ($driver == 'pgsql') {
+            $rand = new Expression('RANDOM()');
+        } else {
+            return $this->redirect(['index']);
+        }
+        $model = Package::find()->orderBy($rand)->one();
+        return $this->redirect(['view', 'name' => $model->name]);
     }
 
     /**

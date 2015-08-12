@@ -40,6 +40,7 @@ echo Nav::widget([
         ['label' => 'Browse', 'url' => ['/mod/index'], 'active' => (Yii::$app->controller->id == 'mod' && Yii::$app->controller->action->id != 'create')],
         ['label' => 'Submit', 'url' => ['/mod/create']],
         ['label' => 'Docs', 'url' => ['/docs/index'], 'active' => Yii::$app->controller->id == 'docs'],
+        ['label' => 'Submit', 'url' => ['/mod/random']],
     ],
 ]);
 echo Nav::widget([
