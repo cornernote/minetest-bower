@@ -468,7 +468,7 @@ class Package extends ActiveRecord
                 'homepage' => $this->homepage ? $this->homepage : Git::getUrl($this->url),
                 'screenshots' => $this->screenshots ? $this->screenshots : ['https://example.com/screenshot1.png'],
                 'authors' => $this->authors ? $this->authors : ['Your Name'],
-                'license' => 'UNKNOWN',
+                //'license' => $this->license ? $this->license : 'WTFPL',
             ], JSON_PRETTY_PRINT);
         }
         $bower = str_replace('\/', '/', $bower);
