@@ -68,7 +68,9 @@ $this->params['breadcrumbs'][] = $this->title;
                 <?= Html::a('View bower.json <i class="glyphicon glyphicon-chevron-right"></i>', ['bower', 'name' => $model->name], ['class' => 'btn btn-sm btn-default']); ?>
             </p>
 
-            <?= $model->getScreenshotsHtml(); ?>
+            <div class="text-center">
+                <?= $model->getScreenshotsHtml(); ?>
+            </div>
 
             <?php if (!$model->bower) { ?>
                 <?= Alert::widget([
