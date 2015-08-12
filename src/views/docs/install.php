@@ -44,7 +44,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <p>Install nodejs, npm and git</p>
             <pre class="prettyprint lang-bash">$ sudo apt-get install nodejs npm git-core</pre>
 
-            <p>Ununtu users, link nodejs to node</p>
+            <p>Ubuntu users, link nodejs to node</p>
             <pre class="prettyprint lang-bash">sudo ln -s /usr/bin/nodejs /usr/bin/node</pre>
 
             <p>Install bower</p>
