@@ -312,10 +312,19 @@ class Package extends ActiveRecord
         }
         if (!$this->readme) {
             foreach (['README.txt', 'readme.txt', 'Readme.txt', 'README', 'readme'] as $file) {
-                $this->readme = Git::getFile($this->url, $file);
-                if ($this->readme) {
-                    $this->readme_format = 'text';
-                    break;
+                $text = strtolower($file) != 'readme';
+                if (!$text) {
+                    foreach (get_headers(Git::getUrl($this->url, $file)) as $header) {
+                        if ($header == 'Content-Type: text/plain') {
+                            $text = true;
+                        }
+                    }
+                }
+                if ($text) {
+                    $this->readme = Git::getFile($this->url, $file);
+                    if ($this->readme) {
+                        break;
+                    }
                 }
             }
         }
