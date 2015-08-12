@@ -49,12 +49,12 @@ $this->params['breadcrumbs'][] = 'bower.json';
 
         <?php if (strpos($model->url, 'github.com')) { ?>
             <p>Create a <?= Html::a('new webhook', Git::getUrl($model->url) . '/settings/hooks/new') ?> and enter
-                <code><?= Url::to(['view', 'name' => $model->name], true); ?></code> into the
+                <code><?= Url::to(['bower', 'name' => $model->name], true); ?></code> into the
                 <em>Payload URL</em>, then click <em>Add webhook</em>.</p>
             <?= Html::img('https://cloud.githubusercontent.com/assets/51875/9213435/7cf27a68-40d1-11e5-888a-c4692ad9f4b9.png'); ?>
         <?php } elseif (strpos($model->url, 'bitbucket.org')) { ?>
             <p>Create a <?= Html::a('new webhook', Git::getUrl($model->url) . '/admin/addon/admin/bitbucket-webhooks/bb-webhooks-repo-admin') ?> and enter
-                <code><?= Url::to(['view', 'name' => $model->name], true); ?></code> into the URL. </p>
+                <code><?= Url::to(['bower', 'name' => $model->name], true); ?></code> into the URL. </p>
             <?= Html::img('https://cloud.githubusercontent.com/assets/51875/9217084/5f2da65c-4102-11e5-81b5-61b313a39aa7.png'); ?>
         <?php } ?>
     <?php } ?>
