@@ -505,7 +505,7 @@ class Package extends ActiveRecord
         $buttons[] = '[![download](https://img.shields.io/github/tag/' . $this->getProjectTag() . '.svg?style=flat-square&label=release)](' . Git::getDownload($this->url) . ')';
         $buttons[] = '[![git](https://img.shields.io/badge/git-project-green.svg?style=flat-square)](' . Git::getUrl($this->url) . ')';
         if ($this->forum) {
-            $items[] = '[![forum](https://img.shields.io/badge/minetest-mod-green.svg?style=flat-square)](' . $this->forum . ')';
+            $buttons[] = '[![forum](https://img.shields.io/badge/minetest-mod-green.svg?style=flat-square)](' . $this->forum . ')';
         }
         $buttons[] = '[![bower](https://img.shields.io/badge/bower-mod-green.svg?style=flat-square)](' . Url::to(['/mod/view', 'name' => $this->name], true) . ')';
         if ($this->license) {
