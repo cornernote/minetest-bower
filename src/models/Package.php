@@ -12,6 +12,7 @@ use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 use yii\helpers\Html;
+use yii\helpers\Url;
 use yii\widgets\Menu;
 
 /**
@@ -458,6 +459,76 @@ class Package extends ActiveRecord
     /**
      * @return string
      */
+    public function getReadmeSample()
+    {
+        $readme = [];
+        $readme[] = '# ' . $this->name . ' for Minetest';
+        $readme[] = '';
+        $readme[] = $this->getReadmeButtons();
+        $readme[] = '';
+        $readme[] = '';
+        if ($this->description) {
+            $readme[] = '## Description';
+            $readme[] = '';
+            $readme[] = $this->description;
+            $readme[] = '';
+            $readme[] = '';
+        }
+        $readme[] = '## Project Resources';
+        $readme[] = '';
+        if ($this->homepage && $this->homepage != Git::getUrl($this->url) && $this->homepage != $this->forum) {
+            $readme[] = '* [Home](' . $this->homepage . ')';
+        }
+        $readme[] = '* [Download](' . Git::getDownload($this->url) . ')';
+        $readme[] = '* [Project](' . Git::getUrl($this->url) . ')';
+        if ($this->forum) {
+            $readme[] = '* [Forum](' . $this->forum . ')';
+        }
+        $readme[] = '* [Bower](' . Url::to(['/mod/view', 'name' => $this->name], true) . ')';
+        if ($this->license) {
+            // todo
+        }
+        $readme[] = '';
+        return implode("\n", $readme);
+    }
+
+    /**
+     * @return string
+     */
+    public function getReadmeButtons()
+    {
+        $buttons = [];
+        if ($this->homepage && $this->homepage != Git::getUrl($this->url) && $this->homepage != $this->forum) {
+            $items[] = ['label' => 'Homepage', 'url' => $this->homepage];
+            $buttons[] = '[![home](https://img.shields.io/badge/' . $this->name . '-home-blue.svg?style=flat-square)](' . $this->homepage . ')';
+        }
+        $buttons[] = '[![download](https://img.shields.io/github/tag/' . $this->getProjectTag() . '.svg?style=flat-square&label=release)](' . Git::getDownload($this->url) . ')';
+        $buttons[] = '[![git](https://img.shields.io/badge/git-project-green.svg?style=flat-square)](' . Git::getUrl($this->url) . ')';
+        if ($this->forum) {
+            $items[] = '[![forum](https://img.shields.io/badge/minetest-mod-green.svg?style=flat-square)](' . $this->forum . ')';
+        }
+        $buttons[] = '[![bower](https://img.shields.io/badge/bower-mod-green.svg?style=flat-square)](' . Url::to(['/mod/view', 'name' => $this->name], true) . ')';
+        if ($this->license) {
+            // todo
+        }
+        return implode("\n", $buttons);
+    }
+
+
+    /**
+     * Returns project tag, eg: cornernote/minetest-skyblock
+     * @return string
+     */
+    public function getProjectTag()
+    {
+        $url = parse_url(Git::getUrl($this->url));
+        return trim($url['path'], '/');
+    }
+
+
+    /**
+     * @return string
+     */
     public function getReadmeHtml()
     {
         if ($this->readme) {
@@ -466,11 +537,21 @@ class Package extends ActiveRecord
                 return $parser->parse($this->readme);
             }
             if ($this->readme_format == 'text') {
-                $readme = preg_replace('@(https?://([-\w\.]+[-\w])+(:\d+)?(/([\w/_\.#-]*(\?\S+)?[^\.\s])?)?)@', '<a href="$1">$1</a>', $this->readme);
-                return '<h1>' . $this->name . '</h1><pre class="readme">' . $readme . '</pre>';
+                $text = preg_replace('@(https?://([-\w\.]+[-\w])+(:\d+)?(/([\w/_\.#-]*(\?\S+)?[^\.\s])?)?)@', '<a href="$1">$1</a>', $this->readme);
+
+                $readme = [];
+                $readme[] = '# ' . $this->name;
+                $readme[] = $this->getReadmeButtons();
+                $readme[] = '';
+                $readme[] = '';
+                $parser = new GithubMarkdown();
+                $readme = $parser->parse(implode("\n", $readme));
+
+                return $readme . '<pre class="readme">' . $text . '</pre>';
             }
         }
-        return '';
+        $parser = new GithubMarkdown();
+        return $parser->parse($this->getReadmeSample());
     }
 
     /**
@@ -494,4 +575,5 @@ class Package extends ActiveRecord
         $bower = str_replace('\/', '/', $bower);
         return '<pre>' . $bower . '</pre>';
     }
+
 }

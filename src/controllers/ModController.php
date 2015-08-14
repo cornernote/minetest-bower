@@ -92,6 +92,19 @@ class ModController extends Controller
     }
 
     /**
+     * Displays a single Package models readme info.
+     * @param string $name
+     * @return mixed
+     */
+    public function actionReadme($name)
+    {
+        $model = $this->findModel($name);
+        return $this->render('readme', [
+            'model' => $model,
+        ]);
+    }
+
+    /**
      * Creates a new Package model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed

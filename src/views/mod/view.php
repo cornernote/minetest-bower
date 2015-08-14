@@ -17,18 +17,6 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="row">
         <div class="col-lg-8">
             <?= $model->getReadmeHtml() ?>
-            <?php
-            if (!$model->readme) {
-                echo '<h1>' . Html::encode($model->name) . '</h1>';
-                echo Alert::widget([
-                    'options' => [
-                        'class' => 'alert-danger',
-                    ],
-                    'closeButton' => false,
-                    'body' => 'This mod has no <code>README.md</code> or <code>README.txt</code> file.  If you are the owner please consider adding one to the <a href="' . Git::getUrl($model->url) . '">repository</a>.',
-                ]);
-            }
-            ?>
         </div>
         <div class="col-lg-4 small">
             <?= DetailView::widget([
@@ -66,22 +54,26 @@ $this->params['breadcrumbs'][] = $this->title;
             <p class="text-center">
                 <?= Html::a('Update <i class="glyphicon glyphicon-chevron-right"></i>', ['update', 'name' => $model->name], ['class' => 'btn btn-sm btn-default']); ?>
                 &nbsp;&nbsp;
-                <?= Html::a('View bower.json <i class="glyphicon glyphicon-chevron-right"></i>', ['bower', 'name' => $model->name], ['class' => 'btn btn-sm btn-default']); ?>
+                <?php
+                $readmeClass = 'btn-default';
+                if ($model->readme) {
+                    $readmeClass = 'btn-success';
+                }
+                ?>
+                <?= Html::a('README.md <i class="glyphicon glyphicon-chevron-right"></i>', ['readme', 'name' => $model->name], ['class' => 'btn btn-sm ' . $readmeClass]); ?>
+                &nbsp;&nbsp;
+                <?php
+                $bowerClass = 'btn-default';
+                if ($model->bower) {
+                    $bowerClass = 'btn-success';
+                }
+                ?>
+                <?= Html::a('bower.json <i class="glyphicon glyphicon-chevron-right"></i>', ['bower', 'name' => $model->name], ['class' => 'btn btn-sm ' . $bowerClass]); ?>
             </p>
 
             <div class="text-center">
                 <?= $model->getScreenshotsHtml(); ?>
             </div>
-
-            <?php if (!$model->bower) { ?>
-                <?= Alert::widget([
-                    'options' => [
-                        'class' => 'alert-info',
-                    ],
-                    'closeButton' => false,
-                    'body' => 'This mod has no valid <code>bower.json</code> file.  If you are the owner please consider adding one to the repository, then click Update.',
-                ]); ?>
-            <?php } ?>
 
         </div>
     </div>
