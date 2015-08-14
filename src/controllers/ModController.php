@@ -105,6 +105,19 @@ class ModController extends Controller
     }
 
     /**
+     * Displays a single Package models readme info.
+     * @param string $name
+     * @return mixed
+     */
+    public function actionScreenshots($name)
+    {
+        $model = $this->findModel($name);
+        return $this->render('screenshots', [
+            'model' => $model,
+        ]);
+    }
+
+    /**
      * Creates a new Package model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed

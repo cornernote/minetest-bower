@@ -38,6 +38,8 @@ $web = [
                 'random' => 'mod/random',
                 'mods/update/<name:\w+>' => 'mod/update',
                 'mods/bower/<name:\w+>' => 'mod/bower',
+                'mods/readme/<name:\w+>' => 'mod/readme',
+                'mods/screenshots/<name:\w+>' => 'mod/screenshots',
                 'mods/<name:\w+>' => 'mod/view',
                 'mods' => 'mod/index',
                 // docs

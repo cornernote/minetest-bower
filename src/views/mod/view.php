@@ -72,7 +72,13 @@ $this->params['breadcrumbs'][] = $this->title;
             </p>
 
             <div class="text-center">
-                <?= $model->getScreenshotsHtml(); ?>
+                <?php
+                if ($model->screenshots) {
+                    $model->getScreenshotsHtml();
+                } else {
+                    echo Html::a(Html::img('@web/img/no-image.png', ['class' => 'thumbnail']), ['screenshots', 'name' => $model->name]);
+                }
+                ?>
             </div>
 
         </div>
