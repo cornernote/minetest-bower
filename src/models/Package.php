@@ -577,4 +577,15 @@ class Package extends ActiveRecord
         return '<pre>' . $bower . '</pre>';
     }
 
+    public function getKeywordsHtml()
+    {
+        $keywordsHtml = [];
+        $keywords = explode(',', $this->keywords);
+        foreach ($keywords as $keyword) {
+            $keyword = trim($keyword);
+            $keywordsHtml[] = $keyword;
+        }
+        return implode(', ', $keywordsHtml);
+    }
+
 }

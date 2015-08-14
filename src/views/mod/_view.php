@@ -7,7 +7,7 @@ use yii\helpers\Html;
 /* @var $model app\models\Package */
 
 ?>
-<div class="package-view">
+<div class="mod-view">
 
     <h2><?= Html::a(Html::encode($model->name), ['view', 'name' => $model->name]) ?></h2>
 

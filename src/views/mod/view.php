@@ -56,7 +56,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 &nbsp;&nbsp;
                 <?php
                 $readmeClass = 'btn-default';
-                if ($model->readme) {
+                if ($model->readme && $model->readme_format == 'markdown') {
                     $readmeClass = 'btn-success';
                 }
                 ?>
