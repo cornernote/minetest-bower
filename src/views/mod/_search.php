@@ -27,8 +27,8 @@ use yii\helpers\Html;
             ]
         ]
     ])
-        ->label(false)
-        ->hint(Html::a('popular keywords', ['cloud']));
+        ->label(false);
+        //->hint(Html::a('popular keywords', ['cloud']));
     ?>
 
     <?php ActiveForm::end(); ?>
