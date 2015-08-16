@@ -37,7 +37,7 @@ echo '<a class="hidden-xs" href="https://github.com/cornernote/minetest-bower"><
 echo Nav::widget([
     'options' => ['class' => 'navbar-nav'],
     'items' => [
-        ['label' => 'Browse', 'url' => ['/mod/index'], 'active' => (Yii::$app->controller->id == 'mod' && Yii::$app->controller->action->id != 'create')],
+        ['label' => 'Browse', 'url' => ['/mod/index'], 'active' => (Yii::$app->controller->id == 'mod' && !in_array(Yii::$app->controller->action->id, ['create', 'cloud']))],
         ['label' => 'Random', 'url' => ['/mod/random']],
         ['label' => 'Cloud', 'url' => ['/mod/cloud']],
         ['label' => 'Submit', 'url' => ['/mod/create']],
