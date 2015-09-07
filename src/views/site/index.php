@@ -57,7 +57,7 @@ $this->params['jumbotron'] = '/site/_index-jumbotron';
             ?>
         </div>
 
-        <h2>Using Bower to Manage Mods and Dependancies</h2>
+        <h2>Using Bower to Manage Mods and Dependencies</h2>
 
         <p>If you are familiar with CLI, you can use Minetest Bower to install Minetest mods and dependency mods quickly and easily under Linux, Windows, and Mac OS X. Minetest Bower needs primarily two software packages named NodeJS and Git, which are easy to install.</p>
 
