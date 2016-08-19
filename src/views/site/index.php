@@ -25,6 +25,10 @@ $this->params['jumbotron'] = '/site/_index-jumbotron';
 
         <p>If you'd like to run a Minetest Bower mirror, this is encouraged and simple to set up. Simply copy the <?= Html::a('this JSON file', ['/package/index']) ?> to your website and update it periodically.</p>
 
+        <h2>Search Mods</h2>
+
+        <?php echo $this->render('/mods/_search', ['model' => new PackageSearch()]); ?>
+
         <h2>Browse Mods</h2>
 
         <div class="row">
