@@ -27,7 +27,7 @@ $this->params['jumbotron'] = '/site/_index-jumbotron';
 
         <h2>Search Mods</h2>
 
-        <?php echo $this->render('/mods/_search', ['model' => new PackageSearch()]); ?>
+        <?php echo $this->render('/mod/_search', ['model' => new PackageSearch()]); ?>
 
         <h2>Browse Mods</h2>
 
