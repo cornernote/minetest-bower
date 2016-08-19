@@ -27,6 +27,11 @@ $this->params['breadcrumbs'][] = $this->title;
                     //'description',
                     'keywords',
                     [
+                        'label' => 'Keywords',
+                        'value' => $model->getKeywordsHtml(),
+                        'format' => 'raw',
+                    ],
+                    [
                         'label' => 'Authors',
                         'value' => $model->getAuthorsHtml(),
                         'format' => 'raw',

@@ -577,13 +577,16 @@ class Package extends ActiveRecord
         return '<pre>' . $bower . '</pre>';
     }
 
+    /**
+     * @return string
+     */
     public function getKeywordsHtml()
     {
         $keywordsHtml = [];
         $keywords = explode(',', $this->keywords);
         foreach ($keywords as $keyword) {
             $keyword = trim($keyword);
-            $keywordsHtml[] = $keyword;
+            $keywordsHtml[] = Html::a($keyword, ['/mod/index', 'search' => $keyword]);
         }
         return implode(', ', $keywordsHtml);
     }
