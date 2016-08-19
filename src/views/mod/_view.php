@@ -27,7 +27,11 @@ use yii\helpers\Html;
                 'hideIfEmpty' => true,
                 'attributes' => [
                     'description',
-                    'keywords',
+                    [
+                        'label' => 'Keywords',
+                        'value' => $model->getKeywordsHtml(),
+                        'format' => 'raw',
+                    ],
                     //[
                     //    'label' => 'Authors',
                     //    'value' => $model->getAuthorsHtml(),
