@@ -26,6 +26,14 @@ composer install
 
 ## Using Heroku
 
+Setup:
+
+```
+sudo apt-get install postgresql-client
+wget -O- https://toolbelt.heroku.com/install-ubuntu.sh | sh
+heroku login
+```
+
 Deploy:
 
 ```
@@ -50,16 +58,24 @@ Bash with vim
 heroku vim
 ```
 
-View database:
+View logs:
+
+```
+heroku logs --tail
+```
+
+Connect to database:
 
 ```
 heroku pg:psql
 ```
 
-View logs:
+Database commands:
 
 ```
-heroku logs --tail
+\dt # list tables
+\d+ package # describe package table
+DELETE FROM package WHERE name='modname'; # delete a package
 ```
 
 More info:
