@@ -10,7 +10,7 @@ use yii\helpers\Html;
 
 $this->title = $model->name;
 $this->params['breadcrumbs'][] = ['label' => 'Mods', 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
+$this->params['breadcrumbs'][] = (new GithubMarkdown())->parse($this->title);
 ?>
 <div class="mod-view">
 
