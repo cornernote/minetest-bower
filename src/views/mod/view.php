@@ -2,6 +2,7 @@
 
 use app\components\Git;
 use app\widgets\DetailView;
+use cebe\markdown\GithubMarkdown;
 use yii\bootstrap\Alert;
 use yii\helpers\Html;
 
