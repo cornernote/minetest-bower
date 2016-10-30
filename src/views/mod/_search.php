@@ -11,7 +11,7 @@ use yii\helpers\Html;
 <div class="package-search">
 
     <?php $form = ActiveForm::begin([
-        'action' => ['index'],
+        'action' => ['/mod/index'],
         'method' => 'get',
     ]); ?>
 
