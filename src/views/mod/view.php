@@ -1,9 +1,6 @@
 <?php
 
-use app\components\Git;
 use app\widgets\DetailView;
-use cebe\markdown\GithubMarkdown;
-use yii\bootstrap\Alert;
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
@@ -11,7 +8,7 @@ use yii\helpers\Html;
 
 $this->title = $model->name;
 $this->params['breadcrumbs'][] = ['label' => 'Mods', 'url' => ['index']];
-$this->params['breadcrumbs'][] = (new GithubMarkdown())->parse($this->title);
+$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="mod-view">
 
