@@ -15,7 +15,8 @@
         "bigpaulie/yii2-fancybox": "^1.0",
         "knplabs/github-api": "^1.4",
         "vlucas/phpdotenv": "^2.0",
-        "kartik-v/yii2-detail-view": "^1.7"
+        "kartik-v/yii2-detail-view": "^1.7",
+        "geoip/geoip": "~1.15"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "*",
