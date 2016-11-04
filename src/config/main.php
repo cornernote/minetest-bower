@@ -29,18 +29,18 @@ $web = [
             'rules' => [
                 // packages
                 'POST packages' => 'package/create',
-                'packages/search/<search:\w+>' => 'package/search',
-                'packages/<name:\w+>' => 'package/view',
+                'packages/search/<search:[\w-]+>' => 'package/search',
+                'packages/<name:[\w-]+>' => 'package/view',
                 'packages' => 'package/index',
                 // mods
                 'submit' => 'mod/create',
                 'cloud' => 'mod/cloud',
                 'random' => 'mod/random',
-                'mods/update/<name:\w+>' => 'mod/update',
-                'mods/bower/<name:\w+>' => 'mod/bower',
-                'mods/readme/<name:\w+>' => 'mod/readme',
-                'mods/screenshots/<name:\w+>' => 'mod/screenshots',
-                'mods/<name:\w+>' => 'mod/view',
+                'mods/update/<name:[\w-]+>' => 'mod/update',
+                'mods/bower/<name:[\w-]+>' => 'mod/bower',
+                'mods/readme/<name:[\w-]+>' => 'mod/readme',
+                'mods/screenshots/<name:[\w-]+>' => 'mod/screenshots',
+                'mods/<name:[\w-]+>' => 'mod/view',
                 'mods' => 'mod/index',
                 // docs
                 'docs' => 'docs/index',
