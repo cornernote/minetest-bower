@@ -22,7 +22,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'hideIfEmpty' => true,
                 'attributes' => [
                     'name',
-                    //'description',
+                    'description',
                     [
                         'label' => 'Keywords',
                         'value' => $model->getKeywordsHtml(),
