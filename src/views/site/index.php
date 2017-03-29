@@ -11,7 +11,7 @@ use yii\db\Expression;
 use yii\helpers\Html;
 use yii\widgets\ListView;
 
-$this->title = 'Minetest Bower';
+$this->title = 'Minetest Bower: Mods, Texture Packs and Subgames';
 $this->params['jumbotron'] = '/site/_index-jumbotron';
 
 ?>
