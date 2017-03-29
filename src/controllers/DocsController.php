@@ -23,6 +23,11 @@ class DocsController extends Controller
         return $this->render('bower-format');
     }
 
+    public function actionUpdateWebhook()
+    {
+        return $this->render('update-webhook');
+    }
+
     public function actionRegistryCurl()
     {
         return $this->render('registry-curl');
