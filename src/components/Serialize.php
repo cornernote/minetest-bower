@@ -2,12 +2,12 @@
 
 namespace app\components;
 
-use yii\base\Object;
+use yii\base\BaseObject;
 
 /**
  * Serialize
  */
-class Serialize extends Object
+class Serialize extends BaseObject
 {
     /**
      * Convert the given value into a gzip compressed blob so it can be stored in the database
