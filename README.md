@@ -98,7 +98,6 @@ heroku run php /app/yii package/import-mtpm
 ```
 
 
-
 ## Resources
 
 * [Homepage](https://minetest-bower.herokuapp.com/)
