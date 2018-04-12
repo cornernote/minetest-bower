@@ -32,8 +32,9 @@ $this->params['jumbotron'] = '/site/_index-jumbotron';
         //echo $this->render('/mod/_search', ['model' => new PackageSearch()]);
         ?>
 
+        <hr>
+
         <?php
-        echo '<h2>Mod List</h2>';
         echo '<div class="text-justify">';
         $items = [];
         foreach (\app\models\Package::find()->orderBy(['name' => SORT_ASC])->all() as $package) {
