@@ -13,9 +13,9 @@ class DocsController extends Controller
         return $this->render('index');
     }
 
-    public function actionInstall()
+    public function actionBowerCli()
     {
-        return $this->render('install');
+        return $this->render('bower-cli');
     }
 
     public function actionBowerFormat()

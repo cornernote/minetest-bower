@@ -19,11 +19,10 @@ $this->params['jumbotron'] = '/site/_index-jumbotron';
 
     <div class="body-content">
 
-        <h2>About Minetest Mods</h2>
-
-        <p>Minetest Mods is a Minetest mod repository. The repository is unmoderated, anybody may <?=Html::a('submit a mod',['mod/create'])?>.
-            Different versions by different people of similar mods are permitted but
-            each version must have different names.</p>
+        <p>Minetest Mods is a Minetest mod repository. The repository is unmoderated, anybody may
+            <?= Html::a('submit a mod', ['mod/create']) ?>.
+            Different versions by different people of similar mods are permitted but each version must have a different
+            name. A mod can be deleted by deleting the source repo and then clicking update from the mod page.</p>
 
         <p>If you'd like to run a Minetest Mods mirror, this is encouraged and simple to set up. Simply copy
             the <?= Html::a('this JSON file', ['package/index']) ?> to your website and update it periodically.</p>
@@ -35,6 +34,7 @@ $this->params['jumbotron'] = '/site/_index-jumbotron';
 
         <?php
         echo '<h2>Mod List</h2>';
+        echo '<div class="text-justify">';
         $items = [];
         foreach (\app\models\Package::find()->orderBy(['name' => SORT_ASC])->all() as $package) {
             $items[] = Html::a($package->name, ['mod/view', 'name' => $package->name]);
@@ -43,6 +43,7 @@ $this->params['jumbotron'] = '/site/_index-jumbotron';
             'encode' => false,
             'class' => 'list-inline',
         ]);
+        echo '</div>';
         //echo '<div class="row">';
         //$searchModel = new PackageSearch();
         //$query = Package::find();
