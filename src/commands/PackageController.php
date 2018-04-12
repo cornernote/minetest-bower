@@ -52,7 +52,7 @@ class PackageController extends Controller
      */
     public function actionRestore()
     {
-        $file = 'https://gist.githubusercontent.com/cornernote/d18f9048b230a8075be1/raw/bc76dc90013422053642865111ff8a5553fa6dd5/packages.json';
+        $file = 'https://gist.githubusercontent.com/cornernote/b622b71ac3f77922e9021654f4c28909/raw/77ff749cac8f0bc1b1e667da300126edecf2f8ec/packages.json';
         $this->stdout('Importing restore from ' . $file . "\n");
         $data = json_decode(file_get_contents($file), true);
         $count = count($data);

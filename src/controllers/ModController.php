@@ -24,7 +24,7 @@ class ModController extends Controller
     public $enableCsrfValidation = false;
 
     /**
-     * Lists all Package models.
+     * Browse Package models.
      * @return mixed
      */
     public function actionIndex()
@@ -60,6 +60,7 @@ class ModController extends Controller
      * Displays a single Package model.
      * @param string $name
      * @return mixed
+     * @throws NotFoundHttpException
      */
     public function actionView($name)
     {
@@ -82,6 +83,7 @@ class ModController extends Controller
      * Displays a single Package models bower info.
      * @param string $name
      * @return mixed
+     * @throws NotFoundHttpException
      */
     public function actionBower($name)
     {
@@ -95,6 +97,7 @@ class ModController extends Controller
      * Displays a single Package models readme info.
      * @param string $name
      * @return mixed
+     * @throws NotFoundHttpException
      */
     public function actionReadme($name)
     {
@@ -108,6 +111,7 @@ class ModController extends Controller
      * Displays a single Package models readme info.
      * @param string $name
      * @return mixed
+     * @throws NotFoundHttpException
      */
     public function actionScreenshots($name)
     {

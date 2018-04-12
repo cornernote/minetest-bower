@@ -10,7 +10,7 @@
         "yiisoft/yii2-bootstrap": "*",
         "fxp/composer-asset-plugin": "*",
         "kartik-v/yii2-widgets": "^3.4",
-        "cebe/markdown": "~1.0.1",
+        "cebe/markdown": "~1.2.0",
         "bigpaulie/yii2-fancybox": "^1.0",
         "knplabs/github-api": "^1.4",
         "vlucas/phpdotenv": "^2.0",

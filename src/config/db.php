@@ -12,7 +12,7 @@ if (YII_ENV == 'prod') {
 }
 return [
     'class' => 'yii\db\Connection',
-    'dsn' => 'mysql:host=localhost;dbname=minetest_bower',
+    'dsn' => 'mysql:host=db;dbname=minetest',
     'username' => 'root',
     'password' => 'root',
     'charset' => 'utf8',

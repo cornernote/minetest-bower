@@ -9,7 +9,6 @@ class m150812_000001_create_package extends Migration
 
     public function up()
     {
-        $this->dropTable(self::TABLE);
         $this->createTable(self::TABLE, [
             'id' => Schema::TYPE_PK,
             'name' => Schema::TYPE_STRING . '(50) NOT NULL',
@@ -35,5 +34,6 @@ class m150812_000001_create_package extends Migration
 
     public function down()
     {
+        $this->dropTable(self::TABLE);
     }
 }

@@ -1,0 +1,58 @@
+version: '2'
+
+services:
+
+  php:
+    image: cornernote/php:7.2-fpm-4.2
+    depends_on:
+      - db
+    environment:
+      - DB_ENV_MYSQL_USER=minetest
+      - DB_ENV_MYSQL_DATABASE=minetest
+      - DB_ENV_MYSQL_PASSWORD=minetest
+      - DB_ENV_MYSQL_ROOT_PASSWORD=root
+    volumes:
+      - ./composer.json:/app/composer.json
+      - ./composer.lock:/app/composer.lock
+      - ./yii:/app/yii
+      - ./web:/app/web
+      - ./src:/app/src
+      - ./vendor:/app/vendor
+      - ./runtime:/app/runtime
+
+  nginx:
+    image: cornernote/nginx:1.13
+    volumes:
+      - dhparam:/etc/nginx/dhparam
+      - ./build/nginx/config/etc/nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./web:/app/web
+      - ./src:/app/src
+      - ./vendor:/app/vendor
+      - ./runtime:/app/runtime
+    depends_on:
+      - php
+
+  db:
+    image: percona:5.7
+    command: --character-set-server=utf8 --collation-server=utf8_general_ci
+    environment:
+      - MYSQL_USER=minetest
+      - MYSQL_DATABASE=minetest
+      - MYSQL_PASSWORD=minetest
+      - MYSQL_ROOT_PASSWORD=root
+    volumes:
+      - mysql:/var/lib/mysql
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    environment:
+      - PMA_HOST=db
+    volumes:
+      - /sessions
+    depends_on:
+      - db
+
+
+volumes:
+  mysql:
+  dhparam:

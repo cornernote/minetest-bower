@@ -1,0 +1,31 @@
+version: '2'
+
+services:
+
+  nginx:
+    environment:
+      - VIRTUAL_HOST=minetest-bower.127.0.0.1.xip.io
+    networks:
+      - default
+      - nginx-proxy
+    volumes:
+      - ./build/nginx/config/etc/letsencrypt/live/app:/etc/letsencrypt/live/app
+
+#  db:
+#    ports:
+#      - 3306:3306
+
+  phpmyadmin:
+    environment:
+      - VIRTUAL_HOST=minetest-bower.afi.127.0.0.1.xip.io
+    networks:
+      - default
+      - nginx-proxy
+    volumes:
+      - ./build/phpmyadmin/etc/phpmyadmin/config.dev.inc.php:/etc/phpmyadmin/config.user.inc.php
+
+
+networks:
+  nginx-proxy:
+    external:
+      name: nginx-proxy
