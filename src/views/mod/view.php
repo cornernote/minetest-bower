@@ -7,7 +7,7 @@ use yii\helpers\Html;
 /* @var $model app\models\Package */
 
 $this->title = $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Mods', 'url' => ['index']];
+//$this->params['breadcrumbs'][] = ['label' => 'Mods', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="mod-view">

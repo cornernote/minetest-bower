@@ -3,7 +3,7 @@ use yii\helpers\ArrayHelper;
 
 $config = [
     'id' => 'minetest-bower',
-    'name' => 'Minetest Bower',
+    'name' => 'Minetest Mods',
     'basePath' => dirname(__DIR__),
     'vendorPath' => '@app/../vendor',
     'runtimePath' => '@app/../runtime',

@@ -27,34 +27,34 @@ class ModController extends Controller
      * Browse Package models.
      * @return mixed
      */
-    public function actionIndex()
-    {
-        $searchModel = new PackageSearch();
-        $dataProvider = $searchModel->search(['PackageSearch' => Yii::$app->request->queryParams]);
-
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
-    }
+    //public function actionIndex()
+    //{
+    //    $searchModel = new PackageSearch();
+    //    $dataProvider = $searchModel->search(['PackageSearch' => Yii::$app->request->queryParams]);
+    //
+    //    return $this->render('index', [
+    //        'searchModel' => $searchModel,
+    //        'dataProvider' => $dataProvider,
+    //    ]);
+    //}
 
     /**
      * Redirects to a random mod.
      * @return mixed
      */
-    public function actionRandom()
-    {
-        $driver = Package::getDb()->driverName;
-        if ($driver == 'mysql') {
-            $rand = new Expression('RAND()');
-        } elseif ($driver == 'pgsql') {
-            $rand = new Expression('RANDOM()');
-        } else {
-            return $this->redirect(['index']);
-        }
-        $model = Package::find()->orderBy($rand)->one();
-        return $this->redirect(['view', 'name' => $model->name]);
-    }
+    //public function actionRandom()
+    //{
+    //    $driver = Package::getDb()->driverName;
+    //    if ($driver == 'mysql') {
+    //        $rand = new Expression('RAND()');
+    //    } elseif ($driver == 'pgsql') {
+    //        $rand = new Expression('RANDOM()');
+    //    } else {
+    //        return $this->redirect(['index']);
+    //    }
+    //    $model = Package::find()->orderBy($rand)->one();
+    //    return $this->redirect(['view', 'name' => $model->name]);
+    //}
 
     /**
      * Displays a single Package model.
@@ -176,28 +176,28 @@ class ModController extends Controller
      * Renders a tag cloud of popular keywords
      * @return mixed
      */
-    public function actionCloud()
-    {
-        $keywords = Yii::$app->cache->get('mod.cloud.keywords');
-        if (!$keywords) {
-            $keywords = [];
-            $packages = Package::find()->where(['is not', 'keywords', null])->all();
-            foreach ($packages as $package) {
-                foreach (explode(',', $package->keywords) as $keyword) {
-                    if (!isset($keywords[$keyword])) {
-                        $keywords[$keyword] = [
-                            'text' => $keyword,
-                            'weight' => 0,
-                            'link' => Url::to(['/mod/index', 'search' => $keyword]),
-                        ];
-                    }
-                    $keywords[$keyword]['weight']++;
-                }
-            }
-            Yii::$app->cache->set('mod.cloud.keywords', $keywords, 60 * 60);
-        }
-        return $this->render('cloud', ['keywords' => $keywords]);
-    }
+    //public function actionCloud()
+    //{
+    //    $keywords = Yii::$app->cache->get('mod.cloud.keywords');
+    //    if (!$keywords) {
+    //        $keywords = [];
+    //        $packages = Package::find()->where(['is not', 'keywords', null])->all();
+    //        foreach ($packages as $package) {
+    //            foreach (explode(',', $package->keywords) as $keyword) {
+    //                if (!isset($keywords[$keyword])) {
+    //                    $keywords[$keyword] = [
+    //                        'text' => $keyword,
+    //                        'weight' => 0,
+    //                        'link' => Url::to(['/mod/index', 'search' => $keyword]),
+    //                    ];
+    //                }
+    //                $keywords[$keyword]['weight']++;
+    //            }
+    //        }
+    //        Yii::$app->cache->set('mod.cloud.keywords', $keywords, 60 * 60);
+    //    }
+    //    return $this->render('cloud', ['keywords' => $keywords]);
+    //}
 
     /**
      * Finds the Package model based on its primary key value.

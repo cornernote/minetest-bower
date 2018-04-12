@@ -8,7 +8,7 @@ use yii\helpers\Html;
 
 
 $this->title = 'Keyword Cloud';
-$this->params['breadcrumbs'][] = ['label' => 'Mods', 'url' => ['index']];
+//$this->params['breadcrumbs'][] = ['label' => 'Mods', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="mod-cloud">

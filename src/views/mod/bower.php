@@ -10,7 +10,7 @@ use yii\widgets\DetailView;
 /* @var $model app\models\Package */
 
 $this->title = $model->name . ' bower.json';
-$this->params['breadcrumbs'][] = ['label' => 'Mods', 'url' => ['index']];
+//$this->params['breadcrumbs'][] = ['label' => 'Mods', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'name' => $model->name]];
 $this->params['breadcrumbs'][] = 'bower.json';
 ?>
