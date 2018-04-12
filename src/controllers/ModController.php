@@ -168,7 +168,7 @@ class ModController extends Controller
         }
         $model->delete();
         Yii::$app->getSession()->setFlash('danger', Yii::t('app', 'Mod source could not be found updated so mod was deleted.'));
-        return $this->redirect(['index']);
+        return $this->redirect(Yii::$app->homeUrl);
     }
 
 
