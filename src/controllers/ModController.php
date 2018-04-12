@@ -145,21 +145,30 @@ class ModController extends Controller
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param string $name
      * @return mixed
+     * @throws NotFoundHttpException
+     * @throws \Exception
+     * @throws \Throwable
+     * @throws \yii\db\StaleObjectException
      */
     public function actionUpdate($name)
     {
         $model = $this->findModel($name);
-        $model->harvestModInfo();
-        if ($model->getDirtyAttributes()) {
-            if ($model->save()) {
-                Yii::$app->getSession()->setFlash('success', Yii::t('app', 'Mod has been updated from remote repository.'));
+        if (Git::getFile($model->url)) {
+            $model->harvestModInfo();
+            if ($model->getDirtyAttributes()) {
+                if ($model->save()) {
+                    Yii::$app->getSession()->setFlash('success', Yii::t('app', 'Mod has been updated from remote repository.'));
+                } else {
+                    Yii::$app->getSession()->setFlash('danger', Yii::t('app', 'Error while saving mod updates.'));
+                }
             } else {
-                Yii::$app->getSession()->setFlash('error', Yii::t('app', 'Error while saving mod updates.'));
+                Yii::$app->getSession()->setFlash('info', Yii::t('app', 'Mod has been updated from remote repository, however no change was detected.'));
             }
-        } else {
-            Yii::$app->getSession()->setFlash('info', Yii::t('app', 'Mod has been updated from remote repository, however no change was detected.'));
+            return $this->redirect(['view', 'name' => $model->name]);
         }
-        return $this->redirect(['view', 'name' => $model->name]);
+        $model->delete();
+        Yii::$app->getSession()->setFlash('danger', Yii::t('app', 'Mod source could not be found updated so mod was deleted.'));
+        return $this->redirect(['index']);
     }
 
 
