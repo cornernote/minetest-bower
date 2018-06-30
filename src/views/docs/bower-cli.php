@@ -51,10 +51,10 @@ $this->params['breadcrumbs'][] = $this->title;
             <pre class="prettyprint lang-bash">$ sudo apt-get install nodejs npm git-core</pre>
 
             <p>Ubuntu users, link nodejs to node</p>
-            <pre class="prettyprint lang-bash">sudo ln -s /usr/bin/nodejs /usr/bin/node</pre>
+            <pre class="prettyprint lang-bash">$ sudo ln -s /usr/bin/nodejs /usr/bin/node</pre>
 
             <p>Install bower</p>
-            <pre class="prettyprint lang-bash">$ npm install -g bower</pre>
+            <pre class="prettyprint lang-bash">$ sudo npm install -g bower</pre>
 
         </div>
     </div>
